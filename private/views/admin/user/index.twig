@@ -1,0 +1,11 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}
+  Users
+{% endblock %}
+
+{% block content %}
+  {% for user in users %}
+    {{ user.username }}<br>
+  {% endfor %}
+{% endblock %}

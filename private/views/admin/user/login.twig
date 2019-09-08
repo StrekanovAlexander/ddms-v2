@@ -1,0 +1,31 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}
+  Login
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class="card-body">
+      <h6 class="card-title">Login</h6>
+      <form action="{{ path_for('admin.user.login') }}" method="POST">
+        <div class="form-group">
+          <label for="email" class="small">E-mail</label>
+          <input class="form-control" name="email" id="email" placeholder="E-mail">
+        </div>
+        <div class="form-group">
+          <label for="password" class="small">Password</label>
+          <input class="form-control" name="password" id="password" type="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-dark btn" type="submit">Login</button>
+        </div>  
+        {{ csrf.fields|raw }}
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

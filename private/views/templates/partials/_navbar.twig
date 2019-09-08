@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+       <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      {% if auth.isAuth %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ auth.user.username }}</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ path_for('admin.user.details', {'id': auth.user.id}) }}">Account</a>
+          </div>
+        </li>
+        {% if auth.user.is_admin %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Admin</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{{ path_for('admin.users') }}">Users</a>
+            </div>
+          </li>
+        {% endif %}  
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path_for('admin.user.logout') }}" title="Register">Logout</a>
+        </li>
+    {% else %} 
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path_for('admin.user.create') }}" title="Register">Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path_for('admin.user.login') }}" title="Login">Login</a>
+      </li>
+    {% endif %}  
+    </ul>
+  </div>
+</nav>
