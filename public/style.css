@@ -16,7 +16,7 @@
   background-color: rgba(255,255,255,1.0);
   border-radius: 50%;
   height: 5rem;
-  margin: 1rem 0;
+  margin: 2rem 0;
   width: 5rem;
 }
 
@@ -31,5 +31,8 @@
   .header__caption {
     font-size: 2rem;
     text-shadow: 0.15rem 0.15rem 0 black;
+  }
+  .header__logo {
+    margin: 0 auto;
   }
 }
