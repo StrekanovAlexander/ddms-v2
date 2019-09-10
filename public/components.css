@@ -1,0 +1,18 @@
+.navbar {
+  background-color: firebrick !important;
+  padding: 0 !important;
+}
+
+.nav-item {
+  transition: 3s;
+}
+
+.nav-item.active, .nav-item:hover {
+  background-color: #680000;
+  transition: 3s;
+}
+
+.nav-link {
+  color: white !important;
+  padding: 0.5rem 1rem !important;
+}
