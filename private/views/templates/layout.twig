@@ -18,10 +18,8 @@
     {% include 'templates/partials/_breadcrumbs.twig' %}
     {% include 'templates/partials/_flash.twig' %}
     <div class="row">
-      <div class="col-md-2 col-sm-12">
-        <h6>Відділення</h6>
-      </div>
-      <div class="col-md-10 col-sm-12">
+      {% include 'templates/partials/_sidebar.twig' %}
+      <div class="col-md-9 col-sm-12">
         {% block content %}{% endblock %}
       </div>
     </div>
