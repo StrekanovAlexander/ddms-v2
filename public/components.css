@@ -2,7 +2,7 @@
   background-color: transparent !important;
 }
 
-.breadcrumb-item a{
+.breadcrumb-item a {
   color: firebrick;
 }
 
@@ -17,7 +17,7 @@
 
 .nav-item.active, .nav-item:hover {
   background-color: #680000;
-  transition: 3s;
+  transition: 2s;
 }
 
 .nav-link {

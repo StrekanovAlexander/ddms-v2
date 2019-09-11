@@ -36,3 +36,20 @@
     margin: 0 auto;
   }
 }
+
+.menu {
+  margin: auto;
+}
+
+.menu_margin-bottom {
+  margin-bottom: 2rem;
+}
+
+.menu__caption {
+  background-color: firebrick !important;
+  color: white !important;
+}
+
+.menu__item a {
+  color: black !important;
+}
