@@ -29,29 +29,25 @@
     </ul>
     <ul class="navbar-nav">
       {% if auth.isAuth %}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ auth.user.username }}</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="{{ path_for('admin.user.details', {'id': auth.user.id}) }}">Account</a>
-          </div>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path_for('admin.dashboard') }}">Панель</a>
         </li>
         {% if auth.user.is_admin %}
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Admin</a>
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Aдмін</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{ path_for('admin.users') }}">Users</a>
+              <a class="dropdown-item" href="{{ path_for('admin.users') }}">Користувачи</a>
+              <a class="dropdown-item" href="{{ path_for('admin.user.details', {'id': auth.user.id}) }}">Поточний</a>
+              <a class="dropdown-item" href="{{ path_for('admin.user.create') }}">Реєстрація</a>
             </div>
           </li>
         {% endif %}  
         <li class="nav-item">
-          <a class="nav-link" href="{{ path_for('admin.user.logout') }}" title="Register">Logout</a>
+          <a class="nav-link" href="{{ path_for('admin.user.logout') }}"><i class="fas fa-sign-out-alt"></i></a>
         </li>
     {% else %} 
       <li class="nav-item">
-        <a class="nav-link" href="{{ path_for('admin.user.create') }}" title="Register">Register</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ path_for('admin.user.login') }}" title="Вхід">Вхід</a>
+        <a class="nav-link" href="{{ path_for('admin.user.login') }}"><i class="fas fa-sign-in-alt"></i></a>
       </li>
     {% endif %}  
     </ul>
