@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use \App\Common\Pages;
 use \App\Models\User;
 use \Respect\Validation\Validator;
 
@@ -21,7 +22,6 @@ class UserController extends Controller {
 
     $validation = $this->validator->validate($request, [
       'username' => Validator::notVoid()->noSpaces()->available('username', User::class),
-      'email' => Validator::notVoid()->isEmail()->available('email', User::class),
       'password' => Validator::notVoid()->noSpaces(),
       'password2' => Validator::notVoid()->noSpaces()->compare($request->getParam('password'))
     ]);
@@ -35,24 +35,23 @@ class UserController extends Controller {
 
     User::add($request->getParams());
 
-    $this->auth->auth(
-      $request->getParam('email'),
-      $request->getParam('password')
-    );  
-
     $this->flash->addMessage('message', 'The user account was created successful');
 
-    return $response->withRedirect($this->router->pathFor('home'));
+    return $response->withRedirect($this->router->pathFor('admin.dashboard', [
+      'breadcrumbs' => Pages::breadcrumbs(),  
+    ]));
   }
 
   public function getLogin($request, $response) {
-    return $this->view->render($response, 'admin/user/login.twig');
+    return $this->view->render($response, 'admin/user/login.twig', [
+      'breadcrumbs' => Pages::breadcrumbs(),
+    ]);
   }
 
   public function postLogin($request, $response) {
     
     $auth = $this->auth->auth(
-      $request->getParam('email'),
+      $request->getParam('username'),
       $request->getParam('password')
     );  
 
@@ -61,7 +60,14 @@ class UserController extends Controller {
       return $response->withRedirect($this->router->pathFor('admin.user.login'));
     }
 
-    return $response->withRedirect($this->router->pathFor('home'));
+    return $response->withRedirect($this->router->pathFor('home', [
+      'breadcrumbs' => Pages::breadcrumbs(),
+    ]));
+
+
+    return $response->withRedirect($this->router->pathFor('admin.event.details', [
+      'id' => $request->getParam('id'),
+    ]));
 
   }
 
