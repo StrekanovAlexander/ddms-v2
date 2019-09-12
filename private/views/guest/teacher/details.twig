@@ -1,0 +1,17 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}
+ Teachers
+{% endblock %}
+
+{% block content %}
+  {% if teacher|length %}
+
+    {{ teacher.full_name }}
+    <br>
+    {{ teacher.content }}
+     <br>
+    {{ teacher.department.title }}
+
+  {% endif %}
+{% endblock %}
