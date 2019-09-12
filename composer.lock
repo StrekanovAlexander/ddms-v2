@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4147b15ac3f3a28ee7b110b90b273a78",
+    "content-hash": "8aaeae0e075a162a28673e25bbfe696e",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -248,6 +248,50 @@
                 "sql"
             ],
             "time": "2017-08-24T12:07:53+00:00"
+        },
+        {
+            "name": "illuminate/pagination",
+            "version": "v5.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/pagination.git",
+                "reference": "901289ff913f1b2e60cf7d8c510190c89fec71a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/pagination/zipball/901289ff913f1b2e60cf7d8c510190c89fec71a6",
+                "reference": "901289ff913f1b2e60cf7d8c510190c89fec71a6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "5.4.*",
+                "illuminate/support": "5.4.*",
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Pagination\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Illuminate Pagination package.",
+            "homepage": "https://laravel.com",
+            "time": "2017-01-15T01:21:06+00:00"
         },
         {
             "name": "illuminate/support",

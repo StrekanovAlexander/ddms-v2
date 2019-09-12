@@ -5,7 +5,8 @@
         "slim/flash": "^0.4.0",
         "slim/csrf": "^0.8.3",
         "illuminate/database": "^5.4",
-        "respect/validation": "^1.1"
+        "respect/validation": "^1.1",
+        "illuminate/pagination": "5.4"
     },
     "autoload": {
         "psr-4": {
