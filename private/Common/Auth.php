@@ -6,7 +6,7 @@ use \App\Models\User;
 class Auth {
 
   public function auth($username, $password) {
-    $user = User::where('username', $username)->first();
+    $user = User::where('username', $username)->where('is_actual', true)->first();
 
     if (!$user) {
       return false;
