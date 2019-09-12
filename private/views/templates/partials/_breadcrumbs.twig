@@ -1,8 +1,15 @@
+{% if breadcrumbs|length %}
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <a href="#">Головна</a>
-    </li>
-    <li class="breadcrumb-item" aria-current="page">Поточна</li>
+    {% for breadcrumb in breadcrumbs %}
+      {% if breadcrumb.route|length %}
+        <li class="breadcrumb-item">
+          <a href="{{ breadcrumb.param ? path_for(breadcrumb.route, {'id': breadcrumb.param}) : path_for(breadcrumb.route) }}" class="text-firebrick">{{ breadcrumb.title }}</a>
+        </li>
+      {% else %}
+        <li class="breadcrumb-item" aria-current="page">{{ breadcrumb.title }}</li>
+      {% endif %}  
+    {% endfor %}
   </ol>
 </nav>
+{% endif %}
