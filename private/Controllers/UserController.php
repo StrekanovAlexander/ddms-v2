@@ -11,6 +11,9 @@ class UserController extends Controller {
     $users = User::get();
     return $this->view->render($response, 'admin/user/index.twig', [
       'users' => $users,
+      'breadcrumbs' => Pages::breadcrumbs([
+        ['Користувачи']
+      ]),  
     ]);
   }
 
@@ -60,7 +63,7 @@ class UserController extends Controller {
       return $response->withRedirect($this->router->pathFor('admin.user.login'));
     }
 
-    return $response->withRedirect($this->router->pathFor('home', [
+    return $response->withRedirect($this->router->pathFor('admin.dashboard', [
       'breadcrumbs' => Pages::breadcrumbs(),
     ]));
 
