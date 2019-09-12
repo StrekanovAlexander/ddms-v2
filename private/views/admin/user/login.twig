@@ -6,21 +6,20 @@
 
 {% block content %}
 
-<div class="row">
+<div class="row mt-5">
   <div class="col-md-6 offset-md-3">
     <div class="card-body">
-      <h6 class="card-title">Login</h6>
       <form action="{{ path_for('admin.user.login') }}" method="POST">
         <div class="form-group">
           <label for="username" class="small">Логін</label>
           <input class="form-control" name="username" id="username" placeholder="Логін">
         </div>
         <div class="form-group">
-          <label for="password" class="small">Password</label>
-          <input class="form-control" name="password" id="password" type="password" placeholder="Password">
+          <label for="password" class="small">Пароль</label>
+          <input class="form-control" name="password" id="password" type="password" placeholder="Пароль">
         </div>
         <div class="form-group">
-          <button class="btn btn-dark btn" type="submit">Login</button>
+          <button class="btn btn-sm btn-dark" type="submit">Вхід</button>
         </div>  
         {{ csrf.fields|raw }}
       </form>
