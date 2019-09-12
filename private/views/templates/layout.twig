@@ -16,10 +16,11 @@
   {% include 'templates/partials/_navbar.twig' %}
   <div class="container">
     {% include 'templates/partials/_breadcrumbs.twig' %}
-    {% include 'templates/partials/_flash.twig' %}
     <div class="row">
       {% include 'templates/partials/_sidebar.twig' %}
       <div class="col-md-9 col-sm-12">
+       
+        {% include 'templates/partials/_flash.twig' %}
         {% block content %}{% endblock %}
       </div>
     </div>
