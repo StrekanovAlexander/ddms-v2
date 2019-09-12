@@ -17,11 +17,14 @@
   <div class="container">
     {% include 'templates/partials/_breadcrumbs.twig' %}
     <div class="row">
-      {% include 'templates/partials/_sidebar.twig' %}
-      <div class="col-md-9 col-sm-12">
-       
-        {% include 'templates/partials/_flash.twig' %}
-        {% block content %}{% endblock %}
+      {% if auth.isAuth %}
+        <div class="col-md-12">
+      {% else %}  
+        {% include 'templates/partials/_sidebar.twig' %}
+        <div class="col-md-9 col-sm-12">  
+      {% endif %}  
+      {% include 'templates/partials/_flash.twig' %}
+      {% block content %}{% endblock %}
       </div>
     </div>
   </div>
