@@ -64,6 +64,10 @@ $container['UserController'] = function($container) {
   return new \App\Controllers\UserController($container);
 };
 
+$container['TeacherController'] = function($container) {
+  return new \App\Controllers\TeacherController($container);
+};
+
 $app->add(new \App\Middleware\CsrfMiddleware($container));
 $app->add(new \App\Middleware\OldInputMiddleware($container));
 $app->add(new \App\Middleware\ValidationMiddleware($container));
