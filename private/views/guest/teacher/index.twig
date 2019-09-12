@@ -5,5 +5,35 @@
 {% endblock %}
 
 {% block content %}
-  teachers
+  {% if teachers|length %}
+    {% set counter = 1 %}
+    <div class="row">
+    {% for teacher in teachers %}
+      <div class="col-md-3">
+        <div class="card">
+          <a href="{{ path_for('teacher', {'id': teacher.id}) }}">Link</a>
+          <div class="card-body">
+            <h6 class="card-title text-center">
+              {{ teacher.full_name }}<br><small>{{ teacher.content }}</small>
+            </h6>
+          </div>
+         </div>  
+      </div> 
+      {% if counter is divisible by(4) %}
+        </div><br><div class="row">
+      {% endif %}
+      {% set counter = counter + 1 %} 
+    {% endfor %}
+    </div>
+    <nav class="my-5">
+      <ul class="pagination justify-content-center">
+        {% for page in 1..teachers.lastPage %}
+          <li class="page-item{{ page == teachers.currentPage ? ' active' : '' }}">
+            <a class="page-link btn btn-sm" href="{{ path_for('teachers', {}, {'page': page}) }}">{{ page }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+  {% endif %}
 {% endblock %}
