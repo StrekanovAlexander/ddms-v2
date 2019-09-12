@@ -23,6 +23,25 @@
       <li class="nav-item">
         <a class="nav-link" href="#" title="Нормативні документи">Нормативні документи</a>
       </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Відділення</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-item bg-light"><small>Музичний відділ</small></div>
+          <a class="dropdown-item" href="#">Фортепіанний відділ</a>
+          <a class="dropdown-item" href="#">Народний відділ</a>
+          <a class="dropdown-item" href="#">Музично-теоретичний відділ</a>
+          <div class="dropdown-item bg-light"><small>Художній відділ</small></div>
+          <a class="dropdown-item" href="#">Музично-теоретичний відділ</a>
+          <a class="dropdown-item" href="#">Учбовий процес</a>
+          <a class="dropdown-item" href="#">Конкурси</a>
+          <a class="dropdown-item" href="#">Наші випускники</a>
+          <div class="dropdown-item bg-light"><small>Галерея</small></div>
+          <a class="dropdown-item" href="#">Золотий фонд</a>
+          <a class="dropdown-item" href="#">Архів</a>
+        </div>
+      </li>
+
       <li class="nav-item">
         <a class="nav-link" href="#" title="Контакти">Контакти</a>
       </li>
@@ -47,7 +66,7 @@
         </li>
     {% else %} 
       <li class="nav-item">
-        <a class="nav-link" href="{{ path_for('admin.user.login') }}"><i class="fas fa-sign-in-alt"></i></a>
+        <a class="nav-link" href="{{ path_for('admin.user.login') }}"><i class="fas fa-key"></i></i></a>
       </li>
     {% endif %}  
     </ul>
