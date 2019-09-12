@@ -1,6 +1,7 @@
 <?php
 
 $app->get('/', 'PageController:home')->setName('home');
+$app->get('/teachers', 'TeacherController:teachers')->setName('teachers');
 
 $app->get('/admin/users', 'UserController:index')->setName('admin.users');
 $app->get('/admin/user/create', 'UserController:getCreate')->setName('admin.user.create');
