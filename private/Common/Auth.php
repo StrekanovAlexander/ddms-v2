@@ -5,8 +5,8 @@ use \App\Models\User;
 
 class Auth {
 
-  public function auth($email, $password) {
-    $user = User::where('email', $email)->first();
+  public function auth($username, $password) {
+    $user = User::where('username', $username)->first();
 
     if (!$user) {
       return false;
