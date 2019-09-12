@@ -24,3 +24,14 @@
   color: white !important;
   padding: 0.5rem 1rem !important;
 }
+
+.pagination li a {
+  background-color: white; 
+  box-shadow: none !important;
+  color: #333;
+}
+
+.page-item.active .page-link {
+  background-color: firebrick !important;
+  border-color: transparent;
+}
