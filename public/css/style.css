@@ -3,7 +3,6 @@
   background-image: url('../public/images/bg-header.jpg');
   background-size: cover;
   background-position: bottom;
-  display: none;
 }
 
 .header__caption {
