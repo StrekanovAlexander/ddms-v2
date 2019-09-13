@@ -5,7 +5,22 @@
 {% endblock %}
 
 {% block content %}
-  {% for user in users %}
-    {{ user.username }}<br>
-  {% endfor %}
+  <table class="table">
+    <tr>
+      <td>ID</th>
+      <th>Користувач</th>
+      <th>Адміністратор</th>
+      <th>Актуальність</th>
+      <th></th>
+    </tr>  
+    {% for user in users %}
+     <tr>
+      <td>{{ user.id }}</td>
+      <td>{{ user.username }}</td>
+      <td><i class="fas {{ user.is_admin ? 'fa-check' : 'fa-times' }} "></i></td>
+      <td><i class="fas {{ user.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      <td><a href="{{ path_for('admin.user.update', {'id': user.id}) }}"><i class="fas fa-key text-firebrick"></i></a></td>
+    </tr>  
+    {% endfor %}
+  </table>
 {% endblock %}
