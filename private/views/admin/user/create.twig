@@ -1,7 +1,7 @@
 {% extends 'templates/layout.twig' %}
 
 {% block title %}
-  Create user
+  Створити користувача
 {% endblock %}
 
 {% block content %}
@@ -9,31 +9,31 @@
 <div class="row">
   <div class="col-md-6 offset-md-3">
     <div class="card-body">
-      <h6 class="card-title">Create user</h6>
+      <h6 class="card-title">Створити користувача</h6>
       <form action="{{ path_for('admin.user.create') }}" method="POST">
         <div class="form-group">
-          <label for="username" class="small">Username</label>
-          <input class="form-control{{ errors.username ? ' is-invalid' : '' }}" name="username" id="username" value="{{ old.username }}" placeholder="User name">
+          <label for="username" class="small">Логін</label>
+          <input class="form-control{{ errors.username ? ' is-invalid' : '' }}" name="username" id="username" value="{{ old.username }}" placeholder="Логін">
           {% if errors.username %}
             <span class="small text-danger">{{ errors.username|first }}</span> 
           {% endif %}  
         </div>
         <div class="form-group">
-          <label for="password" class="small">Password</label>
-          <input class="form-control{{ errors.username ? ' is-invalid' : '' }}" name="password" id="password" value="" type="password" placeholder="Password">
+          <label for="password" class="small">Пароль</label>
+          <input class="form-control{{ errors.username ? ' is-invalid' : '' }}" name="password" id="password" value="" type="password" placeholder="Пароль">
           {% if errors.password %}
             <span class="small text-danger">{{ errors.password|first }}</span> 
           {% endif %}  
         </div>
         <div class="form-group">
-          <label for="password2" class="small">Password (re)</label>
-          <input class="form-control{{ errors.username ? ' is-invalid' : '' }}" name="password2" id="password2" type="password" placeholder="Password re-type">
+          <label for="password2" class="small">Пароль (повтор)</label>
+          <input class="form-control{{ errors.username ? ' is-invalid' : '' }}" name="password2" id="password2" type="password" placeholder="Пароль (повтор)">
           {% if errors.password2 %}
             <span class="small text-danger">{{ errors.password2|first }}</span> 
           {% endif %}  
         </div>
         <div class="form-group">
-          <button class="btn btn-dark btn" type="submit">Create</button>
+          <button class="btn btn-dark btn" type="submit">Записати</button>
         </div>  
         {{ csrf.fields|raw }}
       </form>

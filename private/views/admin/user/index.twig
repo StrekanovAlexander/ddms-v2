@@ -1,10 +1,12 @@
 {% extends 'templates/layout.twig' %}
 
-{% block title %}
-  Users
-{% endblock %}
+{% block title %}Користувачи{% endblock %}
 
 {% block content %}
+  <h6 class="font-weight-bold">Користувачи</h6>
+  <div class="my-3">
+  <a href="{{ path_for('admin.user.create') }}" class="btn btn-dark btn-sm" role="button"><i class="fas fa-plus"></i> Створити</a>
+</div>
   <table class="table">
     <tr>
       <td>ID</th>
@@ -19,7 +21,7 @@
       <td>{{ user.username }}</td>
       <td><i class="fas {{ user.is_admin ? 'fa-check' : 'fa-times' }} "></i></td>
       <td><i class="fas {{ user.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
-      <td><a href="{{ path_for('admin.user.update', {'id': user.id}) }}"><i class="fas fa-key text-firebrick"></i></a></td>
+      <td><a href="{{ path_for('admin.user.update', {'id': user.id}) }}"><i class="fas fa-edit text-dark"></i></a></td>
     </tr>  
     {% endfor %}
   </table>
