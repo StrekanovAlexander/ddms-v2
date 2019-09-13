@@ -9,9 +9,13 @@
     {% set counter = 1 %}
     <div class="row">
     {% for teacher in teachers %}
-      <div class="col-md-3">
-        <div class="card">
-          <a href="{{ path_for('teacher', {'id': teacher.id}) }}">Link</a>
+      <div class="col-md-4">
+        <div class="card card-fixed">
+          {% if teacher.image_preview|length %}
+            <a href="{{ path_for('teacher', {'id': teacher.id}) }}">
+              <img src="{{ base_url() }}/images/teachers/{{ teacher.image_preview }}" class="card-img-top" alt="{{ teacher.full_name }}">
+            </a>
+          {% endif %}  
           <div class="card-body">
             <h6 class="card-title text-center">
               {{ teacher.full_name }}<br><small>{{ teacher.content }}</small>
@@ -19,7 +23,7 @@
           </div>
          </div>  
       </div> 
-      {% if counter is divisible by(4) %}
+      {% if counter is divisible by(3) %}
         </div><br><div class="row">
       {% endif %}
       {% set counter = counter + 1 %} 

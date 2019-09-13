@@ -4,12 +4,19 @@
 
 {% block content %}
   {% if teacher|length %}
-
-    {{ teacher.full_name }}
-    <br>
-    {{ teacher.content }}
-     <br>
-    {{ teacher.department.title }}
+    <h1>{{ teacher.full_name }}</h1>
+    <h5 class="text-firebrick">{{ teacher.content }}</h5>
+    <h6>{{ teacher.department.section.title }}: {{ teacher.department.title }}</h6>
+  {% if teacher.image|length %}
+    <div class="row my-5">
+      <div class="col-md-12 col-sm-12">
+        <a href="{{ path_for('teacher', {'id': teacher.id}) }}">
+          <img src="{{ base_url() }}/images/teachers/{{ teacher.image }}" class="img-fluid" alt="{{ teacher.full_name }}">
+        </a>
+      </div>
+    </div>  
+    {% endif %}
+  </div>  
 
   {% endif %}
 {% endblock %}
