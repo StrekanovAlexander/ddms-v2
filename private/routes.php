@@ -19,4 +19,8 @@ $app->group('', function() {
   $this->get('/admin/user/create', 'UserController:getCreate')->setName('admin.user.create');
   $this->post('/admin/user/create', 'UserController:postCreate');
   $this->get('/admin/user/details[/{id}]', 'UserController:details')->setName('admin.user.details');
+
+  $this->get('/admin/user/update[/{id}]', 'UserController:getUpdate')->setName('admin.user.update');
+  $this->post('/admin/user/update', 'UserController:postUpdate');
+
 })->add(new \App\Middleware\AdminMiddleware($container));
