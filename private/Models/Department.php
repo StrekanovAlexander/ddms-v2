@@ -7,4 +7,8 @@ class Department extends Model {
 
   protected $table = 'departments';
 
+  public function section() {
+    return $this->belongsTo('\App\Models\Section', 'section_id');
+  }
+
 }
