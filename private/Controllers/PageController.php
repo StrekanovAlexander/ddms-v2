@@ -13,7 +13,7 @@ class PageController extends Controller {
     return $this->view->render($response, 'admin/dashboard.twig', [
       'breadcrumbs' => \App\Common\Pages::breadcrumbs([
         ['Панель керування']
-      ])
+      ], true)
     ]);
   }
 
