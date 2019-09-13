@@ -10,6 +10,7 @@ class User extends Model {
   protected $fillable = [
     'username',
     'password',
+    'is_actual',
   ];
 
   public static function add($array) {
@@ -17,6 +18,10 @@ class User extends Model {
       'username' => $array['username'],
       'password' => password_hash($array['password'], PASSWORD_DEFAULT),
     ]);
+  }
+
+  public static function setPassword($password) {
+    return password_hash($password, PASSWORD_DEFAULT);
   }
 
 } 
