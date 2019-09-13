@@ -13,12 +13,17 @@ class UserController extends Controller {
       'users' => $users,
       'breadcrumbs' => Pages::breadcrumbs([
         ['Користувачи']
-      ]),  
+      ], true),  
     ]);
   }
 
   public function getCreate($request, $response) {
-    return $this->view->render($response, 'admin/user/create.twig');
+    return $this->view->render($response, 'admin/user/create.twig', [
+      'breadcrumbs' => Pages::breadcrumbs([
+        ['Користувачи', 'admin.users'],
+        ['Створити'],
+      ], true),    
+    ]);
   }
 
   public function postCreate($request, $response) {
@@ -31,18 +36,16 @@ class UserController extends Controller {
 
     if ($validation->failed()) {
 
-      $this->flash->addMessage('message', 'Error user creating');
+      $this->flash->addMessage('message', 'Помилка створення користувача');
 
       return $response->withRedirect($this->router->pathFor('admin.user.create'));
     }
 
     User::add($request->getParams());
 
-    $this->flash->addMessage('message', 'The user account was created successful');
+    $this->flash->addMessage('message', 'Користувача було створено');
 
-    return $response->withRedirect($this->router->pathFor('admin.users', [
-      'breadcrumbs' => Pages::breadcrumbs(),  
-    ]));
+    return $response->withRedirect($this->router->pathFor('admin.users'));
   }
 
   public function getLogin($request, $response) {
@@ -59,18 +62,11 @@ class UserController extends Controller {
     );  
 
     if (!$auth) {
-      $this->flash->addMessage('message', 'Login error');
+      $this->flash->addMessage('message', 'Помилка входу');
       return $response->withRedirect($this->router->pathFor('admin.user.login'));
     }
 
-    return $response->withRedirect($this->router->pathFor('admin.dashboard', [
-      'breadcrumbs' => Pages::breadcrumbs(),
-    ]));
-
-
-    return $response->withRedirect($this->router->pathFor('admin.event.details', [
-      'id' => $request->getParam('id'),
-    ]));
+    return $response->withRedirect($this->router->pathFor('admin.dashboard'));
 
   }
 
@@ -79,17 +75,14 @@ class UserController extends Controller {
     return $response->withRedirect($this->router->pathFor('home'));
   }
 
-  public function details($request, $response, $args) {
-
-    return $this->view->render($response, 'admin/user/details.twig', [
-      'user' => $this->auth->user(),
-    ]);
-
-  }
-
   public function getUpdate($request, $response, $args) {
+    $user = User::find($args['id']);
     return $this->view->render($response, 'admin/user/update.twig', [
-      'user' => User::find($args['id']),
+      'user' => $user,
+      'breadcrumbs' => Pages::breadcrumbs([
+        ['Користувачи', 'admin.users'],
+        [$user->username],
+      ], true),
     ]);
   }
 
@@ -123,7 +116,7 @@ class UserController extends Controller {
       'is_actual' => $request->getParam('is_actual') ? true : false,
     ]);
 
-    $this->flash->addMessage('message', 'Дані користувача були змінені');
+    $this->flash->addMessage('message', 'Дані користувача було змінено');
 
     return $response->withRedirect($this->router->pathFor('admin.users'));
   }
