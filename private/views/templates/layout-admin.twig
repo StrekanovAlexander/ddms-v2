@@ -5,26 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"  crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="{{ base_url() }}/css/components.css">
-  <link rel="stylesheet" href="{{ base_url() }}/css/style.css">
+  <link rel="stylesheet" href="{{ base_url() }}/css/admin.css">
   <title>Дніпрорудненська дитяча музична школа {% block title %}{% endblock %}</title>
 </head>
 <body>
-  {% include 'templates/partials/_header.twig' %}
-  {% include 'templates/partials/_navbar.twig' %}
+  {% if auth.isAuth %}
+    {% include 'templates/partials/_navbar-admin.twig' %}
+  {% endif %}
   <div class="container">
-    {% include 'templates/partials/_breadcrumbs.twig' %}
-    <div class="row">
-      {% include 'templates/partials/_sidebar.twig' %}
-      <div class="col-md-9 col-sm-12">  
-        {% include 'templates/partials/_flash.twig' %}
-        {% block content %}{% endblock %}
-      </div>
-    </div>
+    {% if auth.isAuth %}
+      {% include 'templates/partials/_breadcrumbs.twig' %}
+    {% endif %}
+    {% include 'templates/partials/_flash.twig' %}
+    {% block content %}{% endblock %}
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+  <script src="{{ base_url() }}/js/common.js" ></script>
 </body>
 </html>
