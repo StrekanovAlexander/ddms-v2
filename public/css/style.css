@@ -54,3 +54,7 @@
 .menu__item a {
   color: black !important;
 }
+
+.text-firebrick {
+  color: firebrick;
+}
