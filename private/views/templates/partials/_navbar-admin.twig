@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ path_for('home') }}" title="Головна"><i class="fas fa-home"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path_for('admin.teachers') }}" title="Пeдколектив">Пeдколектив</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path_for('admin.dashboard') }}">Панель</a>
+        </li>
+        {% if auth.user.is_admin %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Aдмін</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{{ path_for('admin.users') }}">Користувачи</a>
+            </div>
+          </li>
+        {% endif %}  
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path_for('admin.user.logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
