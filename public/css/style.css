@@ -1,3 +1,8 @@
+.card-fixed {
+  border: none;
+  min-height: 18rem !important;
+}
+
 .header {
   background-color: black;
   background-image: url('../public/images/bg-header.jpg');
