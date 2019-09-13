@@ -30,7 +30,7 @@ class TeacherController extends Controller {
   public function index($request, $response) {
     $teachers = Teacher::teachers()->toArray();
     return $this->view->render($response, 'admin/teacher/index.twig', [
-      'teachers' => Pages::pagination($teachers, $request->getParam('page', 1), 8),
+      'teachers' => Pages::pagination($teachers, $request->getParam('page', 1), 5),
       'breadcrumbs' => Pages::breadcrumbs([
         ['Викладачи'],
       ], true),
