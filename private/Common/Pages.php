@@ -6,6 +6,7 @@ use \Illuminate\Pagination\LengthAwarePaginator;
 class Pages {
 
   const HOME_PAGE = ['Головна', 'home'];
+  const AUTH_HOME_PAGE = ['Головна', 'admin.dashboard'];
   const BREADCRUMB_KEYS = [0 => 'title', 1 => 'route', 2 => 'param'];
   
   public static function pagination(array $arr, $page, $perPage) {
@@ -17,8 +18,12 @@ class Pages {
     );
   }
   
-  public static function breadcrumbs(array $arr = []) {
-    array_unshift($arr, self::HOME_PAGE);
+  public static function breadcrumbs(array $arr = [], $isAuth = false) {
+    if ($isAuth) {
+      array_unshift($arr, self::AUTH_HOME_PAGE);
+    } else {
+      array_unshift($arr, self::HOME_PAGE);
+    }
     $result = [];
     foreach($arr as $value) {
       $elem = [];
