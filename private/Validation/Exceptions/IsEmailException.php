@@ -7,7 +7,7 @@ class IsEmailException extends ValidationException {
 
   public static $defaultTemplates = [
     self::MODE_DEFAULT => [
-      self::STANDARD => 'It`s not valid email',
+      self::STANDARD => 'Помилка у e-mail адресі',
     ],
   ];
 

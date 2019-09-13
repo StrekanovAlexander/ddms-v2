@@ -7,7 +7,7 @@ class NotVoidException extends ValidationException {
   
   public static $defaultTemplates = [
     self::MODE_DEFAULT => [
-      self::STANDARD => 'Empty field',
+      self::STANDARD => 'Порожні дані',
     ],
  ];
 

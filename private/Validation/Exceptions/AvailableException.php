@@ -7,7 +7,7 @@ class AvailableException extends ValidationException {
   
   public static $defaultTemplates = [
     self::MODE_DEFAULT => [
-      self::STANDARD => 'Value is not available',
+      self::STANDARD => 'Такі дані вже присутні',
     ],
  ];
 

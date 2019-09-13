@@ -7,7 +7,7 @@ class CompareException extends ValidationException {
   
   public static $defaultTemplates = [
     self::MODE_DEFAULT => [
-      self::STANDARD => 'Not Compare values',
+      self::STANDARD => 'Дані не співпадають',
     ],
  ];
 
