@@ -23,4 +23,9 @@ $app->group('', function() {
   $this->get('/admin/user/update[/{id}]', 'UserController:getUpdate')->setName('admin.user.update');
   $this->post('/admin/user/update', 'UserController:postUpdate');
 
+  $this->get('/admin/teachers', 'TeacherController:index')->setName('admin.teachers');
+  $this->get('/admin/teacher/update[/{id}]', 'TeacherController:getUpdate')->setName('admin.teacher.update');
+  $this->post('/admin/teacher/update', 'TeacherController:postUpdate');
+  $this->get('/admin/teacher/details[/{id}]', 'TeacherController:details')->setName('admin.teacher.details');
+
 })->add(new \App\Middleware\AdminMiddleware($container));
