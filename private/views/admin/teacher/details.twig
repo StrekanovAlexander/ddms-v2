@@ -22,10 +22,21 @@
         <th>Інформація</th>
         <td>{{ teacher.content }}</td>
       </tr>  
+      <tr> 
+        <th>Ранг</th>
+        <td>{{ teacher.rank }}</td>
+      </tr>  
+      <tr> 
+        <th>Світлина</th>
+        <td>
+          <img src="{{ base_url() }}/images/teachers/{{ teacher.image }}" alt="{{ teacher.full_name }}" style="width: 15%">
+        </td>
+      </tr>  
       <tr>  
         <th>Актуальність</th>
         <td><i class="fas {{ teacher.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
       </tr>  
     </table>
+    <a class="btn btn-dark btn-sm" href="{{ path_for('admin.teacher.update', {'id': teacher.id}) }}"><i class="fas fa-edit"></i> Редагувати</a>
   {% endif %}
 {% endblock %}
