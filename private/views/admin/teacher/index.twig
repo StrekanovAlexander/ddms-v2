@@ -1,16 +1,16 @@
-{% extends 'templates/layout.twig' %}
+{% extends 'templates/layout-admin.twig' %}
 
 {% block title %}Викладачі{% endblock %}
 
 {% block content %}
-  <h6 class="font-weight-bold">Викладачі</h6>
+  <h6>Викладачі</h6>
   <div class="my-3">
     <a href="#" class="btn btn-dark btn-sm"><i class="fas fa-plus"></i> Створити</a>
   </div>
   {% if teachers|length %}
-  <table class="table">
+  <table class="table table-striped">
     <tr>
-      <td>ID</th>
+      <th>ID</th>
       <th>Повне ім'я</th>
       <th>Відділ</th>
       <th>Інформація</th>
@@ -24,7 +24,7 @@
       <td>{{ teacher.section_title }}: {{ teacher.department_title }}</td>
       <td>{{ teacher.content }}</td>
       <td><i class="fas {{ teacher.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
-      <td><a href="{{ path_for('admin.teacher.details', {'id': teacher.id}) }}"><i class="fas fa-edit text-dark"></i></a></td>
+      <td><a href="{{ path_for('admin.teacher.details', {'id': teacher.id}) }}"><i class="fas fa-search text-dark"></i></a></td>
     </tr>  
     {% endfor %}
   </table>
