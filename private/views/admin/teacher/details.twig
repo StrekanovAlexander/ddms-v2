@@ -1,0 +1,31 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}Викладач: {{ teacher.full_name }}{% endblock %}
+
+{% block content %}
+  {% if teacher|length %}
+    <h6 class="my-5">Викладач: {{ teacher.full_name }}</h6>
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ teacher.id }}</td>
+      </tr>
+      <tr>  
+        <th>Відділ</th>
+        <td>{{ teacher.department.title }}</td>
+      </tr>  
+      <tr>  
+        <th>Повне ім'я</th>
+        <td>{{ teacher.full_name }}</td>
+      </tr>  
+      <tr> 
+        <th>Інформація</th>
+        <td>{{ teacher.content }}</td>
+      </tr>  
+      <tr>  
+        <th>Актуальність</th>
+        <td><i class="fas {{ teacher.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      </tr>  
+    </table>
+  {% endif %}
+{% endblock %}

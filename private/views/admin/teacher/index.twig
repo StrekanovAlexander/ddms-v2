@@ -1,0 +1,39 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}Викладачі{% endblock %}
+
+{% block content %}
+  <h6 class="font-weight-bold">Викладачі</h6>
+  <div class="my-3">
+    <a href="#" class="btn btn-dark btn-sm"><i class="fas fa-plus"></i> Створити</a>
+  </div>
+  {% if teachers|length %}
+  <table class="table">
+    <tr>
+      <td>ID</th>
+      <th>Повне ім'я</th>
+      <th>Інформація</th>
+      <th>Актуальність</th>
+      <th></th>
+    </tr>  
+    {% for teacher in teachers %}
+     <tr>
+      <td>{{ teacher.id }}</td>
+      <td>{{ teacher.full_name }}</td>
+      <td>{{ teacher.content }}</td>
+      <td><i class="fas {{ teacher.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      <td><a href="{{ path_for('admin.teacher.details', {'id': teacher.id}) }}"><i class="fas fa-edit text-dark"></i></a></td>
+    </tr>  
+    {% endfor %}
+  </table>
+  <nav class="my-5">
+    <ul class="pagination justify-content-center">
+      {% for page in 1..teachers.lastPage %}
+      <li class="page-item{{ page == teachers.currentPage ? ' active' : '' }}">
+        <a class="page-link btn btn-sm" href="{{ path_for('admin.teachers', {}, {'page': page}) }}">{{ page }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+  {% endif %}
+{% endblock %}
