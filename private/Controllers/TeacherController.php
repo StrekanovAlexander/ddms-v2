@@ -28,7 +28,7 @@ class TeacherController extends Controller {
   }
 
   public function index($request, $response) {
-    $teachers = Teacher::orderBy('rank')->get()->toArray();
+    $teachers = Teacher::teachers()->toArray();
     return $this->view->render($response, 'admin/teacher/index.twig', [
       'teachers' => Pages::pagination($teachers, $request->getParam('page', 1), 10),
       'breadcrumbs' => Pages::breadcrumbs([
@@ -50,7 +50,7 @@ class TeacherController extends Controller {
     return $this->view->render($response, 'admin/teacher/details.twig', [
       'teacher' => $teacher,
       'breadcrumbs' => Pages::breadcrumbs([
-        ['Викладачи', 'teachers'],
+        ['Викладачи', 'admin.teachers'],
         [$teacher->full_name],
       ]),
     ]);
