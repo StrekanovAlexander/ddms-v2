@@ -1,13 +1,16 @@
-{% extends 'templates/layout.twig' %}
+{% extends 'templates/layout-admin.twig' %}
 
-{% block title %}
-  Login
-{% endblock %}
+{% block title %}{% endblock %}
 
 {% block content %}
 
 <div class="row mt-5">
-  <div class="col-md-6 offset-md-3">
+  <img src="{{ base_url() }}/images/ddms-logo.png" alt="Дніпрорудненська дитяча музична школа" class="mx-auto" style="width: 100px">
+</div>
+
+<h6 class="text-center">Aдміністрування сайту Дніпрорудненської музичної школи</h6>
+<div class="row">
+  <div class="col-md-4 offset-md-4">
     <div class="card-body">
       <form action="{{ path_for('admin.user.login') }}" method="POST">
         <div class="form-group">
