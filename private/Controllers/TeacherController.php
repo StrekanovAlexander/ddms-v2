@@ -27,4 +27,33 @@ class TeacherController extends Controller {
     ]);
   }
 
+  public function index($request, $response) {
+    $teachers = Teacher::orderBy('rank')->get()->toArray();
+    return $this->view->render($response, 'admin/teacher/index.twig', [
+      'teachers' => Pages::pagination($teachers, $request->getParam('page', 1), 10),
+      'breadcrumbs' => Pages::breadcrumbs([
+        ['Викладачи'],
+      ]),
+    ]);
+  }
+
+  public function getUpdate() {
+    
+  }
+
+  public function postUpdate() {
+
+  }
+
+  public function details($request, $response, $args) {
+    $teacher = Teacher::find($args['id']);
+    return $this->view->render($response, 'admin/teacher/details.twig', [
+      'teacher' => $teacher,
+      'breadcrumbs' => Pages::breadcrumbs([
+        ['Викладачи', 'teachers'],
+        [$teacher->full_name],
+      ]),
+    ]);
+  }
+
 }
