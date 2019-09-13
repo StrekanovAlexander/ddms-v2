@@ -40,7 +40,7 @@ class UserController extends Controller {
 
     $this->flash->addMessage('message', 'The user account was created successful');
 
-    return $response->withRedirect($this->router->pathFor('admin.dashboard', [
+    return $response->withRedirect($this->router->pathFor('admin.users', [
       'breadcrumbs' => Pages::breadcrumbs(),  
     ]));
   }
