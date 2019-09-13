@@ -9,7 +9,8 @@ class TeacherController extends Controller {
   public function teachers($request, $response) {
     $teachers = Teacher::where('is_actual', true)->orderBy('rank')->get()->toArray();
     return $this->view->render($response, 'guest/teacher/index.twig', [
-      'teachers' => Pages::pagination($teachers, $request->getParam('page', 1), 16),
+      'teachers' => Pages::pagination($teachers, $request->getParam('page', 1), 9),
+      'activePage' => 'teachers',
       'breadcrumbs' => Pages::breadcrumbs([
         ['Викладачи'],
       ]),
@@ -20,6 +21,7 @@ class TeacherController extends Controller {
     $teacher = Teacher::where('is_actual', true)->find($args['id']);
     return $this->view->render($response, 'guest/teacher/details.twig', [
       'teacher' => $teacher,
+      'activePage' => 'teachers',
       'breadcrumbs' => Pages::breadcrumbs([
         ['Викладачи', 'teachers'],
         [$teacher->full_name],
