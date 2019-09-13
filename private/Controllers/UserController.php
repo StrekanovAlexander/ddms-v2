@@ -86,5 +86,46 @@ class UserController extends Controller {
     ]);
 
   }
+
+  public function getUpdate($request, $response, $args) {
+    return $this->view->render($response, 'admin/user/update.twig', [
+      'user' => User::find($args['id']),
+    ]);
+  }
+
+  public function postUpdate($request, $response) {
+
+    if ($request->getParam('edit_password')) {
+      
+      $validation = $this->validator->validate($request, [
+        'password' => Validator::notVoid()->noSpaces(),
+        'password2' => Validator::notVoid()->noSpaces()->compare($request->getParam('password'))
+      ]);
+
+      if ($validation->failed()) {
+        $this->flash->addMessage('message', 'Помилка зміни паролю');
+        return $response->withRedirect($this->router->pathFor('admin.user.update', [
+          'id' => $request->getParam('id')
+        ]));
+      }
+
+    }
+
+    $user = User::find($request->getParam('id'));
+
+    if ($request->getParam('edit_password')) {
+      $user->update([
+        'password' => User::setPassword($request->getParam('password')),
+      ]);
+    }  
+
+    $user->update([
+      'is_actual' => $request->getParam('is_actual') ? true : false,
+    ]);
+
+    $this->flash->addMessage('message', 'Дані користувача були змінені');
+
+    return $response->withRedirect($this->router->pathFor('admin.users'));
+  }
   
 }
