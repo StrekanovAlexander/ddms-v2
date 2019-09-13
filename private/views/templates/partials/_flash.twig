@@ -1,7 +1,10 @@
 {% if flash.getMessage('message') %}
 <div class="row mt-4">
-  <div class="col-md-6 offset-md-3 alert alert-secondary">
+  <div class="col-md-6 offset-md-3 alert alert-info">
     {{ flash.getMessage('message')|first }}
+    <a href="#">
+      <i class="fas float-right text-dark {{ user.is_actual ? 'fa-check' : 'fa-times' }} "></i>
+    </a>  
   </div>
 </div>
 {% endif %}

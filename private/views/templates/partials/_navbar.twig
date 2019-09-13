@@ -56,8 +56,6 @@
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Aдмін</a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="{{ path_for('admin.users') }}">Користувачи</a>
-              <a class="dropdown-item" href="{{ path_for('admin.user.details', {'id': auth.user.id}) }}">Поточний</a>
-              <a class="dropdown-item" href="{{ path_for('admin.user.create') }}">Реєстрація</a>
             </div>
           </li>
         {% endif %}  
