@@ -5,6 +5,7 @@ class PageController extends Controller {
 
   public function home($request, $response) {
     return $this->view->render($response, 'guest/home.twig', [
+      'activePage' => 'home',
       'breadcrumbs' => \App\Common\Pages::breadcrumbs()
     ]);
   }
