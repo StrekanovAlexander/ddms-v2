@@ -1,10 +1,10 @@
 {% extends 'templates/layout.twig' %}
 
-{% block title %}
- Teachers
-{% endblock %}
+{% block title %}Викладачи{% endblock %}
 
 {% block content %}
+  <h1>Викладачи</h1>
+  <br>
   {% if teachers|length %}
     {% set counter = 1 %}
     <div class="row">
