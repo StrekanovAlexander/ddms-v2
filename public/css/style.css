@@ -62,3 +62,7 @@
 .text-firebrick {
   color: firebrick;
 }
+
+a.text-firebrick:hover, a.text-firebrick:visited {
+  color: firebrick;
+}
