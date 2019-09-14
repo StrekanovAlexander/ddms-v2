@@ -1,4 +1,5 @@
 vendor/*
+public/docs/*
 public/images/awards/*
 public/images/carousel/*
 public/images/teachers/*
