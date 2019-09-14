@@ -1,6 +1,8 @@
 <?php
 
 $app->get('/', 'PageController:home')->setName('home');
+$app->get('/contacts', 'PageController:contacts')->setName('contacts');
+
 $app->get('/teachers', 'TeacherController:teachers')->setName('teachers');
 $app->get('/teacher[/{id}]', 'TeacherController:teacher')->setName('teacher');
 
