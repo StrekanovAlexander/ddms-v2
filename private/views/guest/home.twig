@@ -1,9 +1,68 @@
 {% extends 'templates/layout.twig' %}
 
-{% block title %}
- Home
-{% endblock %}
+{% block title %}Початкова сторінка{% endblock %}
 
 {% block content %}
-  somewhat
+  {% if carousel|length %}
+  <div id="carousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      {% set counter = 0 %}
+      {% for item in carousel %}
+        <li data-target="#carousel" data-slide-to="{{ counter }}" class="{{ counter == 0 ? ' active' : '' }}"></li>
+        {% set counter = counter + 1 %}
+      {% endfor %}  
+    </ol>
+    <div class="carousel-inner">
+      {% set counter = 0 %}
+      {% for item in carousel %}
+        <div class="carousel-item{{ counter == 0 ? ' active' : '' }}">
+          <img class="d-block w-100" src="{{ base_url() }}/images/carousel/{{ item.image }}" alt="">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>{{ item.title }}</h5>
+            <p>{{ item.content }}</p>
+          </div>
+        </div>
+        {% set counter = counter + 1 %}
+      {% endfor %}
+    </div>
+    <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Попередня</span>
+  </a>
+  <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Наступна</span>
+  </a>
+  </div>  
+  {% endif %}
+
+  <h4 class="my-5 text-center text-firebrick">
+    Шановні друзі!<br>Вітаємо вас на сайті Дніпрорудненської дитячої музичної школи!
+  </h4>
+
+  <p>
+    У серпні 1967 року була відкрита Дніпрорудненска дитяча музична школа. У 2006 році школа була перейменована у Комунальний спеціалізований мистецький навчальний заклад "Дніпрорудненська дитяча музична школа" Василівської районної ради Запорізької області. В даний час в школі навчається 260 дітей за такими спеціальностями:
+  </p>  
+
+  <ul>
+    <li>фортепіано</li>
+    <li>сольний спів</li>
+    <li>хоровий спів</li>
+    <li>гітара</li>
+    <li>акордеон</li>
+    <li>баян</li>
+    <li>бандура</li>
+    <li>домра</li>
+    <li>образотворче мистецтво</li>
+  </ul>
+
+  <p>Школа не тільки підтримує існуючі традиції, але й шукає нові шляхи. Ми розвиваємо академічне, автентичне народне та сучасне спрямування змісту початкової мистецької освіти.
+  </p>
+
+  <h4 class="text-center">Наша адреса:</h4>
+
+  <p>вул. Героїв праці 1, м. Дніпрорудне, Запорізької обл., 71630</p>
+  <p>Телефон: (06175) 6-19-44</p>
+  <p>E-mail: dneprorudnoe.music@ukr.net</p>
+
 {% endblock %}
