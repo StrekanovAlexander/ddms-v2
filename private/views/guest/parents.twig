@@ -1,0 +1,34 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}Батькам{% endblock %}
+
+{% block content %}
+  <h1>Батькам</h1>
+  <h5 class="mt-5">Реквізити для оплати</h5>
+  {% if accounts|length %}
+    <div class="row">
+      <ul>
+      {% for account in accounts %}
+      <li>
+        <a href="{{ base_url() }}/docs/{{ account.src }}" target="_blank" class="text-firebrick">
+          {{ account.purpose }}
+        </a>
+      </li>  
+      {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  <h5 class="mt-5">Анкета для батьків</h5>
+  <ul>
+    <li>
+      <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSdImMJO49nSu4PLw9ac4kqpXrBdnbmLZ0ygOGbBjhw0ndUizQ/viewform" class="text-firebrick">Заповнити анкету</a>
+    </li>
+  </ul>
+  <h5 class="mt-5">Оголошення</h5>
+  <ul>
+    <li>
+      <a target="_blank" href="{{ base_url() }}/docs/ddms-nabir-2019.pdf" class="text-firebrick">Дніпрорудненська дитяча музична школа оголошує набір учнів на 2019-2020 навчальний рік</a>
+    </li>
+  </ul>
+
+{% endblock %}
