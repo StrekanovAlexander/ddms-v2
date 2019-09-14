@@ -16,6 +16,16 @@ class PageController extends Controller {
     ]);
   }
 
+  public function contacts($request, $response) {
+    return $this->view->render($response, 'guest/contacts.twig', [
+      'activePage' => 'contacts',
+      'contacts' => Information::where('is_actual', true)->where('slug', 'contacts')->first(),
+      'breadcrumbs' => \App\Common\Pages::breadcrumbs([
+        ['Контактна інформаіця'],
+      ]),
+    ]);
+  }
+
   public function dashboard($request, $response) {
     return $this->view->render($response, 'admin/dashboard.twig', [
       'breadcrumbs' => \App\Common\Pages::breadcrumbs([
