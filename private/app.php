@@ -56,6 +56,10 @@ $container['view'] = function($container) {
   return $view;
 };
 
+$container['AudioController'] = function($container) {
+  return new \App\Controllers\AudioController($container);
+};
+
 $container['AwardController'] = function($container) {
   return new \App\Controllers\AwardController($container);
 };

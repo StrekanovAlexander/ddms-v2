@@ -13,6 +13,8 @@ $app->get('/documents', 'DocumentController:documents')->setName('documents');
 
 $app->get('/department[/{slug}]', 'DepartmentController:department')->setName('department');
 
+$app->get('/minus', 'AudioController:minus')->setName('minus');
+
 $app->group('', function() {
   $this->get('/admin/user/login', 'UserController:getLogin')->setName('admin.user.login');
   $this->post('/admin/user/login', 'UserController:postLogin');
