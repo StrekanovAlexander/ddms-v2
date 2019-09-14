@@ -60,6 +60,10 @@ $container['AwardController'] = function($container) {
   return new \App\Controllers\AwardController($container);
 };
 
+$container['DocumentController'] = function($container) {
+  return new \App\Controllers\DocumentController($container);
+};
+
 $container['PageController'] = function($container) {
   return new \App\Controllers\PageController($container);
 };
