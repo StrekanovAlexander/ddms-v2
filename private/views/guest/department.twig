@@ -1,0 +1,25 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}{{ department.title }}{% endblock %}
+
+{% block content %}
+  <h1>{{ department.title }}</h1>
+  {% if department.image %}
+    <div class="row my-5">
+      <div class="col">
+        <div class="card">
+          <img src="{{ base_url() }}/images/departments/{{ department.image }}" class="card-img-top">
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {{ department.content|raw }}
+  {% if teachers|length %}
+    <h5 class="my-4">Викладачи відділу:</h5>
+    <ul>
+    {% for teacher in teachers %}
+      <li><a href="{{ path_for('teacher', {'id': teacher.id }) }}" class="text-firebrick" title="{{ teacher.full_name }}">{{ teacher.full_name }}</a></li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}
