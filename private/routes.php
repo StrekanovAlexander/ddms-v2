@@ -11,6 +11,8 @@ $app->get('/awards', 'AwardController:awards')->setName('awards');
 $app->get('/parents', 'ParentController:parents')->setName('parents');
 $app->get('/documents', 'DocumentController:documents')->setName('documents');
 
+$app->get('/department[/{slug}]', 'DepartmentController:department')->setName('department');
+
 $app->group('', function() {
   $this->get('/admin/user/login', 'UserController:getLogin')->setName('admin.user.login');
   $this->post('/admin/user/login', 'UserController:postLogin');
