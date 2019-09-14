@@ -1,0 +1,38 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}Відзнаки{% endblock %}
+
+{% block content %}
+  <h1>Відзнаки</h1>
+  <br>
+  {% if awards|length %}
+    {% set counter = 1 %}
+    <div class="row">
+    {% for award in awards %}
+      <div class="col-md-2">
+        <div class="card">
+          {% if award.image|length %}
+            <a href="{{ base_url() }}/images/awards/{{ award.image }}" class="smart-photo">
+              <img src="{{ base_url() }}/images/awards/{{ award.image }}" class="card-img-top"/>
+            </a>
+          {% endif %}  
+         </div>  
+      </div> 
+      {% if counter is divisible by(6) %}
+        </div><br><div class="row">
+      {% endif %}
+      {% set counter = counter + 1 %} 
+    {% endfor %}
+    </div>
+    <nav class="my-5">
+      <ul class="pagination justify-content-center">
+        {% for page in 1..awards.lastPage %}
+          <li class="page-item{{ page == awards.currentPage ? ' active' : '' }}">
+            <a class="page-link btn btn-sm" href="{{ path_for('awards', {}, {'page': page}) }}">{{ page }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+  {% endif %}
+{% endblock %}
