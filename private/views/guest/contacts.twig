@@ -1,0 +1,16 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}Контактна інформація{% endblock %}
+
+{% block content %}
+  <h1 class="mb-5">{{ contacts.title }}</h1>
+  {{ contacts.content|raw }}
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10805.500675084919!2d34.998111!3d47.3851124!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf1b36f4e5a4f8e7!2z0JTQvdC10L_RgNC-0YDRg9C00L3QtdC90YHQutCw0Y8g0JzRg9C30YvQutCw0LvRjNC90LDRjyDQqNC60L7Qu9Cw!5e0!3m2!1sru!2sua!4v1568477720745!5m2!1sru!2sua" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+      </div>
+   </div>
+  </div>
+
+{% endblock %}
