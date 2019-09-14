@@ -64,6 +64,10 @@ $container['PageController'] = function($container) {
   return new \App\Controllers\PageController($container);
 };
 
+$container['ParentController'] = function($container) {
+  return new \App\Controllers\ParentController($container);
+};
+
 $container['UserController'] = function($container) {
   return new \App\Controllers\UserController($container);
 };
