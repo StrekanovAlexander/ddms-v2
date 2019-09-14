@@ -1,6 +1,5 @@
-.card-fixed {
+.card_no-border {
   border: none;
-  min-height: 18rem !important;
 }
 
 .header {
