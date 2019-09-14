@@ -2,6 +2,12 @@
   border: none;
 }
 
+.footer {
+  background-color: dimgray;
+  color: white;
+  margin: 2rem 0 0;
+}
+
 .header {
   background-color: black;
   background-image: url('../public/images/bg-header.jpg');
