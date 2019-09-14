@@ -6,6 +6,8 @@ $app->get('/teacher[/{id}]', 'TeacherController:teacher')->setName('teacher');
 
 $app->get('/awards', 'AwardController:awards')->setName('awards');
 
+$app->get('/parents', 'ParentController:parents')->setName('parents');
+
 $app->group('', function() {
   $this->get('/admin/user/login', 'UserController:getLogin')->setName('admin.user.login');
   $this->post('/admin/user/login', 'UserController:postLogin');
