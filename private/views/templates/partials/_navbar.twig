@@ -23,8 +23,8 @@
       <li class="nav-item{{ activePage == 'documents' ? ' active' : '' }}">
         <a class="nav-link" href="{{ path_for('documents') }}" title="Нормативні документи">Нормативні документи</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" title="Контакти">Контакти</a>
+      <li class="nav-item{{ activePage == 'documents' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ path_for('contacts') }}" title="Контакти">Контакти</a>
       </li>
     </ul>
     <ul class="navbar-nav">
