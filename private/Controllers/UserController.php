@@ -88,7 +88,7 @@ class UserController extends Controller {
 
   public function postUpdate($request, $response) {
 
-    if ($request->getParam('edit_password')) {
+    if (strlen($request->getParam('password'))) {
       
       $validation = $this->validator->validate($request, [
         'password' => Validator::notVoid()->noSpaces(),
@@ -106,7 +106,7 @@ class UserController extends Controller {
 
     $user = User::find($request->getParam('id'));
 
-    if ($request->getParam('edit_password')) {
+    if (strlen($request->getParam('password'))) {
       $user->update([
         'password' => User::setPassword($request->getParam('password')),
       ]);
