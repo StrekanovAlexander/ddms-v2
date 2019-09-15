@@ -17,6 +17,10 @@ $container = $app->getContainer();
 
 $capsule = \App\Common\Capsule::capsule($db);
 
+$container['abspath'] = function() {
+  return dirname(dirname(__FILE__));
+};
+
 $container['auth'] = function() {
   return new \App\Common\Auth;
 };
