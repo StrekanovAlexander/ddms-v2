@@ -4,17 +4,29 @@
 
 {% block content %}
   {% if post|length %}
+    <h5 class="text-firebrick">{{ post.created_at|date("d.m.Y") }}</h5>
     <h1>{{ post.title }}</h1>
-    <h5 class="text-firebrick"></h5>
-    <h6></h6>
-  {% if post.image|length %}
-    <div class="row my-5">
-      <div class="col-md-12 col-sm-12">
-        <img src="{{ base_url() }}/images/galleries/{{ post.folder }}/{{ post.image }}" class="img-fluid" alt="{{ post.title }}">
+    <div class="row my-3">
+      <div class="col">
+        <p class="lead">{{ post.intro }}</p>
+        {% if post.image|length %}
+          <img src="{{ base_url() }}/images/galleries/{{ post.folder }}/{{ post.image }}" class="img-fluid my-3" alt="{{ post.title }}">
+        {% endif %}
+        {{ post.content|raw }}
+      </div>  
+    </div>    
+    {% if images|length %}
+      <div class="row">
+        {% for image in images %}
+          <div class="col-md-2 col-sm-12">
+            <div class="card card_no-border">
+              <a href="{{ base_url() }}/images/galleries/{{ post.folder }}/{{ image }}"  class="smart-photo">
+              <img src="{{ base_url() }}/images/galleries/{{ post.folder }}/{{ image }}" class="card-img-top mb-3"/>
+              </a>  
+            </div>
+          </div>    
+        {% endfor %}
       </div>
-    </div>  
-    {% endif %}
-  </div>  
-
+    {% endif %}  
   {% endif %}
 {% endblock %}

@@ -16,7 +16,8 @@
           {% endif %}  
           <div class="card-body">
             <h6 class="card-title text-center">
-              {{ post.title }}<br><small>{{ post.intro }}</small>
+              <a href="{{ path_for('post', {'id': post.id}) }}" class="text-firebrick">{{ post.title }}</a>
+              <br><small>{{ post.intro }}</small>
             </h6>
           </div>
         </div>
