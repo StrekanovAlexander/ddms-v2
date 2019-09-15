@@ -20,6 +20,14 @@ $app->get('/student[/{id}]', 'StudentController:student')->setName('student');
 
 $app->get('/posts', 'PostController:posts')->setName('posts');
 $app->get('/post[/{id}]', 'PostController:post')->setName('post');
+$app->get('/processes', 'PostController:processes')->setName('processes');
+$app->get('/process[/{id}]', 'PostController:process')->setName('process');
+
+$app->get('/contests[/{id}]', 'PostController:contests')->setName('contests');
+$app->get('/contest[/{id}]', 'PostController:contest')->setName('contest');
+
+$app->get('/foundation', 'PostController:foundation')->setName('foundation');
+$app->get('/archive', 'PostController:archive')->setName('archive');
 
 $app->group('', function() {
   $this->get('/admin/user/login', 'UserController:getLogin')->setName('admin.user.login');
