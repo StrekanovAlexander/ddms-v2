@@ -1,0 +1,20 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+  {% if post|length %}
+    <h1>{{ post.title }}</h1>
+    <h5 class="text-firebrick"></h5>
+    <h6></h6>
+  {% if post.image|length %}
+    <div class="row my-5">
+      <div class="col-md-12 col-sm-12">
+        <img src="{{ base_url() }}/images/galleries/{{ post.folder }}/{{ post.image }}" class="img-fluid" alt="{{ post.title }}">
+      </div>
+    </div>  
+    {% endif %}
+  </div>  
+
+  {% endif %}
+{% endblock %}
