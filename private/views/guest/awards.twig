@@ -10,7 +10,7 @@
     <div class="row">
     {% for award in awards %}
       <div class="col-md-2">
-        <div class="card">
+        <div class="card card_no-border">
           {% if award.image|length %}
             <a href="{{ base_url() }}/images/awards/{{ award.image }}" class="smart-photo">
               <img src="{{ base_url() }}/images/awards/{{ award.image }}" class="card-img-top"/>

@@ -35,3 +35,9 @@
   background-color: firebrick !important;
   border-color: transparent;
 }
+
+.page-link:hover {
+  background-color: lightgray !important;
+  border-color: transparent;
+  color: black;
+}

@@ -1,0 +1,21 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}Наші випускники. Детальніше{% endblock %}
+
+{% block content %}
+  {% if student|length %}
+    <h1>{{ student.full_name }}</h1>
+    <h5>{{ student.department.title }}</h5>
+    <h6 class="text-firebrick">{{ student.content }}</h6>
+    
+  {% if student.image|length %}
+    <div class="row my-5">
+      <div class="col-md-12 col-sm-12">
+        <img src="{{ base_url() }}/images/students/{{ student.image }}" class="img-fluid" alt="{{ student.full_name }}">
+      </div>
+    </div>  
+    {% endif %}
+  </div>  
+
+  {% endif %}
+{% endblock %}

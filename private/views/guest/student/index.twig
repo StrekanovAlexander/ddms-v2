@@ -1,0 +1,28 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}Наші випускники{% endblock %}
+
+{% block content %}
+  <h1>Наші випускники</h1>
+  {% if students|length %}
+    <div class="row mt-5">
+    {% for student in students %}
+      <div class="col-md-4 col-sm-12">
+        <div class="card card_no-border">
+          {% if student.image|length %}
+            <a href="{{ path_for('student', {'id': student.id }) }}">
+              <img src="{{ base_url() }}/images/students/{{ student.image }}" class="card-img-top" alt="{{ student.full_name }}">
+            </a>
+          {% endif %}  
+          <div class="card-body">
+            <h6 class="card-title text-center">
+              {{ student.full_name }}<br><small>{{ student.content }}</small>
+            </h6>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>  
+  {% endif %}
+  
+{% endblock %}

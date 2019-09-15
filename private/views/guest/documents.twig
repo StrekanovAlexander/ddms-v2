@@ -1,0 +1,26 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}Нормативні документи{% endblock %}
+
+{% block content %}
+  <h1>Нормативні документи</h1>
+  {% if documents|length %}
+    <div class="row mt-5">
+      <ul>
+      {% for document in documents %}
+      <li>
+        {% if document.is_remote == 1 %}
+        <a href="{{ document.src }}" target="_blank" class="text-firebrick">
+          {{ document.title }}
+        </a>
+        {% else %}
+        <a href="{{ base_url() }}/docs/{{ document.src }}" target="_blank" class="text-firebrick">
+          {{ document.title }}
+        </a>
+        {% endif %}
+      </li>  
+      {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+ {% endblock %}

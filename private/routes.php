@@ -1,12 +1,22 @@
 <?php
 
 $app->get('/', 'PageController:home')->setName('home');
+$app->get('/contacts', 'PageController:contacts')->setName('contacts');
+
 $app->get('/teachers', 'TeacherController:teachers')->setName('teachers');
 $app->get('/teacher[/{id}]', 'TeacherController:teacher')->setName('teacher');
 
 $app->get('/awards', 'AwardController:awards')->setName('awards');
 
 $app->get('/parents', 'ParentController:parents')->setName('parents');
+$app->get('/documents', 'DocumentController:documents')->setName('documents');
+
+$app->get('/department[/{slug}]', 'DepartmentController:department')->setName('department');
+
+$app->get('/minus', 'AudioController:minus')->setName('minus');
+
+$app->get('/students[/{id}]', 'StudentController:students')->setName('students');
+$app->get('/student[/{id}]', 'StudentController:student')->setName('student');
 
 $app->group('', function() {
   $this->get('/admin/user/login', 'UserController:getLogin')->setName('admin.user.login');

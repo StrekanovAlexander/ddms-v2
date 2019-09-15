@@ -1,6 +1,15 @@
-.card-fixed {
+.card_no-border {
   border: none;
-  min-height: 18rem !important;
+}
+
+.footer {
+  background-color: dimgray;
+  color: white;
+  margin: 2rem 0 0;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Open Sans', sans-serif;
 }
 
 h1, h2, h3, h4 {

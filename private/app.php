@@ -56,8 +56,20 @@ $container['view'] = function($container) {
   return $view;
 };
 
+$container['AudioController'] = function($container) {
+  return new \App\Controllers\AudioController($container);
+};
+
 $container['AwardController'] = function($container) {
   return new \App\Controllers\AwardController($container);
+};
+
+$container['DepartmentController'] = function($container) {
+  return new \App\Controllers\DepartmentController($container);
+};
+
+$container['DocumentController'] = function($container) {
+  return new \App\Controllers\DocumentController($container);
 };
 
 $container['PageController'] = function($container) {
@@ -66,6 +78,10 @@ $container['PageController'] = function($container) {
 
 $container['ParentController'] = function($container) {
   return new \App\Controllers\ParentController($container);
+};
+
+$container['StudentController'] = function($container) {
+  return new \App\Controllers\StudentController($container);
 };
 
 $container['UserController'] = function($container) {

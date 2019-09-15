@@ -10,7 +10,7 @@
     <div class="row">
     {% for teacher in teachers %}
       <div class="col-md-4">
-        <div class="card card-fixed">
+        <div class="card card_no-border">
           {% if teacher.image_preview|length %}
             <a href="{{ path_for('teacher', {'id': teacher.id}) }}">
               <img src="{{ base_url() }}/images/teachers/{{ teacher.image_preview }}" class="card-img-top" alt="{{ teacher.full_name }}">

@@ -1,0 +1,18 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}Мінусові фонограми{% endblock %}
+
+{% block content %}
+  <h1>Мінусові фонограми</h1>
+  <p class="lead">З питань придбання мінусових фонограм звертатись на поштову адресу</p>
+  {% if audio|length %}
+    <div class="jouele-playlist" data-space-control="true">
+    {% for item in audio %}
+      <div class="example-track my-5">
+        <a href="{{ base_url() }}/audio/{{ item.filename }}" data-length="" class="jouele">{{ item.title }}</a>
+      </div>  
+    {% endfor %}
+    </div>
+  {% endif %}
+  
+{% endblock %}
