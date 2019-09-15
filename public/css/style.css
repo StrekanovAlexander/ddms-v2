@@ -3,6 +3,10 @@
   min-height: 18rem !important;
 }
 
+h1, h2, h3, h4 {
+  font-family: 'Open Sans', sans-serif;
+}
+
 .header {
   background-color: black;
   background-image: url('../public/images/bg-header.jpg');
