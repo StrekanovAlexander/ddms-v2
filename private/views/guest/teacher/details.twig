@@ -10,9 +10,7 @@
   {% if teacher.image|length %}
     <div class="row my-5">
       <div class="col-md-12 col-sm-12">
-        <a href="{{ path_for('teacher', {'id': teacher.id}) }}">
-          <img src="{{ base_url() }}/images/teachers/{{ teacher.image }}" class="img-fluid" alt="{{ teacher.full_name }}">
-        </a>
+        <img src="{{ base_url() }}/images/teachers/{{ teacher.image }}" class="img-fluid" alt="{{ teacher.full_name }}">
       </div>
     </div>  
     {% endif %}

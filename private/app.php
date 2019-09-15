@@ -17,6 +17,10 @@ $container = $app->getContainer();
 
 $capsule = \App\Common\Capsule::capsule($db);
 
+$container['abspath'] = function() {
+  return dirname(dirname(__FILE__));
+};
+
 $container['auth'] = function() {
   return new \App\Common\Auth;
 };
@@ -80,16 +84,20 @@ $container['ParentController'] = function($container) {
   return new \App\Controllers\ParentController($container);
 };
 
+$container['PostController'] = function($container) {
+  return new \App\Controllers\PostController($container);
+};
+
 $container['StudentController'] = function($container) {
   return new \App\Controllers\StudentController($container);
 };
 
-$container['UserController'] = function($container) {
-  return new \App\Controllers\UserController($container);
-};
-
 $container['TeacherController'] = function($container) {
   return new \App\Controllers\TeacherController($container);
+};
+
+$container['UserController'] = function($container) {
+  return new \App\Controllers\UserController($container);
 };
 
 $app->add(new \App\Middleware\CsrfMiddleware($container));

@@ -1,0 +1,40 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}Події{% endblock %}
+
+{% block content %}
+  <h1>Події</h1>
+  {% if posts|length %}
+    <div class="row mt-5">
+    {% for post in posts %}
+      <div class="col-md-4 col-sm-12">
+        <div class="card card_no-border">
+          {% if post.image|length %}
+            <a href="{{ path_for('post', {'id': post.id}) }}">
+              <img src="{{ base_url() }}/images/galleries/{{ post.folder }}/{{ post.image }}" class="card-img-top" alt="{{ post.title }}">
+            </a>
+          {% endif %}  
+          <div class="card-body">
+            <h6 class="card-title text-center">
+              <a href="{{ path_for('post', {'id': post.id}) }}" class="text-firebrick">
+                {{ post.created_at|date("d.m.Y") }}:                 
+                {{ post.title }}</a>
+              <br><small>{{ post.intro }}</small>
+            </h6>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div> 
+    <nav class="my-5">
+      <ul class="pagination justify-content-center">
+        {% for page in 1..posts.lastPage %}
+          <li class="page-item{{ page == posts.currentPage ? ' active' : '' }}">
+            <a class="page-link btn btn-sm" href="{{ path_for('posts', {}, {'page': page}) }}">{{ page }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav> 
+  {% endif %}
+  
+{% endblock %}
