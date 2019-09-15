@@ -15,6 +15,9 @@ $app->get('/department[/{slug}]', 'DepartmentController:department')->setName('d
 
 $app->get('/minus', 'AudioController:minus')->setName('minus');
 
+$app->get('/students[/{id}]', 'StudentController:students')->setName('students');
+$app->get('/student[/{id}]', 'StudentController:student')->setName('student');
+
 $app->group('', function() {
   $this->get('/admin/user/login', 'UserController:getLogin')->setName('admin.user.login');
   $this->post('/admin/user/login', 'UserController:postLogin');

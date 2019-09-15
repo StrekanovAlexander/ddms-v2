@@ -80,6 +80,10 @@ $container['ParentController'] = function($container) {
   return new \App\Controllers\ParentController($container);
 };
 
+$container['StudentController'] = function($container) {
+  return new \App\Controllers\StudentController($container);
+};
+
 $container['UserController'] = function($container) {
   return new \App\Controllers\UserController($container);
 };
