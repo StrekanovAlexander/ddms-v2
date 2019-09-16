@@ -3,7 +3,7 @@
 {% block title %}Конкурси{% endblock %}
 
 {% block content %}
-  <h1>Конкурси</h1>
+  <h1>Конкурси: {{ section }}</h1>
   {% if posts|length %}
     <div class="row mt-5">
     {% for post in posts %}
@@ -28,11 +28,13 @@
     </div> 
     <nav class="my-5">
       <ul class="pagination justify-content-center">
-        {% for page in 1..posts.lastPage %}
-          <li class="page-item{{ page == posts.currentPage ? ' active' : '' }}">
-            <a class="page-link btn btn-sm" href="{{ path_for('processes', {}, {'page': page}) }}">{{ page }}</a>
-          </li>
-        {% endfor %}
+        {% if posts.lastPage > 1 %}
+          {% for page in 1..posts.lastPage %}
+            <li class="page-item{{ page == posts.currentPage ? ' active' : '' }}">
+              <a class="page-link btn btn-sm" href="{{ path_for('contests', {'id': slug}, {'page': page}) }}">{{ page }}</a>
+            </li>
+          {% endfor %}
+        {% endif %}
       </ul>
     </nav> 
   {% endif %}
