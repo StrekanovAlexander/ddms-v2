@@ -100,6 +100,12 @@ $container['UserController'] = function($container) {
   return new \App\Controllers\UserController($container);
 };
 
+$container['notFoundHandler'] = function($container) {
+	return function($request, $response) use ($container) {
+    return $container->view->render($response, '404.twig')->withStatus(404);
+	};
+};
+
 $app->add(new \App\Middleware\CsrfMiddleware($container));
 $app->add(new \App\Middleware\OldInputMiddleware($container));
 $app->add(new \App\Middleware\ValidationMiddleware($container));
