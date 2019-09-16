@@ -1,5 +1,8 @@
 {% extends 'templates/layout.twig' %}
 
+{% block description %}{{ department.intro }}{% endblock %}
+
+
 {% block title %}{{ department.title }}{% endblock %}
 
 {% block content %}
@@ -18,7 +21,7 @@
     <h5 class="my-4">Викладачи відділу:</h5>
     <ul>
     {% for teacher in teachers %}
-      <li><a href="{{ path_for('teacher', {'id': teacher.id }) }}" class="text-firebrick" title="{{ teacher.full_name }}">{{ teacher.full_name }}</a></li>
+      <li><a href="{{ path_for('teacher', {'id': teacher.id }) }}" class="text-firebrick" title="{{ teacher.full_name }}">{{ teacher.full_name }}</a> - <span class="text-gray">{{ teacher.content }}</span></li>
     {% endfor %}
     </ul>
   {% endif %}
