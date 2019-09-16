@@ -80,13 +80,16 @@ class PostController extends Controller {
   }
 
   public function contests($request, $response, $args) {
+    $section = Post::where('is_actual', true)->where('slug', $args['id'])->first()->section->title; 
 
     $posts = Post::where('is_actual', true)->where('slug', $args['id'])->orderBy('id', 'DESC')->get()->toArray();
 
     return $this->view->render($response, 'guest/post/contests.twig', [
       'posts' => Pages::pagination($posts, $request->getParam('page', 1), 6),
+      'slug' => $args['id'],
+      'section' => $section, 
       'breadcrumbs' => Pages::breadcrumbs([
-        ['Конкурси'],
+        ['Конкурси: ' . $section],
       ]),
     ]);
 
