@@ -1,6 +1,8 @@
 {% extends 'templates/layout.twig' %}
 
-{% block description %}У серпні 1967 року була відкрита Дніпрорудненска дитяча музична школа. У 2006 році школа була перейменована у Комунальний спеціалізований мистецький навчальний заклад 'Дніпрорудненська дитяча музична школа' Василівської районної ради Запорізької області{% endblock %}
+{% block description %}
+У серпні 1967 року була відкрита Дніпрорудненска дитяча музична школа. У 2006 році школа була перейменована у Комунальний спеціалізований мистецький навчальний заклад «Дніпрорудненська дитяча музична школа» Василівської районної ради Запорізької області
+{% endblock %}
 
 {% block title %}Початкова сторінка{% endblock %}
 
@@ -37,11 +39,11 @@
   </a>
   </div>  
   {% endif %}
-  <h4 class="mt-5 text-center text-firebrick">
+  <h4 class=" mt-5 mb-4 text-center text-firebrick">
     {{ about.title|raw }} 
   </h4>
   {{ about.content|raw }}
-  <h4 class="my-3 text-center text-firebrick">
+  <h4 class="my-4 text-center text-firebrick">
     {{ contacts.title }} 
   </h4>
   {{ contacts.content|raw }}
