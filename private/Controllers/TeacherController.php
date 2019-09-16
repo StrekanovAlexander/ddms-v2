@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Common\Pages;
+use App\Models\Department;
 use App\Models\Teacher;
 
 class TeacherController extends Controller {
@@ -39,7 +40,13 @@ class TeacherController extends Controller {
     ]);
   }
 
-  public function getUpdate() {
+  public function getUpdate($request, $response, $args) {
+    $teacher = Teacher::find($args['id']);
+    $departments = Department::get();
+    return $this->view->render($response, 'admin/teacher/update.twig', [
+      'teacher' => $teacher,
+      'departments' => $departments,
+    ]);
     
   }
 
