@@ -1,9 +1,11 @@
 <?php 
 namespace App\Controllers;
 
-use App\Common\Pages;
-use App\Models\Department;
-use App\Models\Teacher;
+use \App\Common\Files;
+use \App\Common\Pages;
+use \App\Models\Department;
+use \App\Models\Teacher;
+use \Respect\Validation\Validator;
 
 class TeacherController extends Controller {
 
@@ -46,11 +48,43 @@ class TeacherController extends Controller {
     return $this->view->render($response, 'admin/teacher/update.twig', [
       'teacher' => $teacher,
       'departments' => $departments,
+      'breadcrumbs' => Pages::breadcrumbs([
+        ['Викладачи', 'admin.teachers'],
+        ['Редагування: ' . $reacher->full_name ]
+      ])
     ]);
     
   }
 
-  public function postUpdate() {
+  public function postUpdate($request, $response) {
+
+    $validation = $this->validator->validate($request, [
+      'full_name' => Validator::notVoid(),
+      'content' => Validator::notVoid(),
+    ]);
+
+    if ($validation->failed()) {
+      $this->flash->addMessage('message', 'Помилка редагування викладача');
+      return $response->withRedirect($this->router->pathFor('admin.teacher.update', [
+        'id' => $request->getParam('id'),
+      ]));
+    }
+
+    $teacher = Teacher::find($request->getParam('id'));
+    $teacher->update([
+      'department_id' => $request->getParam('department_id'),
+      'full_name' => $request->getParam('full_name'),
+      'content' => $request->getParam('content'),
+      'rank' => $request->getParam('rank'),
+      'is_actual' => $request->getParam('is_actual')  ? true : false,
+    ]);
+
+    $this->flash->addMessage('message', 'Викладача було відредаговано');
+
+    return $response->withRedirect($this->router->pathFor('admin.teacher.details', [
+      'id' => $teacher->id,
+    ]));
+
 
   }
 
@@ -63,6 +97,53 @@ class TeacherController extends Controller {
         [$teacher->full_name],
       ], true),
     ]);
+  }
+
+  public function postUpload($request, $response) {
+    $teacher = Teacher::find($request->getParam('id'));
+
+    $path = Files::getPath([
+      $this->abspath, 'public', 'images', 'teachers'
+    ]);
+
+    $files = $request->getUploadedFiles();
+    $file = $files['file'];
+    $fileName = Files::moveFile($file, $path);
+
+    if ($fileName) {
+      if ($request->getParam('image-preview')) {
+        $teacher->image_preview = $fileName;
+      } else {
+        $teacher->image = $fileName;
+      }   
+      $teacher->save();
+      $this->flash->addMessage('message', 'Зображення було завантажено');   
+    } else {
+       $this->flash->addMessage('message', 'Помилка завантаження файлу!'); 
+    }
+    return $response->withRedirect($this->router->pathFor('admin.teacher.details', [
+      'id' => $teacher->id,    
+    ]));
+  }
+
+  public function removeFile($request, $response, $args) {
+    $file = Files::getPath([
+      $this->abspath, 'public', 'images', 'teachers', $args['file']
+    ]);
+
+    if (unlink($file)) {
+      $this->flash->addMessage('message', 'Файл було видалено');
+      $teacher = Teacher::find($args['id']);
+      $teacher[$args['field']] = null;
+      $teacher->save();
+    } else {
+      $this->flash->addMessage('message', 'Помилка видалення файлу');
+    }
+    
+    return $response->withRedirect($this->router->pathFor('admin.teacher.details', [
+      'id' => $args['id'], 
+    ]));
+    
   }
 
 }

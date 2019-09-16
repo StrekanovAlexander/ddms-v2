@@ -7,6 +7,14 @@ class Teacher extends Model {
 
   protected $table = 'teachers';
 
+  protected $fillable = [
+    'department_id',
+    'full_name',
+    'content',
+    'rank',
+    'is_actual',
+  ];
+
   public function department() {
     return $this->belongsTo('App\Models\Department', 'department_id'); 
   }
