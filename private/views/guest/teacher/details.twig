@@ -1,6 +1,8 @@
 {% extends 'templates/layout.twig' %}
 
-{% block title %}Викладач: {{ teacher.full_name }}{% endblock %}
+{% block description %}{{ teacher.full_name }} - {{ teacher.content|lower }}{% endblock %}
+
+{% block title %}{{ teacher.full_name }}{% endblock %}
 
 {% block content %}
   {% if teacher|length %}
