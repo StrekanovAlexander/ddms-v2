@@ -48,8 +48,13 @@ $app->group('', function() {
   $this->post('/admin/user/update', 'UserController:postUpdate');
 
   $this->get('/admin/teachers', 'TeacherController:index')->setName('admin.teachers');
+  
   $this->get('/admin/teacher/update[/{id}]', 'TeacherController:getUpdate')->setName('admin.teacher.update');
   $this->post('/admin/teacher/update', 'TeacherController:postUpdate');
+  
   $this->get('/admin/teacher/details[/{id}]', 'TeacherController:details')->setName('admin.teacher.details');
+
+  $this->post('/admin/teacher/upload', 'TeacherController:postUpload')->setName('admin.teacher.upload');
+  $this->get('/admin/teacher/file/remove[/{id}/{file}/{field}]', 'TeacherController:removeFile')->setName('admin.teacher.file.remove');
 
 })->add(new \App\Middleware\AdminMiddleware($container));
