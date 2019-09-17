@@ -3,12 +3,15 @@
 {% block title %}{% endblock %}
 
 {% block content %}
+  
   <div class="row">
     <div class="col-md-4 col-sm-12">
       <p>Загальні дані</p>
       <ul>
         <li><a href="{{ path_for('admin.teachers') }}" class="text-firebrick">Викладачи</a></li>
+        <li><a href="{{ path_for('admin.awards') }}" class="text-firebrick">Відзнаки</a></li>
       </ul>  
     </div>  
   </div>
+
 {% endblock %}
