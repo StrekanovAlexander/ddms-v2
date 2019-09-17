@@ -48,6 +48,10 @@ $app->group('', function() {
   $this->post('/admin/user/update', 'UserController:postUpdate');
 
   $this->get('/admin/teachers', 'TeacherController:index')->setName('admin.teachers');
+
+  $this->get('/admin/teacher/create', 'TeacherController:getCreate')->setName('admin.teacher.create');
+  $this->post('/admin/teacher/create', 'TeacherController:postCreate');
+
   
   $this->get('/admin/teacher/update[/{id}]', 'TeacherController:getUpdate')->setName('admin.teacher.update');
   $this->post('/admin/teacher/update', 'TeacherController:postUpdate');
