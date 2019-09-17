@@ -1,0 +1,60 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Відзнака{% endblock %}
+
+{% block content %}
+  {% if award|length %}
+    <h5 class="my-5">Відзнака: {{ award.title }}</h5>
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ award.id }}</td>
+      </tr>
+      <tr> 
+        <th>Відділ</th>
+        <td>{{ award.section.title }}</td>
+      </tr>  
+      <tr>  
+        <th>Назва</th>
+        <td>{{ award.title }}</td>
+      </tr>  
+      <tr>  
+        <th>Опис</th>
+        <td>{{ award.content }}</td>
+      </tr>  
+      <tr> 
+        <th>Файл</th>
+        <td>
+          <img src="{{ base_url() }}/images/awards/{{ award.image }}" alt="{{ award.title }}" style="width: 10%">
+          {% if award.image %}
+            <a href="{{ path_for('admin.award.file.remove', {
+              'id': award.id, 
+              'file': award.image,
+            }) }}" class="btn btn-sm btn-dark"> <i class="fas fa-trash-alt"></i> Видалити</a>
+          {% endif %}
+        </td>
+      </tr>
+      <tr>  
+        <th>Актуальність</th>
+        <td><i class="fas {{ award.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      </tr>  
+      <tr>  
+        <th>Користувач</th>
+        <td>{{ award.user.username }}</td>
+      </tr>  
+    </table>  
+    <a class="btn btn-dark btn-sm" href="{{ path_for('admin.award.update', {'id': award.id}) }}"><i class="fas fa-edit"></i> Редагувати</a>
+    <br>
+    <br>
+    <form action="{{ path_for('admin.award.upload') }}" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">Завантажити файл</label>
+        <input class="form-control-file" id="file" name="file" type="file">
+      </div>
+      <button class="btn btn-dark btn-sm" type="submit"><i class='fas fa-upload'></i> Пуск
+      </button>
+      <input type="hidden" name="id" id="id" value="{{ award.id }}">
+      {{ csrf.fields|raw }}
+    </form>
+  {% endif %}
+{% endblock %}

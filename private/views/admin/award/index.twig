@@ -1,0 +1,47 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Відзнаки{% endblock %}
+
+{% block content %}
+  <h6>Відзнаки</h6>
+  <div class="my-3">
+    <a href="{{ path_for('admin.award.create') }}" class="btn btn-dark btn-sm"><i class="fas fa-plus"></i> Створити</a>
+  </div>
+  {% if awards|length %}
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Файл</th>
+      <th>Назва</th>
+      <th>Опис</th>
+      <th>Відділ</th>
+      <th>Актуальність</th>
+      <th></th>
+    </tr>  
+    {% for award in awards %}
+     <tr>
+      <td>{{ award.id }}</td>
+      <td>{{ award.section_title }}</td>
+      <td>{{ award.title }}</td>
+      <td>{{ award.content }}</td>
+      <td style="width:15%">
+        {% if award.image %}
+          <img src="{{ base_url() }}/images/awards/{{ award.image }}" style="width: 20%">
+        {% endif %}  
+      </td>
+      <td><i class="fas {{ award.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      <td><a href="{{ path_for('admin.award.details', {'id': award.id}) }}"><i class="fas fa-search text-dark"></i></a></td>
+    </tr>  
+    {% endfor %}
+  </table>
+  <nav class="my-5">
+    <ul class="pagination justify-content-center">
+      {% for page in 1..awards.lastPage %}
+      <li class="page-item{{ page == awards.currentPage ? ' active' : '' }}">
+        <a class="page-link btn btn-sm" href="{{ path_for('admin.awards', {}, {'page': page}) }}">{{ page }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+  {% endif %}
+{% endblock %}
