@@ -57,4 +57,19 @@ $app->group('', function() {
   $this->post('/admin/teacher/upload', 'TeacherController:postUpload')->setName('admin.teacher.upload');
   $this->get('/admin/teacher/file/remove[/{id}/{file}/{field}]', 'TeacherController:removeFile')->setName('admin.teacher.file.remove');
 
+  $this->get('/admin/awards', 'AwardController:index')->setName('admin.awards');
+
+  $this->get('/admin/award/details[/{id}]', 'AwardController:details')->setName('admin.award.details');
+  
+  $this->get('/admin/award/update[/{id}]', 'AwardController:getUpdate')->setName('admin.award.update');
+  $this->post('/admin/award/update', 'AwardController:postUpdate');
+  
+  $this->get('/admin/award/create', 'AwardController:getCreate')->setName('admin.award.create');
+  $this->post('/admin/award/create', 'AwardController:postCreate');
+
+  $this->post('/admin/award/upload', 'AwardController:postUpload')->setName('admin.award.upload');
+
+  $this->get('/admin/award/file/remove[/{id}/{file}]', 'AwardController:removeFile')->setName('admin.award.file.remove');
+
+  
 })->add(new \App\Middleware\AdminMiddleware($container));
