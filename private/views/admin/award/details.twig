@@ -42,6 +42,10 @@
         <th>Користувач</th>
         <td>{{ award.user.username }}</td>
       </tr>  
+      <tr>  
+        <th>Створено / Редаговано</th>
+        <td>{{ award.created_at }} / {{ award.updated_at }}</td>
+      </tr>
     </table>  
     <a class="btn btn-dark btn-sm" href="{{ path_for('admin.award.update', {'id': award.id}) }}"><i class="fas fa-edit"></i> Редагувати</a>
     <br>
