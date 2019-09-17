@@ -77,6 +77,7 @@ class TeacherController extends Controller {
       'content' => $request->getParam('content'),
       'rank' => $request->getParam('rank'),
       'is_actual' => $request->getParam('is_actual')  ? true : false,
+      'user_id' => $this->auth->user()->id,
     ]);
 
     $this->flash->addMessage('message', 'Викладача було відредаговано');
@@ -115,7 +116,8 @@ class TeacherController extends Controller {
         $teacher->image_preview = $fileName;
       } else {
         $teacher->image = $fileName;
-      }   
+      }
+      $teacher->user_id = $this->auth->user()->id;   
       $teacher->save();
       $this->flash->addMessage('message', 'Зображення було завантажено');   
     } else {
@@ -145,5 +147,50 @@ class TeacherController extends Controller {
     ]));
     
   }
+
+  public function getCreate($request, $response) {
+    $departments = Department::get();
+    return $this->view->render($response, 'admin/teacher/create.twig', [
+       'departments' => $departments,
+      'breadcrumbs' => Pages::breadcrumbs([
+        ['Викладачи', 'admin.teachers'],
+        ['Створення']
+      ])
+    ]);
+    
+  }
+
+  public function postCreate($request, $response) {
+
+    $validation = $this->validator->validate($request, [
+      'full_name' => Validator::notVoid(),
+      'content' => Validator::notVoid(),
+    ]);
+
+    if ($validation->failed()) {
+      $this->flash->addMessage('message', 'Помилка створення викладача');
+      return $response->withRedirect($this->router->pathFor('admin.teacher.create'));
+    }
+
+    Teacher::create([
+      'department_id' => $request->getParam('department_id'),
+      'full_name' => $request->getParam('full_name'),
+      'content' => $request->getParam('content'),
+      'rank' => $request->getParam('rank'),
+      'is_actual' => $request->getParam('is_actual')  ? true : false,
+      'user_id' => $this->auth->user()->id,
+    ]);
+
+    $id = Teacher::max('id');
+
+    $this->flash->addMessage('message', 'Викладача було створено');
+
+    return $response->withRedirect($this->router->pathFor('admin.teacher.details', [
+      'id' => $id,
+    ]));
+
+
+  }
+
 
 }

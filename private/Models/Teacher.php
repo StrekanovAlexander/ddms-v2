@@ -13,10 +13,17 @@ class Teacher extends Model {
     'content',
     'rank',
     'is_actual',
+    'user_id',
   ];
+
+
 
   public function department() {
     return $this->belongsTo('App\Models\Department', 'department_id'); 
+  }
+
+  public function user() {
+    return $this->belongsTo('App\Models\User', 'user_id');
   }
 
   public static function teachers() {
