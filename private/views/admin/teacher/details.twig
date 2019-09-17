@@ -56,6 +56,14 @@
         <th>Актуальність</th>
         <td><i class="fas {{ teacher.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
       </tr>  
+      <tr>  
+        <th>Користувач</th>
+        <td>{{ teacher.user.username }}</td>
+      </tr>  
+      <tr>  
+        <th>Створено / Редаговано</th>
+        <td>{{ teacher.created_at }} / {{ teacher.updated_at }}</td>
+      </tr>  
     </table>  
     <a class="btn btn-dark btn-sm" href="{{ path_for('admin.teacher.update', {'id': teacher.id}) }}"><i class="fas fa-edit"></i> Редагувати</a>
     <br>
