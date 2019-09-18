@@ -23,6 +23,8 @@
 
       <div class="form-group">
         <label for="content" class="font-weight-bold">Опис</label>
+
+        
         <textarea class="form-control{{ errors.content ? ' is-invalid' : '' }}" id="content" name="content">{{ post.content }}</textarea>
       </div>
 
@@ -49,7 +51,6 @@
       <input type="hidden" name="id" id="id" value="{{ post.id }}">  
       {{ csrf.fields|raw }}
     </form> 
- 
-    
+    {% include 'templates/partials/_tinymce.twig' %}
   {% endif %}
 {% endblock %}
