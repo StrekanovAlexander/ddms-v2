@@ -48,6 +48,7 @@
       </tr>
     </table>  
     <a class="btn btn-dark btn-sm" href="{{ path_for('admin.post.update', {'id': post.id}) }}"><i class="fas fa-edit"></i> Редагувати</a>
+    <a class="btn btn-dark btn-sm" href="{{ path_for('admin.post.files', {'id': post.id}) }}"><i class="fas fa-file-image"></i> Файли</a>
     
   {% endif %}
 {% endblock %}
