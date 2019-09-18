@@ -1,0 +1,53 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Подія{% endblock %}
+
+{% block content %}
+  {% if post|length %}
+    <h5 class="my-5">Подія: {{ post.title }}</h5>
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ post.id }}</td>
+      </tr>
+      <tr> 
+        <th>Відділ</th>
+        <td>{{ post.section.title }}</td>
+      </tr>  
+      <tr>  
+        <th>Назва</th>
+        <td>{{ post.title }}</td>
+      </tr>  
+      <tr>  
+        <th>Інтро</th>
+        <td>{{ post.intro }}</td>
+      </tr>  
+      <tr>  
+        <th>Опис</th>
+        <td>{{ post.content|raw }}</td>
+      </tr>
+      <tr>  
+        <th>Теги</th>
+        <td>{{ post.tags }}</td>
+      </tr>
+      <tr>  
+        <th>Це конкурс</th>
+        <td><i class="fas {{ post.is_contest ? 'fa-check' : 'fa-times' }} "></i></td>
+      </tr>  
+      <tr>  
+        <th>Актуальність</th>
+        <td><i class="fas {{ post.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      </tr>  
+      <tr>  
+        <th>Користувач</th>
+        <td>{{ post.user.username }}</td>
+      </tr>  
+      <tr>  
+        <th>Створено / Редаговано</th>
+        <td>{{ post.created_at }} / {{ post.updated_at }}</td>
+      </tr>
+    </table>  
+    <a class="btn btn-dark btn-sm" href="{{ path_for('admin.post.update', {'id': post.id}) }}"><i class="fas fa-edit"></i> Редагувати</a>
+    
+  {% endif %}
+{% endblock %}

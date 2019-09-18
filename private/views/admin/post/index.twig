@@ -1,0 +1,43 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Події{% endblock %}
+
+{% block content %}
+  <h6>Події</h6>
+  <div class="my-3">
+    <a href="#" class="btn btn-dark btn-sm"><i class="fas fa-plus"></i> Створити</a>
+  </div>
+  {% if posts|length %}
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Дата</th>
+      <th>Відділ</th>
+      <th>Назва</th>
+      <th>Інтро</th>
+      <th>Актуальність</th>
+      <th></th>
+    </tr>  
+    {% for post in posts %}
+     <tr>
+      <td>{{ post.id }}</td>
+      <td>{{ post.created_at|date('d.m.Y') }}</td>
+      <td>{{ post.section_title }}</td>
+      <td>{{ post.title }}</td>
+      <td>{{ post.intro }}</td>
+      <td><i class="fas {{ post.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      <td><a href="{{ path_for('admin.post.details', {'id': post.id}) }}"><i class="fas fa-search text-dark"></i></a></td>
+    </tr>  
+    {% endfor %}
+  </table>
+  <nav class="my-5">
+    <ul class="pagination justify-content-center">
+      {% for page in 1..posts.lastPage %}
+      <li class="page-item{{ page == posts.currentPage ? ' active' : '' }}">
+        <a class="page-link btn btn-sm" href="{{ path_for('admin.posts', {}, {'page': page}) }}">{{ page }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+  {% endif %}
+{% endblock %}
