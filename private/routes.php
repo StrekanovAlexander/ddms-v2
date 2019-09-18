@@ -40,6 +40,10 @@ $app->group('', function() {
 
   $this->get('/admin/posts', 'PostController:index')->setName('admin.posts');
   $this->get('/admin/post/details[/{id}]', 'PostController:details')->setName('admin.post.details');
+  
+  $this->get('/admin/post/create', 'PostController:getCreate')->setName('admin.post.create');
+  $this->post('/admin/post/create', 'PostController:postCreate');
+  
   $this->get('/admin/post/update[/{id}]', 'PostController:getUpdate')->setName('admin.post.update');
   $this->post('/admin/post/update', 'PostController:postUpdate');
 
