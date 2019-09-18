@@ -4,6 +4,7 @@ namespace App\Controllers;
 use \App\Common\Files;
 use \App\Common\Pages;
 use \App\Models\Post;
+use \App\Models\Section;
 
 class PostController extends Controller {
 
@@ -124,12 +125,40 @@ class PostController extends Controller {
     ]);
   }
 
-  public function archive($request, $response) {
-    return $this->view->render($response, 'guest/post/empty.twig', [
+  public function index($request, $response) {
+    $posts = Post::posts()->toArray();
+    return $this->view->render($response, 'admin/post/index.twig', [
+      'posts' => Pages::pagination($posts, $request->getParam('page', 1), 5),
       'breadcrumbs' => Pages::breadcrumbs([
-        ['Архів'],
-      ]),
+        ['Події'],
+      ], true),
     ]);
+    
+  }
+
+  public function details($request, $response, $args) {
+    $post = Post::find($args['id']);
+    return $this->view->render($response, 'admin/post/details.twig', [
+      'post' => $post,
+      'breadcrumbs' => Pages::breadcrumbs([
+        ['Події', 'admin.posts'],
+        [$post->id],
+      ], true),
+    ]);
+  }
+
+  public function getUpdate($request, $response, $args) {
+    $post = Post::find($args['id']);
+    return $this->view->render($response, 'admin/post/update.twig', [
+      'post' => $post,
+      'sections' => Section::get(),
+      'breadcrumbs' => Pages::breadcrumbs([
+        ['Події', 'admin.posts'],
+        [$post->id, 'admin.post.details', $post->id],
+        ['Редагування'],
+      ], true),
+    ]);
+
   }
 
 
