@@ -6,6 +6,17 @@ use \Illuminate\Database\Eloquent\Model;
 class Post extends Model {
   protected $table = 'posts';
 
+  protected $fillable = [
+    'section_id',
+    'title',
+    'intro',
+    'content',
+    'tags',
+    'is_actual',
+    'is_contest',
+    'user_id',
+  ];
+
   public function section() {
     return $this->belongsTo('App\Models\Section', 'section_id'); 
   }

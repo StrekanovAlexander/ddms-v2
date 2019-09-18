@@ -5,6 +5,7 @@ use \App\Common\Files;
 use \App\Common\Pages;
 use \App\Models\Post;
 use \App\Models\Section;
+use \Respect\Validation\Validator;
 
 class PostController extends Controller {
 
@@ -158,7 +159,39 @@ class PostController extends Controller {
         ['Редагування'],
       ], true),
     ]);
+  }
 
+  public function postUpdate($request, $response) {
+
+    $validation = $this->validator->validate($request, [
+      'title' => Validator::notVoid(),
+    ]);
+
+    if ($validation->failed()) {
+      $this->flash->addMessage('message', 'Помилка редагування події');
+      return $response->withRedirect($this->router->pathFor('admin.post.update', [
+        'id' => $request->getParam('id'),
+      ]));
+    }
+
+    $post = post::find($request->getParam('id'));
+    $post->update([
+      'section_id' => $request->getParam('section_id'),
+      'title' => $request->getParam('title'),
+      'intro' => $request->getParam('intro'),
+      'content' => $request->getParam('content'),
+      'tags' => $request->getParam('tags'),
+      'is_actual' => $request->getParam('is_actual')  ? true : false,
+      'is_contest' => $request->getParam('is_contest')  ? true : false,
+      'user_id' => $this->auth->user()->id,
+    ]);
+
+    $this->flash->addMessage('message', 'Подію було відредаговано');
+
+    return $response->withRedirect($this->router->pathFor('admin.post.details', [
+      'id' => $post->id,
+    ]));
+  
   }
 
 
