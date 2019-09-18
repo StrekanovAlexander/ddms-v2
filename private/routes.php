@@ -47,6 +47,12 @@ $app->group('', function() {
   $this->get('/admin/post/update[/{id}]', 'PostController:getUpdate')->setName('admin.post.update');
   $this->post('/admin/post/update', 'PostController:postUpdate');
 
+  $this->get('/admin/post/files[/{id}]', 'PostController:files')->setName('admin.post.files');
+
+  $this->post('/admin/post/upload', 'PostController:postUpload')->setName('admin.post.upload');
+  $this->get('/admin/post/file/remove[/{id}/{file}/{main}]', 'PostController:removeFile')->setName('admin.post.file.remove');
+
+
 })->add(new \App\Middleware\AuthMiddleware($container));
 
 $app->group('', function() {
