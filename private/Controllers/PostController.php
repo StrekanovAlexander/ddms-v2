@@ -247,4 +247,84 @@ class PostController extends Controller {
     
   }
 
+  public function files($request, $response, $args) {
+    $post = Post::find($args['id']);
+    $images = null;
+    if ($post->folder) {
+      $path = Files::getPath([
+        $this->abspath, 'public', 'images', 'galleries', $post->folder
+      ]);
+      $images = Files::files($path);
+    }
+    return $this->view->render($response, 'admin/post/files.twig', [
+      'post' => $post,
+      'images' => $images,
+      'breadcrumbs' => Pages::breadcrumbs([
+        ['Події', 'admin.posts'],
+        [$post->id, 'admin.post.details', $post->id],
+        ['Файли'],
+      ], true),
+    ]);
+  }
+
+  public function postUpload($request, $response) {
+    
+    $post = Post::find($request->getParam('id'));
+    $folder = $post->folder ? $post->folder : date('Ymd') . '-' . rand(100, 999); 
+    
+    $path = Files::getPath([
+      $this->abspath, 'public', 'images', 'galleries', $folder
+    ]);
+    
+    if (!file_exists($path)) {
+      mkdir($path, 0777);
+    }
+    
+    $files = $request->getUploadedFiles();
+    $file = $files['file'];
+    $fileName = Files::moveFileRandomName($file, $path);
+
+    if ($fileName) {
+      if (!$post->folder) {   
+        $post->folder = $folder;
+      }
+      if ($request->getParam('image-main')) {
+        $post->image = $fileName;
+      } 
+      $post->user_id = $this->auth->user()->id;
+      $post->save();
+      $this->flash->addMessage('message', 'Зображення було завантажено');   
+    } else {
+       $this->flash->addMessage('message', 'Помилка завантаження файлу!'); 
+    }
+    return $response->withRedirect($this->router->pathFor('admin.post.files', [
+      'id' => $post->id,    
+    ]));
+  }
+
+  public function removeFile($request, $response, $args) {
+
+    $post = Post::find($args['id']);
+
+    $file = Files::getPath([
+      $this->abspath, 'public', 'images', 'galleries', $post->folder, $args['file']
+    ]);
+
+    if (unlink($file)) {
+      if ($args['main'] == 1) {
+        $post->image = null;
+        $post->save();
+      }
+      $this->flash->addMessage('message', 'Файл було видалено');
+    } else {
+      $this->flash->addMessage('message', 'Помилка видалення файлу');
+    }
+    
+    return $response->withRedirect($this->router->pathFor('admin.post.files', [
+      'id' => $args['id'], 
+    ]));
+    
+  }
+
+
 }
