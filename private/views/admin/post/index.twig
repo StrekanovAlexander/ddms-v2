@@ -5,7 +5,7 @@
 {% block content %}
   <h6>Події</h6>
   <div class="my-3">
-    <a href="#" class="btn btn-dark btn-sm"><i class="fas fa-plus"></i> Створити</a>
+    <a href="{{ path_for('admin.post.create') }}" class="btn btn-dark btn-sm"><i class="fas fa-plus"></i> Створити</a>
   </div>
   {% if posts|length %}
   <table class="table table-striped">
