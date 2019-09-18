@@ -9,6 +9,10 @@ use \Respect\Validation\Validator;
 
 class PostController extends Controller {
 
+  private function slug($section_id) {
+    return $section_id === '1' ? 'music-contest' : 'art-contest'; 
+  }
+
   public function posts($request, $response) {
 
     $posts = Post::where('is_actual', true)->orderBy('id', 'DESC')->get()->toArray();
@@ -174,6 +178,8 @@ class PostController extends Controller {
       ]));
     }
 
+    $slug =  $request->getParam('is_contest') ? $this->slug($request->getParam('section_id')) : null; 
+    
     $post = post::find($request->getParam('id'));
     $post->update([
       'section_id' => $request->getParam('section_id'),
@@ -183,6 +189,7 @@ class PostController extends Controller {
       'tags' => $request->getParam('tags'),
       'is_actual' => $request->getParam('is_actual')  ? true : false,
       'is_contest' => $request->getParam('is_contest')  ? true : false,
+      'slug' => $slug,
       'user_id' => $this->auth->user()->id,
     ]);
 
@@ -194,5 +201,50 @@ class PostController extends Controller {
   
   }
 
+  public function getCreate($request, $response) {
+    return $this->view->render($response, 'admin/post/create.twig', [
+      'sections' => Section::get(),
+      'breadcrumbs' => Pages::breadcrumbs([
+        ['Події', 'admin.posts'],
+        ['Створити'],
+      ], true),
+    ]);
+  }
+
+  public function postCreate($request, $response) {
+    $validation = $this->validator->validate($request, [
+      'title' => Validator::notVoid(),
+    ]);
+
+    if ($validation->failed()) {
+      $this->flash->addMessage('message', 'Помилка створення події');
+      return $response->withRedirect($this->router->pathFor('admin.post.create', [
+        'id' => $request->getParam('id'),
+      ]));
+    }
+
+    $slug =  $request->getParam('is_contest') ? $this->slug($request->getParam('section_id')) : null; 
+    
+    Post::create([
+      'section_id' => $request->getParam('section_id'),
+      'title' => $request->getParam('title'),
+      'intro' => $request->getParam('intro'),
+      'content' => $request->getParam('content'),
+      'tags' => $request->getParam('tags'),
+      'is_actual' => $request->getParam('is_actual')  ? true : false,
+      'is_contest' => $request->getParam('is_contest')  ? true : false,
+      'slug' => $slug,
+      'user_id' => $this->auth->user()->id,
+    ]);
+
+    $id = Post::max('id');
+
+    $this->flash->addMessage('message', 'Подію було створено');
+
+    return $response->withRedirect($this->router->pathFor('admin.post.details', [
+      'id' => $id,
+    ]));
+    
+  }
 
 }

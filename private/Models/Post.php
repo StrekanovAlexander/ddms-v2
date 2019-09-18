@@ -14,6 +14,7 @@ class Post extends Model {
     'tags',
     'is_actual',
     'is_contest',
+    'slug',
     'user_id',
   ];
 
