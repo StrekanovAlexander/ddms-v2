@@ -13,6 +13,16 @@ class Files {
         return false;
     }
 
+    public function moveFileRandomName(UploadedFile $file, $dir) {
+        if ($file->getError() === UPLOAD_ERR_OK) {
+          $extension = pathinfo($file->getClientFilename(), PATHINFO_EXTENSION);
+          $fileName = date('YmdHis') . '-' . rand(100, 999) . '.' . $extension;
+          $file->moveTo($dir . DIRECTORY_SEPARATOR . $fileName);
+          return $fileName;
+        }
+        return false;
+    }
+
     public static function removeDir($dir) {
         $files = glob($dir . '/*');  
         foreach ($files as $file) { 
@@ -35,5 +45,6 @@ class Files {
     public static function getPath($arr) {
         return join(DIRECTORY_SEPARATOR, $arr);
     }
+    
 
 }
