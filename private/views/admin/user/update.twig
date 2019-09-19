@@ -7,7 +7,7 @@
 <div class="row">
   <div class="col-md-6 offset-md-3">
     <div class="card-body">
-      <h6 class="card-title">Редагувати користувача: {{ user.username }}</h6>
+      <h5 class="card-title">Редагувати користувача: <span class="font-weight-bold">{{ user.username }}</span></h5>
       <br>
       <form action="{{ path_for('admin.user.update') }}" method="POST">
         <div class="form-group">
