@@ -46,7 +46,8 @@ class FundController extends Controller {
       'fund' => $fund,
       'breadcrumbs' => Pages::breadcrumbs([
         ['Золотий фонд', 'admin.fund'],
-        [$fund->title],
+        [$fund->title, 'admin.fund.details', $fund->id],
+        ['Редагування'],
       ], true),
     ]);
   }
