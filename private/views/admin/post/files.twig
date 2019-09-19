@@ -23,7 +23,7 @@
           {% for image in images %}
             {% if image != post.image %}
               <p>
-                <img src="{{ base_url() }}/images/galleries/{{ post.folder }}/{{ image }}" alt="" style="width: 50%">
+                <img src="{{ base_url() }}/images/galleries/{{ post.folder }}/{{ image }}" alt="" style="width: 25%">
                 <a href="{{ path_for('admin.post.file.remove', {
                     'id': post.id, 
                     'file': image,
