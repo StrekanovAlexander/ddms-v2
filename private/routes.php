@@ -67,6 +67,21 @@ $app->group('', function() {
 
   $this->get('/admin/fund/file/remove[/{id}/{file}]', 'FundController:removeFile')->setName('admin.fund.file.remove');
 
+
+  $this->get('/admin/students', 'StudentController:index')->setName('admin.students');
+
+  $this->get('/admin/student/details[/{id}]', 'StudentController:details')->setName('admin.student.details');
+  
+  $this->get('/admin/student/update[/{id}]', 'StudentController:getUpdate')->setName('admin.student.update');
+  $this->post('/admin/student/update', 'StudentController:postUpdate');
+  
+  $this->get('/admin/student/create', 'StudentController:getCreate')->setName('admin.student.create');
+  $this->post('/admin/student/create', 'StudentController:postCreate');
+
+  $this->post('/admin/student/upload', 'StudentController:postUpload')->setName('admin.student.upload');
+
+  $this->get('/admin/student/file/remove[/{id}/{file}]', 'StudentController:removeFile')->setName('admin.student.file.remove');
+
 })->add(new \App\Middleware\AuthMiddleware($container));
 
 $app->group('', function() {
