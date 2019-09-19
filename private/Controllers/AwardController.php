@@ -104,11 +104,8 @@ class AwardController extends Controller {
   
       if ($validation->failed()) {
         $this->flash->addMessage('message', 'Помилка створення відзнаки');
-        return $response->withRedirect($this->router->pathFor('admin.award.create', [
-          'id' => $request->getParam('id'),
-        ]));
+        return $response->withRedirect($this->router->pathFor('admin.award.create'));
       }
-
         
       Award::create([
         'section_id' => $request->getParam('section_id'),
