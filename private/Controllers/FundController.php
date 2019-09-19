@@ -9,16 +9,15 @@ use \Respect\Validation\Validator;
 
 class FundController extends Controller {
 
-    // public function fund($request, $response) {
-    //     $fund = \App\Models\Fund::where('is_actual', true)->get()->toArray();
-    //     return $this->view->render($response, 'guest/awards.twig', [
-    //         'awards' => Pages::pagination($awards, $request->getParam('page', 1), 12),
-    //         'activePage' => 'awards',
-    //         'breadcrumbs' => Pages::breadcrumbs([
-    //            ['Відзнаки'],
-    //         ]),
-    //     ]);
-    // }
+    public function fund($request, $response) {
+      $fund = Fund::where('is_actual', true)->get()->toArray();
+      return $this->view->render($response, 'guest/fund.twig', [
+        'fund' => Pages::pagination($fund, $request->getParam('page', 1), 12),
+        'breadcrumbs' => Pages::breadcrumbs([
+           ['Золотий фонд художнього відділу'],
+        ]),
+      ]);
+    }
 
     public function index($request, $response) {
       $fund = Fund::fund()->toArray();
