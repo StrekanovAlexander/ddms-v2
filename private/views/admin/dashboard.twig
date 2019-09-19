@@ -5,18 +5,21 @@
 {% block content %}
   
   <div class="row">
+    {% if auth.user.is_admin %}
     <div class="col-md-3 col-sm-12">
       <p>Адмін розділ</p>
       <ul>
         <li><a href="{{ path_for('admin.teachers') }}" class="text-firebrick">Викладачи</a></li>
         <li><a href="{{ path_for('admin.awards') }}" class="text-firebrick">Відзнаки</a></li>
       </ul>  
-    </div>  
+    </div> 
+    {% endif %} 
     <div class="col-md-3 col-sm-12">
       <p>Загальний розділ</p>
       <ul>
         <li><a href="{{ path_for('admin.posts') }}" class="text-firebrick">Події</a></li>
         <li><a href="{{ path_for('admin.fund') }}" class="text-firebrick">Золотий фонд</a></li>
+        <li><a href="{{ path_for('admin.students') }}" class="text-firebrick">Випускники</a></li>
       </ul>  
     </div>  
   </div>
