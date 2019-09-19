@@ -53,6 +53,20 @@ $app->group('', function() {
   $this->get('/admin/post/file/remove[/{id}/{file}/{main}]', 'PostController:removeFile')->setName('admin.post.file.remove');
 
 
+  $this->get('/admin/fund', 'FundController:index')->setName('admin.fund');
+
+  $this->get('/admin/fund/details[/{id}]', 'FundController:details')->setName('admin.fund.details');
+  
+  $this->get('/admin/fund/update[/{id}]', 'FundController:getUpdate')->setName('admin.fund.update');
+  $this->post('/admin/fund/update', 'FundController:postUpdate');
+  
+  $this->get('/admin/fund/create', 'FundController:getCreate')->setName('admin.fund.create');
+  $this->post('/admin/fund/create', 'FundController:postCreate');
+
+  $this->post('/admin/fund/upload', 'FundController:postUpload')->setName('admin.fund.upload');
+
+  $this->get('/admin/fund/file/remove[/{id}/{file}]', 'FundController:removeFile')->setName('admin.fund.file.remove');
+
 })->add(new \App\Middleware\AuthMiddleware($container));
 
 $app->group('', function() {

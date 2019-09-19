@@ -76,6 +76,10 @@ $container['DocumentController'] = function($container) {
   return new \App\Controllers\DocumentController($container);
 };
 
+$container['FundController'] = function($container) {
+  return new \App\Controllers\FundController($container);
+};
+
 $container['PageController'] = function($container) {
   return new \App\Controllers\PageController($container);
 };
