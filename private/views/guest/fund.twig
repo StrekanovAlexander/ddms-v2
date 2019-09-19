@@ -1,0 +1,48 @@
+{% extends 'templates/layout.twig' %}
+
+{% block title %}Золотий фонд{% endblock %}
+
+{% block content %}
+  <h1>Золотий фонд художнього відділу</h1>
+  <br>
+  {% if fund|length %}
+    {% set counter = 1 %}
+    <div class="row">
+    {% for item in fund %}
+      <div class="col-md-4 col-sm-12">
+        <div class="card card_no-border">
+          {% if item.image|length %}
+            <a href="{{ base_url() }}/images/fund/{{ item.image }}" class="smart-photo" data-caption="{{ item.title }}. {{ item.content }} ">
+              <img src="{{ base_url() }}/images/fund/{{ item.image }}" class="card-img-top"/>
+            </a>
+          {% endif %} 
+          <div class="card-body">
+            <h6 class="card-title text-center">
+              {{ item.title }}<br><small>{{ item.content }}</small>
+            </h6>
+          </div> 
+         </div>  
+      </div> 
+      {% if counter is divisible by(6) %}
+        </div><br><div class="row">
+      {% endif %}
+      {% set counter = counter + 1 %} 
+    {% endfor %}
+    </div>
+    {% if fund.lastPage > 1 %}
+      <nav class="my-5">
+        <ul class="pagination justify-content-center">
+          {% for page in 1..fund.lastPage %}
+            <li class="page-item{{ page == fund.currentPage ? ' active' : '' }}">
+              <a class="page-link btn btn-sm" href="{{ path_for('fund', {}, {'page': page}) }}">{{ page }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    {% endif %}  
+
+  {% else %}
+    <p>Матеріал готується до публікації</p>  
+
+  {% endif %}
+{% endblock %}
