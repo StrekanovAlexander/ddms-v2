@@ -1,0 +1,51 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Випускники{% endblock %}
+
+{% block content %}
+  <h6>Випускники</h6>
+  <div class="my-3">
+    <a href="{{ path_for('admin.student.create') }}" class="btn btn-dark btn-sm"><i class="fas fa-plus"></i> Створити</a>
+  </div>
+  {% if students|length %}
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Відділення</th>
+      <th>Ім'я</th>
+      <th>Опис</th>
+      <th>Рік випуску</th>
+      <th>Світлина</th>
+      <th>Актуальність</th>
+      <th></th>
+    </tr>  
+    {% for student in students %}
+     <tr>
+      <td>{{ student.id }}</td>
+      <td>{{ student.section_title }}</td>
+      <td>{{ student.full_name }}</td>
+      <td>{{ student.content }}</td>
+      <td>{{ student.final_year }}</td>
+      <td style="width:15%">
+        {% if student.image %}
+          <img src="{{ base_url() }}/images/students/{{ student.image }}" style="width: 20%">
+        {% endif %}  
+      </td>
+      <td><i class="fas {{ student.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      <td><a href="{{ path_for('admin.student.details', {'id': student.id}) }}"><i class="fas fa-search text-dark"></i></a></td>
+    </tr>  
+    {% endfor %}
+  </table>
+  {% if students.lastPage > 1 %}
+    <nav class="my-5">
+      <ul class="pagination justify-content-center">
+        {% for page in 1..students.lastPage %}
+        <li class="page-student{{ page == students.currentPage ? ' active' : '' }}">
+          <a class="page-link btn btn-sm" href="{{ path_for('admin.student', {}, {'page': page}) }}">{{ page }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  {% endif %}
+  {% endif %}
+{% endblock %}

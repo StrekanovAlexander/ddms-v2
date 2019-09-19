@@ -1,0 +1,68 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Випускник{% endblock %}
+
+{% block content %}
+  {% if student|length %}
+    <h5 class="my-5">Випускник: {{ student.full_name }}</h5>
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ student.id }}</td>
+      </tr>
+      <tr> 
+        <th>Відділ</th>
+        <td>{{ student.section.title }}</td>
+      </tr>  
+      <tr>  
+        <th>Ім'я</th>
+        <td>{{ student.full_name }}</td>
+      </tr>  
+      <tr>  
+        <th>Опис</th>
+        <td>{{ student.content }}</td>
+      </tr>  
+      <tr>  
+        <th>Рік випуску</th>
+        <td>{{ student.final_year }}</td>
+      </tr>  
+      <tr> 
+        <th>Світлина</th>
+        <td>
+          <img src="{{ base_url() }}/images/students/{{ student.image }}" alt="Файл" style="width: 10%">
+          {% if student.image %}
+            <a href="{{ path_for('admin.student.file.remove', {
+              'id': student.id, 
+              'file': student.image,
+            }) }}" class="btn btn-sm btn-dark"> <i class="fas fa-trash-alt"></i> Видалити</a>
+          {% endif %}
+        </td>
+      </tr>
+      <tr>  
+        <th>Актуальність</th>
+        <td><i class="fas {{ student.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      </tr>  
+      <tr>  
+        <th>Користувач</th>
+        <td>{{ student.user.username }}</td>
+      </tr>  
+      <tr>  
+        <th>Створено / Редаговано</th>
+        <td>{{ student.created_at }} / {{ student.updated_at }}</td>
+      </tr>
+    </table>  
+    <a class="btn btn-dark btn-sm" href="{{ path_for('admin.student.update', {'id': student.id}) }}"><i class="fas fa-edit"></i> Редагувати</a>
+    <br>
+    <br>
+    <form action="{{ path_for('admin.student.upload') }}" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">Завантажити файл</label>
+        <input class="form-control-file" id="file" name="file" type="file">
+      </div>
+      <button class="btn btn-dark btn-sm" type="submit"><i class='fas fa-upload'></i> Пуск
+      </button>
+      <input type="hidden" name="id" id="id" value="{{ student.id }}">
+      {{ csrf.fields|raw }}
+    </form>
+  {% endif %}
+{% endblock %}

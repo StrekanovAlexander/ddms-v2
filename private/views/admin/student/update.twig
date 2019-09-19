@@ -1,0 +1,49 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block full_name %}Редагування випускника{% endblock %}
+
+{% block content %}
+  {% if student|length %}
+    <h5 class="my-5">Редагування випускника: {{ student.full_name }}</h5>
+    <form action="{{ path_for('admin.student.update') }}" method="POST">
+      <div class="form-group">
+        <label for="section_id" class="font-weight-bold">Відділення</label>
+        <select class="form-control" name="section_id" id="section_id">
+        {% for section in sections %}
+          <option value="{{ section.id }}" {{ section.id == student.section_id ? 'selected' : '' }}>{{ section.title }}</option>
+        {% endfor %}
+        </select>
+      </div>  
+
+      <div class="form-group">
+        <label for="full_name" class="font-weight-bold">Ім'я</label>
+        <input class="form-control{{ errors.full_name ? ' is-invalid' : '' }}" name="full_name" id="full_name" value="{{ student.full_name }}">
+      </div>
+
+      <div class="form-group">
+        <label for="content" class="font-weight-bold">Опис</label>
+        <textarea class="form-control{{ errors.content ? ' is-invalid' : '' }}" id="content" name="content">{{ student.content }}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="final_year" class="font-weight-bold">Рік випуску</label>
+        <input class="form-control{{ errors.full_name ? ' is-invalid' : '' }}" name="final_year" id="final_year" value="{{ student.final_year }}">
+      </div>
+
+      <div class="form-group">
+        <div class="form-check">
+          <label for="is_actual" class="form-check-label font-weight-bold">
+            <input type="checkbox" class="form-check-input" name="is_actual" id="is_actual" {{ student.is_actual ? ' checked="checked"' : ''}}>Актуальність
+          </label>
+        </div>
+      </div>
+      <div class="form-group mt-5">
+        <button class="btn btn-dark btn-sm" type="submit"><i class="fas fa-pencil-alt"></i> Зберігти</button>
+      </div>
+
+      <input type="hidden" name="id" id="id" value="{{ student.id }}">  
+      {{ csrf.fields|raw }}
+    </form> 
+
+  {% endif %}
+{% endblock %}
