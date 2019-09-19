@@ -1,0 +1,47 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Золотий фонд{% endblock %}
+
+{% block content %}
+  <h6>Золотий фонд</h6>
+  <div class="my-3">
+    <a href="{{ path_for('admin.fund.create') }}" class="btn btn-dark btn-sm"><i class="fas fa-plus"></i> Створити</a>
+  </div>
+  {% if fund|length %}
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Назва</th>
+      <th>Опис</th>
+      <th>Файл</th>
+      <th>Актуальність</th>
+      <th></th>
+    </tr>  
+    {% for item in fund %}
+     <tr>
+      <td>{{ item.id }}</td>
+      <td>{{ item.title }}</td>
+      <td>{{ item.content }}</td>
+      <td style="width:15%">
+        {% if item.image %}
+          <img src="{{ base_url() }}/images/fund/{{ item.image }}" style="width: 20%">
+        {% endif %}  
+      </td>
+      <td><i class="fas {{ item.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      <td><a href="{{ path_for('admin.fund.details', {'id': item.id}) }}"><i class="fas fa-search text-dark"></i></a></td>
+    </tr>  
+    {% endfor %}
+  </table>
+  {% if fund.lastPage > 1 %}
+    <nav class="my-5">
+      <ul class="pagination justify-content-center">
+        {% for page in 1..fund.lastPage %}
+        <li class="page-item{{ page == fund.currentPage ? ' active' : '' }}">
+          <a class="page-link btn btn-sm" href="{{ path_for('admin.fund', {}, {'page': page}) }}">{{ page }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  {% endif %}
+  {% endif %}
+{% endblock %}

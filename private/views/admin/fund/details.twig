@@ -1,0 +1,64 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Запис у золотому фонді{% endblock %}
+
+{% block content %}
+  {% if fund|length %}
+    <h5 class="my-5">Запис у золотому фонді: {{ fund.title }}</h5>
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ fund.id }}</td>
+      </tr>
+      <tr> 
+        <th>Відділ</th>
+        <td>{{ fund.section.title }}</td>
+      </tr>  
+      <tr>  
+        <th>Назва</th>
+        <td>{{ fund.title }}</td>
+      </tr>  
+      <tr>  
+        <th>Опис</th>
+        <td>{{ fund.content }}</td>
+      </tr>  
+      <tr> 
+        <th>Файл</th>
+        <td>
+          <img src="{{ base_url() }}/images/fund/{{ fund.image }}" alt="Файл" style="width: 10%">
+          {% if fund.image %}
+            <a href="{{ path_for('admin.fund.file.remove', {
+              'id': fund.id, 
+              'file': fund.image,
+            }) }}" class="btn btn-sm btn-dark"> <i class="fas fa-trash-alt"></i> Видалити</a>
+          {% endif %}
+        </td>
+      </tr>
+      <tr>  
+        <th>Актуальність</th>
+        <td><i class="fas {{ fund.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      </tr>  
+      <tr>  
+        <th>Користувач</th>
+        <td>{{ fund.user.username }}</td>
+      </tr>  
+      <tr>  
+        <th>Створено / Редаговано</th>
+        <td>{{ fund.created_at }} / {{ fund.updated_at }}</td>
+      </tr>
+    </table>  
+    <a class="btn btn-dark btn-sm" href="{{ path_for('admin.fund.update', {'id': fund.id}) }}"><i class="fas fa-edit"></i> Редагувати</a>
+    <br>
+    <br>
+    <form action="{{ path_for('admin.fund.upload') }}" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">Завантажити файл</label>
+        <input class="form-control-file" id="file" name="file" type="file">
+      </div>
+      <button class="btn btn-dark btn-sm" type="submit"><i class='fas fa-upload'></i> Пуск
+      </button>
+      <input type="hidden" name="id" id="id" value="{{ fund.id }}">
+      {{ csrf.fields|raw }}
+    </form>
+  {% endif %}
+{% endblock %}
