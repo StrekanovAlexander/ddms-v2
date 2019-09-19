@@ -76,6 +76,11 @@ class UserController extends Controller {
   }
 
   public function getUpdate($request, $response, $args) {
+
+    if ($args['id'] == 1) {
+      return $response->withRedirect($this->router->pathFor('admin.users'));
+    }
+
     $user = User::find($args['id']);
     return $this->view->render($response, 'admin/user/update.twig', [
       'user' => $user,
