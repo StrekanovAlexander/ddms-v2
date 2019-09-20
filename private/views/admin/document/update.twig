@@ -1,0 +1,45 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Редагування нормативного документу{% endblock %}
+
+{% block content %}
+  {% if document|length %}
+    <h5 class="my-5">Редагування нормативного документу: {{ document.title }}</h5>
+    <form action="{{ path_for('admin.document.update') }}" method="POST">
+      
+      <div class="form-group">
+        <label for="title" class="font-weight-bold">Назва</label>
+        <input class="form-control{{ errors.title ? ' is-invalid' : '' }}" name="title" id="title" value="{{ document.title }}">
+      </div>
+
+      <div class="form-group">
+        <label for="src" class="font-weight-bold">Джерело</label>
+        <textarea class="form-control{{ errors.src ? ' is-invalid' : '' }}" id="src" name="src">{{ document.src }}</textarea>
+      </div>
+
+      <div class="form-group">
+        <div class="form-check">
+          <label for="is_remote" class="form-check-label font-weight-bold">
+            <input type="checkbox" class="form-check-input" name="is_remote" id="is_remote" {{ document.is_remote ? ' checked="checked"' : ''}}>Зовньошній
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-check">
+          <label for="is_actual" class="form-check-label font-weight-bold">
+            <input type="checkbox" class="form-check-input" name="is_actual" id="is_actual" {{ document.is_actual ? ' checked="checked"' : ''}}>Актуальність
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group mt-5">
+        <button class="btn btn-dark btn-sm" type="submit"><i class="fas fa-pencil-alt"></i> Зберігти</button>
+      </div>
+
+      <input type="hidden" name="id" id="id" value="{{ document.id }}">  
+      {{ csrf.fields|raw }}
+    </form> 
+    
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Нормативний документ{% endblock %}
+
+{% block content %}
+  {% if document|length %}
+    <h5 class="my-5">Нормативний документ: {{ document.title }}</h5>
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ document.id }}</td>
+      </tr>
+      <tr>  
+        <th>Назва</th>
+        <td>{{ document.title }}</td>
+      </tr>  
+      <tr>  
+        <th>Джерело</th>
+        <td>{{ document.src }}</td>
+      </tr>  
+      <tr> 
+        <th>Файл</th>
+        <td>
+          {% if file %}
+            <a href="{{ base_url() }}/docs/{{ document.src }}" target="_blank">{{ document.src }}</a>
+             <a href="{{ path_for('admin.document.file.remove', {
+              'id': document.id, 
+              'file': document.src,
+            }) }}" class="btn btn-sm btn-dark"> <i class="fas fa-trash-alt"></i> Видалити</a>
+          {% endif %}
+        </td>
+      </tr>
+      <tr>  
+        <th>Зовньошній</th>
+        <td><i class="fas {{ document.is_remote ? 'fa-check' : 'fa-times' }} "></i></td>
+      </tr>  
+      <tr>  
+        <th>Актуальність</th>
+        <td><i class="fas {{ document.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      </tr>  
+      <tr>  
+        <th>Користувач</th>
+        <td>{{ document.user.username }}</td>
+      </tr>  
+      <tr>  
+        <th>Створено / Редаговано</th>
+        <td>{{ document.created_at }} / {{ document.updated_at }}</td>
+      </tr>
+    </table>  
+    <a class="btn btn-dark btn-sm" href="{{ path_for('admin.document.update', {'id': document.id}) }}"><i class="fas fa-edit"></i> Редагувати</a>
+    <br>
+    <br>
+    <form action="{{ path_for('admin.document.upload') }}" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">Завантажити файл</label>
+        <input class="form-control-file" id="file" name="file" type="file">
+      </div>
+      <button class="btn btn-dark btn-sm" type="submit"><i class='fas fa-upload'></i> Пуск
+      </button>
+      <input type="hidden" name="id" id="id" value="{{ document.id }}">
+      {{ csrf.fields|raw }}
+    </form>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Нормативні документи{% endblock %}
+
+{% block content %}
+  <h5>Нормативні документи</h5>
+  <div class="my-3">
+    <a href="{{ path_for('admin.document.create') }}" class="btn btn-dark btn-sm"><i class="fas fa-plus"></i> Створити</a>
+  </div>
+  {% if documents|length %}
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Назва</th>
+      <th>Джерело</th>
+      <th>Зовньошній</th>
+      <th>Актуальність</th>
+      <th></th>
+    </tr>  
+    {% for document in documents %}
+     <tr>
+      <td>{{ document.id }}</td>
+      <td>{{ document.title }}</td>
+      <td>{{ document.src }}</td>
+      <td><i class="fas {{ document.is_remote ? 'fa-check' : 'fa-times' }} "></i></td>
+      <td><i class="fas {{ document.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      <td><a href="{{ path_for('admin.document.details', {'id': document.id}) }}"><i class="fas fa-search text-dark"></i></a></td>
+    </tr>  
+    {% endfor %}
+  </table>
+  {% endif %}
+{% endblock %}

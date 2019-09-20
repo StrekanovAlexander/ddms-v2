@@ -1,0 +1,42 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Створення нормативного документу{% endblock %}
+
+{% block content %}
+  <h5 class="my-5">Створення нормативного документу</h5>
+  <form action="{{ path_for('admin.document.create') }}" method="POST">
+    
+    <div class="form-group">
+      <label for="title" class="font-weight-bold">Назва</label>
+      <input class="form-control{{ errors.title ? ' is-invalid' : '' }}" name="title" id="title" value="{{ old.title }}">
+    </div>
+
+    <div class="form-group">
+      <label for="src" class="font-weight-bold">Джерело</label>
+      <textarea class="form-control{{ errors.src ? ' is-invalid' : '' }}" id="src" name="src">{{ old.src }}</textarea>
+    </div>
+
+    <div class="form-group">
+      <div class="form-check">
+        <label for="is_remote" class="form-check-label font-weight-bold">
+          <input type="checkbox" class="form-check-input" name="is_remote" id="is_remote">Зовньошній
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-check">
+        <label for="is_actual" class="form-check-label font-weight-bold">
+          <input type="checkbox" class="form-check-input" name="is_actual" id="is_actual" >Актуальність
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group mt-5">
+      <button class="btn btn-dark btn-sm" type="submit"><i class="fas fa-pencil-alt"></i> Створити</button>
+    </div>
+
+    {{ csrf.fields|raw }}
+  </form> 
+
+{% endblock %}
