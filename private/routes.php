@@ -120,5 +120,18 @@ $app->group('', function() {
 
   $this->get('/admin/award/file/remove[/{id}/{file}]', 'AwardController:removeFile')->setName('admin.award.file.remove');
 
+  $this->get('/admin/documents', 'DocumentController:index')->setName('admin.documents');
+
+  $this->get('/admin/document/details[/{id}]', 'DocumentController:details')->setName('admin.document.details');
+
+  $this->get('/admin/document/create', 'DocumentController:getCreate')->setName('admin.document.create');
+  $this->post('/admin/document/create', 'DocumentController:postCreate');
+
+  $this->get('/admin/document/update[/{id}]', 'DocumentController:getUpdate')->setName('admin.document.update');
+  $this->post('/admin/document/update', 'DocumentController:postUpdate');
+
+  $this->post('/admin/document/upload', 'DocumentController:postUpload')->setName('admin.document.upload');
+
+  $this->get('/admin/document/file/remove[/{id}/{file}]', 'DocumentController:removeFile')->setName('admin.document.file.remove');
   
 })->add(new \App\Middleware\AdminMiddleware($container));
