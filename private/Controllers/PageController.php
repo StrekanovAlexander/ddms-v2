@@ -9,7 +9,7 @@ class PageController extends Controller {
   public function home($request, $response) {
     return $this->view->render($response, 'guest/home.twig', [
       'activePage' => 'home',
-      'carousel' => Carousel::where('is_actual', true)->get(),
+      'carousel' => Carousel::where('is_actual', true)->orderBy('rank')->get(),
       'about' => Information::where('is_actual', true)->where('slug', 'about')->first(),
       'contacts' => Information::where('is_actual', true)->where('slug', 'contacts')->first(),
       'breadcrumbs' => \App\Common\Pages::breadcrumbs()
