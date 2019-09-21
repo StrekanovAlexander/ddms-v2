@@ -9,7 +9,7 @@ require __DIR__ . '/db.php';
 
 $app = new \Slim\App([
   'settings' => [
-    'displayErrorDetails' => true,
+    'displayErrorDetails' => false,
   ], 
 ]);
 

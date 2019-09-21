@@ -144,5 +144,20 @@ $app->group('', function() {
   $this->post('/admin/carousel/upload', 'CarouselController:postUpload')->setName('admin.carousel.upload');
 
   $this->get('/admin/carousel/file/remove[/{id}/{file}]', 'CarouselController:removeFile')->setName('admin.carousel.file.remove');
+
+
+  $this->get('/admin/audio', 'AudioController:index')->setName('admin.audio');
+
+  $this->get('/admin/audio/details[/{id}]', 'AudioController:details')->setName('admin.audio.details');
+
+  $this->get('/admin/audio/update[/{id}]', 'AudioController:getUpdate')->setName('admin.audio.update');
+  $this->post('/admin/audio/update', 'AudioController:postUpdate');
+
+  $this->post('/admin/audio/upload', 'AudioController:postUpload')->setName('admin.audio.upload');
+
+  $this->get('/admin/audio/file/remove[/{id}/{file}]', 'AudioController:removeFile')->setName('admin.audio.file.remove');
+
+  $this->get('/admin/audio/create', 'AudioController:getCreate')->setName('admin.audio.create');
+  $this->post('/admin/audio/create', 'AudioController:postCreate');
   
 })->add(new \App\Middleware\AdminMiddleware($container));
