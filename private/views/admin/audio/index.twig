@@ -1,0 +1,32 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Мінусові фонограми{% endblock %}
+
+{% block content %}
+  <h5>Мінусові фонограми</h5>
+  <div class="my-3">
+    <a href="{{ path_for('admin.audio.create') }}" class="btn btn-dark btn-sm"><i class="fas fa-plus"></i> Створити</a>
+  </div>
+  {% if audio|length %}
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Назва</th>
+      <th>Опис</th>
+      <th>Файл</th>
+      <th>Актуальність</th>
+      <th></th>
+    </tr>  
+    {% for item in audio %}
+     <tr>
+      <td>{{ item.id }}</td>
+      <td>{{ item.title }}</td>
+      <td>{{ item.content }}</td>
+      <td>{{ item.filename }}</td>
+      <td><i class="fas {{ item.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      <td><a href="{{ path_for('admin.audio.details', {'id': item.id}) }}"><i class="fas fa-search text-dark"></i></a></td>
+    </tr>  
+    {% endfor %}
+  </table>
+  {% endif %}
+{% endblock %}

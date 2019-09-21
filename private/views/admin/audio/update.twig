@@ -1,0 +1,36 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Мінусова фонограма{% endblock %}
+
+{% block content %}
+  {% if audio|length %}
+    <h5 class="my-5">Мінусова фонограма: {{ audio.title }}</h5>
+    <form action="{{ path_for('admin.audio.update') }}" method="POST">
+      
+      <div class="form-group">
+        <label for="title" class="font-weight-bold">Назва</label>
+        <input class="form-control{{ errors.title ? ' is-invalid' : '' }}" name="title" id="title" value="{{ audio.title }}">
+      </div>
+
+      <div class="form-group">
+        <label for="content" class="font-weight-bold">Опис</label>
+        <textarea class="form-control" id="content" name="content">{{ audio.content }}</textarea>
+      </div>
+
+      <div class="form-group">
+        <div class="form-check">
+          <label for="is_actual" class="form-check-label font-weight-bold">
+            <input type="checkbox" class="form-check-input" name="is_actual" id="is_actual" {{ audio.is_actual ? ' checked="checked"' : ''}}>Актуальність
+          </label>
+        </div>
+      </div>
+      <div class="form-group mt-5">
+        <button class="btn btn-dark btn-sm" type="submit"><i class="fas fa-pencil-alt"></i> Зберігти</button>
+      </div>
+
+      <input type="hidden" name="id" id="id" value="{{ audio.id }}">  
+      {{ csrf.fields|raw }}
+    </form> 
+
+  {% endif %}
+{% endblock %}

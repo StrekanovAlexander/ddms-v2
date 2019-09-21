@@ -1,0 +1,60 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Мінусова фонограма{% endblock %}
+
+{% block content %}
+  {% if audio|length %}
+    <h5 class="my-5">Мінусова фонограма: {{ audio.title }}</h5>
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ audio.id }}</td>
+      </tr>
+      <tr>  
+        <th>Назва</th>
+        <td>{{ audio.title }}</td>
+      </tr>  
+      <tr>  
+        <th>Опис</th>
+        <td>{{ audio.content }}</td>
+      </tr>  
+      <tr> 
+        <th>Файл</th>
+        <td>
+          {{ audio.filename }}
+          {% if file %}
+            <a href="{{ path_for('admin.audio.file.remove', {
+              'id': audio.id, 
+              'file': audio.filename,
+            }) }}" class="btn btn-sm btn-dark"> <i class="fas fa-trash-alt"></i> Видалити</a>
+          {% endif %}
+        </td>
+      </tr>
+      <tr>  
+        <th>Актуальність</th>
+        <td><i class="fas {{ audio.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      </tr>  
+      <tr>  
+        <th>Користувач</th>
+        <td>{{ audio.user.username }}</td>
+      </tr>  
+      <tr>  
+        <th>Створено / Редаговано</th>
+        <td>{{ audio.created_at }} / {{ audio.updated_at }}</td>
+      </tr>
+    </table>  
+    <a class="btn btn-dark btn-sm" href="{{ path_for('admin.audio.update', {'id': audio.id}) }}"><i class="fas fa-edit"></i> Редагувати</a>
+    <br>
+    <br>
+    <form action="{{ path_for('admin.audio.upload') }}" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">Завантажити файл</label>
+        <input class="form-control-file" id="file" name="file" type="file">
+      </div>
+      <button class="btn btn-dark btn-sm" type="submit"><i class='fas fa-upload'></i> Пуск
+      </button>
+      <input type="hidden" name="id" id="id" value="{{ audio.id }}">
+      {{ csrf.fields|raw }}
+    </form>
+  {% endif %}
+{% endblock %}
