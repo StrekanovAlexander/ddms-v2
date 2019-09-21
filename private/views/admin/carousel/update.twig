@@ -1,0 +1,45 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Редагування каруселі{% endblock %}
+
+{% block content %}
+  {% if carousel|length %}
+    <h5 class="my-5">Редагування каруселі: {{ carousel.title }}</h5>
+    <form action="{{ path_for('admin.carousel.update') }}" method="POST">
+      <div class="form-group">
+        <label for="title" class="font-weight-bold">Назва</label>
+        <input class="form-control{{ errors.title ? ' is-invalid' : '' }}" name="title" id="title" value="{{ carousel.title }}">
+      </div>
+
+      <div class="form-group">
+        <label for="content" class="font-weight-bold">Опис</label>
+        <textarea class="form-control{{ errors.content ? ' is-invalid' : '' }}" id="content" name="content">{{ carousel.content }}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="rank" class="font-weight-bold">Ранг</label>
+        <select class="form-control" name="rank" id="rank">
+        {% for i in 1..8 %}
+          <option value="{{ i }}" {{ i == carousel.rank ? 'selected' : '' }}>{{ i }}</option>
+        {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <div class="form-check">
+          <label for="is_actual" class="form-check-label font-weight-bold">
+            <input type="checkbox" class="form-check-input" name="is_actual" id="is_actual" {{ carousel.is_actual ? ' checked="checked"' : ''}}>Актуальність
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group mt-5">
+        <button class="btn btn-dark btn-sm" type="submit"><i class="fas fa-pencil-alt"></i> Зберігти</button>
+      </div>
+
+      <input type="hidden" name="id" id="id" value="{{ carousel.id }}">  
+      {{ csrf.fields|raw }}
+    </form> 
+
+  {% endif %}
+{% endblock %}

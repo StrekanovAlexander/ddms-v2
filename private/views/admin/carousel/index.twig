@@ -1,0 +1,36 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Карусель{% endblock %}
+
+{% block content %}
+  <h5>Карусель</h5>
+  <br>
+  {% if carousel|length %}
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Назва</th>
+      <th>Опис</th>
+      <th>Світлина</th>
+      <th>Ранг</th>
+      <th>Актуальність</th>
+      <th></th>
+    </tr>  
+    {% for item in carousel %}
+     <tr>
+      <td>{{ item.id }}</td>
+      <td>{{ item.title }}</td>
+      <td>{{ item.content }}</td>
+      <td style="width: 15%">
+      {% if item.image %}
+        <img src="{{ base_url() }}/images/carousel/{{ item.image }}" style="width: 50%" class="img-fluid">
+      {% endif %}
+      </td>
+      <td>{{ item.rank }}</td>
+      <td><i class="fas {{ item.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      <td><a href="{{ path_for('admin.carousel.details', {'id': item.id}) }}"><i class="fas fa-search text-dark"></i></a></td>
+    </tr>  
+    {% endfor %}
+  </table>
+  {% endif %}
+{% endblock %}

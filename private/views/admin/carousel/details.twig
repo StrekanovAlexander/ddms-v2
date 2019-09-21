@@ -1,0 +1,60 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Світлина каруселі{% endblock %}
+
+{% block content %}
+  {% if carousel|length %}
+    <h5 class="my-5">Світлина каруселі: {{ carousel.title }}</h5>
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ carousel.id }}</td>
+      </tr>
+      <tr> 
+        <th>Назва</th>
+        <td>{{ carousel.title }}</td>
+      </tr>  
+      <tr>  
+        <th>Опис</th>
+        <td>{{ carousel.content }}</td>
+      </tr>  
+      <tr> 
+        <th>Світлина</th>
+        <td>
+          <img src="{{ base_url() }}/images/carousel/{{ carousel.image }}" alt="Світлина" style="width: 10%">
+          {% if carousel.image %}
+            <a href="{{ path_for('admin.carousel.file.remove', {
+              'id': carousel.id, 
+              'file': carousel.image,
+            }) }}" class="btn btn-sm btn-dark"> <i class="fas fa-trash-alt"></i> Видалити</a>
+          {% endif %}
+        </td>
+      </tr>
+      <tr>  
+        <th>Ранг</th>
+        <td>{{ carousel.rank }}</td>
+      </tr>
+      <tr>  
+        <th>Актуальність</th>
+        <td><i class="fas {{ carousel.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      </tr>  
+      <tr>  
+        <th>Створено / Редаговано</th>
+        <td>{{ carousel.created_at }} / {{ carousel.updated_at }}</td>
+      </tr>
+    </table>  
+    <a class="btn btn-dark btn-sm" href="{{ path_for('admin.carousel.update', {'id': carousel.id}) }}"><i class="fas fa-edit"></i> Редагувати</a>
+    <br>
+    <br>
+    <form action="{{ path_for('admin.carousel.upload') }}" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">Завантажити файл</label>
+        <input class="form-control-file" id="file" name="file" type="file">
+      </div>
+      <button class="btn btn-dark btn-sm" type="submit"><i class='fas fa-upload'></i> Пуск
+      </button>
+      <input type="hidden" name="id" id="id" value="{{ carousel.id }}">
+      {{ csrf.fields|raw }}
+    </form>
+  {% endif %}
+{% endblock %}
