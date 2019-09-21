@@ -8,9 +8,11 @@
   {% if audio|length %}
     <div class="jouele-playlist" data-space-control="true">
     {% for item in audio %}
-      <div class="example-track my-5">
-        <a href="{{ base_url() }}/audio/{{ item.filename }}" data-length="" class="jouele">{{ item.title }}</a>
-      </div>  
+      {% if item.filename %}
+        <div class="example-track my-5">
+          <a href="{{ base_url() }}/audio/{{ item.filename }}" data-length="" class="jouele">{{ item.title }}</a>
+        </div>
+      {% endif %}    
     {% endfor %}
     </div>
   {% endif %}
