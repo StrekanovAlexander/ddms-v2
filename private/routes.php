@@ -133,5 +133,16 @@ $app->group('', function() {
   $this->post('/admin/document/upload', 'DocumentController:postUpload')->setName('admin.document.upload');
 
   $this->get('/admin/document/file/remove[/{id}/{file}]', 'DocumentController:removeFile')->setName('admin.document.file.remove');
+
+  $this->get('/admin/carousel', 'CarouselController:index')->setName('admin.carousel');
+
+  $this->get('/admin/carousel/details[/{id}]', 'CarouselController:details')->setName('admin.carousel.details');
+
+  $this->get('/admin/carousel/update[/{id}]', 'CarouselController:getUpdate')->setName('admin.carousel.update');
+  $this->post('/admin/carousel/update', 'CarouselController:postUpdate');
+
+  $this->post('/admin/carousel/upload', 'CarouselController:postUpload')->setName('admin.carousel.upload');
+
+  $this->get('/admin/carousel/file/remove[/{id}/{file}]', 'CarouselController:removeFile')->setName('admin.carousel.file.remove');
   
 })->add(new \App\Middleware\AdminMiddleware($container));

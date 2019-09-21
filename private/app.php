@@ -68,6 +68,10 @@ $container['AwardController'] = function($container) {
   return new \App\Controllers\AwardController($container);
 };
 
+$container['CarouselController'] = function($container) {
+  return new \App\Controllers\CarouselController($container);
+};
+
 $container['DepartmentController'] = function($container) {
   return new \App\Controllers\DepartmentController($container);
 };
