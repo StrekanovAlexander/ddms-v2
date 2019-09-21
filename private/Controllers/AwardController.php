@@ -134,7 +134,7 @@ class AwardController extends Controller {
   
       $files = $request->getUploadedFiles();
       $file = $files['file'];
-      $fileName = Files::moveFile($file, $path);
+      $fileName = Files::moveFileRandomName($file, $path);
   
       if ($fileName) {
         $award->image = $fileName;
