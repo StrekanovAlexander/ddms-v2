@@ -1,0 +1,38 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Створення реквізиту для оплати{% endblock %}
+
+{% block content %}
+  <h5 class="my-5">Створення реквізиту для оплати</h5>
+  <form action="{{ path_for('admin.account.create') }}" method="POST">
+    
+    <div class="form-group">
+      <label for="purpose" class="font-weight-bold">Назва</label>
+      <input class="form-control{{ errors.purpose ? ' is-invalid' : '' }}" name="purpose" id="purpose" value="{{ old.purpose }}">
+    </div>
+
+    <div class="form-group">
+        <label for="rank" class="font-weight-bold">Ранг</label>
+        <select class="form-control" name="rank" id="rank">
+        {% for i in 1..5 %}
+          <option value="{{ i }}">{{ i }}</option>
+        {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group">
+      <div class="form-check">
+        <label for="is_actual" class="form-check-label font-weight-bold">
+          <input type="checkbox" class="form-check-input" name="is_actual" id="is_actual" >Актуальність
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group mt-5">
+      <button class="btn btn-dark btn-sm" type="submit"><i class="fas fa-pencil-alt"></i> Створити</button>
+    </div>
+
+    {{ csrf.fields|raw }}
+  </form> 
+
+{% endblock %}

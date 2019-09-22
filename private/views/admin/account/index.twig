@@ -1,0 +1,36 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Реквізити для оплати{% endblock %}
+
+{% block content %}
+  <h5>Реквізити для оплати</h5>
+  <div class="my-3">
+    <a href="{{ path_for('admin.account.create') }}" class="btn btn-dark btn-sm"><i class="fas fa-plus"></i> Створити</a>
+  </div>
+  {% if accounts|length %}
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Назва</th>
+      <th>Файл</th>
+      <th>Ранг</th>
+      <th>Актуальність</th>
+      <th></th>
+    </tr>  
+    {% for account in accounts %}
+     <tr>
+      <td>{{ account.id }}</td>
+      <td>{{ account.purpose }}</td>
+      <td>
+        {% if account.src %}
+          <a href="{{ base_url() }}/docs/{{ account.src }}" target="_blank">{{ account.src }}</a>
+        {% endif %}
+      </td>
+      <td>{{ account.rank }}</td>
+      <td><i class="fas {{ account.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      <td><a href="{{ path_for('admin.account.details', {'id': account.id}) }}"><i class="fas fa-search text-dark"></i></a></td>
+    </tr>  
+    {% endfor %}
+  </table>
+  {% endif %}
+{% endblock %}

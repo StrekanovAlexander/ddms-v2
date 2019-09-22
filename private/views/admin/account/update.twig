@@ -1,0 +1,42 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Редагування реквізиту для оплати{% endblock %}
+
+{% block content %}
+  {% if account|length %}
+    <h5 class="my-5">Редагування реквізиту для оплати: {{ account.purpose }}</h5>
+    <form action="{{ path_for('admin.account.update') }}" method="POST">
+      
+      <div class="form-group">
+        <label for="purpose" class="font-weight-bold">Назва</label>
+        <input class="form-control{{ errors.purpose ? ' is-invalid' : '' }}" name="purpose" id="purpose" value="{{ account.purpose }}">
+      </div>
+
+      <div class="form-group">
+        <label for="rank" class="font-weight-bold">Ранг</label>
+        <select class="form-control" name="rank" id="rank">
+        {% for i in 1..5 %}
+          <option value="{{ i }}" {{ i == account.rank ? 'selected' : '' }}>{{ i }}</option>
+        {% endfor %}
+        </select>
+      </div>
+      
+
+      <div class="form-group">
+        <div class="form-check">
+          <label for="is_actual" class="form-check-label font-weight-bold">
+            <input type="checkbox" class="form-check-input" name="is_actual" id="is_actual" {{ account.is_actual ? ' checked="checked"' : ''}}>Актуальність
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group mt-5">
+        <button class="btn btn-dark btn-sm" type="submit"><i class="fas fa-pencil-alt"></i> Зберігти</button>
+      </div>
+
+      <input type="hidden" name="id" id="id" value="{{ account.id }}">  
+      {{ csrf.fields|raw }}
+    </form> 
+    
+  {% endif %}
+{% endblock %}

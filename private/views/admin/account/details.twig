@@ -1,0 +1,56 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Реквізити для оплати{% endblock %}
+
+{% block content %}
+  {% if account|length %}
+    <h5 class="my-5">Реквізити для оплати: {{ account.title }}</h5>
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ account.id }}</td>
+      </tr>
+      <tr>  
+        <th>Назва</th>
+        <td>{{ account.purpose }}</td>
+      </tr>  
+      <tr>  
+        <th>Файл</th>
+        <td>
+          {% if account.src %}
+            <a href="{{ base_url() }}/docs/{{ account.src }}" target="_blank">{{ account.src }}</a>
+            <a href="{{ path_for('admin.account.file.remove', {
+              'id': account.id, 
+              'file': account.src,
+            }) }}" class="btn btn-sm btn-dark"> <i class="fas fa-trash-alt"></i> Видалити</a>
+          {% endif %}
+        </td>
+      </tr>  
+      <tr>  
+        <th>Ранг</th>
+        <td>{{ account.rank }}</td>
+      </tr>  
+      <tr>  
+        <th>Актуальність</th>
+        <td><i class="fas {{ account.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      </tr>  
+      <tr>  
+        <th>Створено / Редаговано</th>
+        <td>{{ account.created_at }} / {{ account.updated_at }}</td>
+      </tr>
+    </table>  
+    <a class="btn btn-dark btn-sm" href="{{ path_for('admin.account.update', {'id': account.id}) }}"><i class="fas fa-edit"></i> Редагувати</a>
+    <br>
+    <br>
+    <form action="{{ path_for('admin.account.upload') }}" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">Завантажити файл</label>
+        <input class="form-control-file" id="file" name="file" type="file">
+      </div>
+      <button class="btn btn-dark btn-sm" type="submit"><i class='fas fa-upload'></i> Пуск
+      </button>
+      <input type="hidden" name="id" id="id" value="{{ account.id }}">
+      {{ csrf.fields|raw }}
+    </form>
+  {% endif %}
+{% endblock %}
