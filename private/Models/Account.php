@@ -7,4 +7,10 @@ class Account extends Model {
 
     protected $table = 'accounts';
 
+    protected $fillable = [
+        'purpose',
+        'rank',
+        'is_actual',
+    ];
+
 }
