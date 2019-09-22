@@ -60,6 +60,10 @@ $container['view'] = function($container) {
   return $view;
 };
 
+$container['AccountController'] = function($container) {
+  return new \App\Controllers\AccountController($container);
+};
+
 $container['AudioController'] = function($container) {
   return new \App\Controllers\AudioController($container);
 };

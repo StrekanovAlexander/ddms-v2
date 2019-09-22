@@ -159,5 +159,19 @@ $app->group('', function() {
 
   $this->get('/admin/audio/create', 'AudioController:getCreate')->setName('admin.audio.create');
   $this->post('/admin/audio/create', 'AudioController:postCreate');
+
+  $this->get('/admin/accounts', 'AccountController:index')->setName('admin.accounts');
+  $this->get('/admin/account/details[/{id}]', 'AccountController:details')->setName('admin.account.details');
+  $this->get('/admin/account/create', 'AccountController:getCreate')->setName('admin.account.create');
+  $this->post('/admin/account/create', 'AccountController:postCreate');
+
+  $this->get('/admin/account/update[/{id}]', 'AccountController:getUpdate')->setName('admin.account.update');
+  $this->post('/admin/account/update', 'AccountController:postUpdate');
+
+  $this->post('/admin/account/upload', 'AccountController:postUpload')->setName('admin.account.upload');
+
+  $this->get('/admin/account/file/remove[/{id}/{file}]', 'AccountController:removeFile')->setName('admin.account.file.remove');
+
+  
   
 })->add(new \App\Middleware\AdminMiddleware($container));
