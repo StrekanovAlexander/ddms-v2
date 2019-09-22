@@ -86,7 +86,7 @@ class DocumentController extends Controller {
 
     $this->flash->addMessage('message', 'Документ було відредаговано');
 
-    return $response->withRedirect($this->router->pathFor('admin.documents', [
+    return $response->withRedirect($this->router->pathFor('admin.document.details', [
       'id' => $document->id,
     ]));
 
@@ -148,7 +148,7 @@ class DocumentController extends Controller {
 
     $this->flash->addMessage('message', 'Документ було створено');
 
-    return $response->withRedirect($this->router->pathFor('admin.documents', [
+    return $response->withRedirect($this->router->pathFor('admin.document.details', [
       'id' => $id,
     ]));
 
