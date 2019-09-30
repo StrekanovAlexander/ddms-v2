@@ -1,8 +1,10 @@
 {% extends 'templates/layout.twig' %}
 
-{% block description %}{{ teacher.full_name }} - {{ teacher.content|lower }}{% endblock %}
+{% block description %}
+{{ teacher.full_name }} - {{ teacher.content|lower }}
+{% endblock %}
 
-{% block title %}{{ teacher.full_name }}{% endblock %}
+{% block title %}{{ teacher.full_name }} - викладач {{ teacher.department.title_genitive }}{% endblock %}
 
 {% block content %}
   {% if teacher|length %}
