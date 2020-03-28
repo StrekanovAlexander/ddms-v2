@@ -9,23 +9,30 @@
     <div class="col-md-3 col-sm-12">
       <p>Адмін розділ</p>
       <ul>
-        <li><a href="{{ path_for('admin.carousel') }}" class="text-firebrick">Карусель</a></li>
-        <li><a href="{{ path_for('admin.teachers') }}" class="text-firebrick">Викладачи</a></li>
-        <li><a href="{{ path_for('admin.awards') }}" class="text-firebrick">Відзнаки</a></li>
-        <li><a href="{{ path_for('admin.documents') }}" class="text-firebrick">Нормативні документи</a></li>
-        <li><a href="{{ path_for('admin.audio') }}" class="text-firebrick">Мінусові фонограми</a></li>
+        <li><a href="{{ path_for('admin.carousel') }}">Карусель</a></li>
+        <li><a href="{{ path_for('admin.teachers') }}">Викладачи</a></li>
+        <li><a href="{{ path_for('admin.awards') }}">Відзнаки</a></li>
+        <li><a href="{{ path_for('admin.documents') }}">Нормативні документи</a></li>
+        <li><a href="{{ path_for('admin.audio') }}">Мінусові фонограми</a></li>
       </ul>  
       <ul>
-        <li><a href="{{ path_for('admin.accounts') }}" class="text-firebrick">Реквізити для оплати</a></li>
+        <li><a href="{{ path_for('admin.accounts') }}">Реквізити для оплати</a></li>
       </ul>
     </div> 
     {% endif %} 
     <div class="col-md-3 col-sm-12">
       <p>Загальний розділ</p>
       <ul>
-        <li><a href="{{ path_for('admin.posts') }}" class="text-firebrick">Події</a></li>
-        <li><a href="{{ path_for('admin.fund') }}" class="text-firebrick">Золотий фонд</a></li>
-        <li><a href="{{ path_for('admin.students') }}" class="text-firebrick">Випускники</a></li>
+        <li><a href="{{ path_for('admin.posts') }}">Події</a></li>
+        <li>
+          Дістанційне навчання
+          <ul>
+            <li><a href="{{ path_for('admin.remote', {'id': 1}) }}">Музичний відділ</a></li>
+            <li><a href="{{ path_for('admin.remote', {'id': 2}) }}">Художній відділ</a></li>
+          </ul>
+        </li>
+        <li><a href="{{ path_for('admin.fund') }}">Золотий фонд</a></li>
+        <li><a href="{{ path_for('admin.students') }}">Випускники</a></li>
       </ul>  
     </div>  
   </div>
