@@ -28,6 +28,7 @@ $app->get('/contest[/{id}]', 'PostController:contest')->setName('contest');
 
 $app->get('/fund', 'FundController:fund')->setName('fund');
 
+$app->get('/remote[/{id}]', 'RemoteController:index')->setName('remote.index');
 
 $app->group('', function() {
   $this->get('/admin/user/login', 'UserController:getLogin')->setName('admin.user.login');
@@ -81,6 +82,13 @@ $app->group('', function() {
   $this->post('/admin/student/upload', 'StudentController:postUpload')->setName('admin.student.upload');
 
   $this->get('/admin/student/file/remove[/{id}/{file}]', 'StudentController:removeFile')->setName('admin.student.file.remove');
+
+  // Remote
+  $this->get('/admin/remote/create[/{id}]', 'RemoteController:getCreate')->setName('admin.remote.create');
+  $this->post('/admin/remote/create', 'RemoteController:postCreate');
+  $this->get('/admin/remote/details/{id}/{taskId}', 'RemoteController:details')->setName('admin.remote.details');
+  $this->get('/admin/remote[/{id}]', 'RemoteController:adminIndex')->setName('admin.remote');
+  // Remote end
 
 })->add(new \App\Middleware\AuthMiddleware($container));
 

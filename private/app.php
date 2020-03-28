@@ -100,6 +100,10 @@ $container['PostController'] = function($container) {
   return new \App\Controllers\PostController($container);
 };
 
+$container['RemoteController'] = function($container) {
+  return new \App\Controllers\RemoteController($container);
+};
+
 $container['StudentController'] = function($container) {
   return new \App\Controllers\StudentController($container);
 };
