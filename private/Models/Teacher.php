@@ -37,4 +37,16 @@ class Teacher extends Model {
        ]);
   }
 
+  public static function remote($section_id) {
+    return self::query()
+      ->join('departments', 'teachers.department_id', '=', 'departments.id')
+      ->join('sections', 'departments.section_id', '=', 'sections.id')
+      ->orderBy('teachers.full_name')
+      ->where('teachers.is_remote', 1)
+      ->where('sections.id', $section_id)
+      ->get([
+        'teachers.*',
+       ]);
+  }
+
 }
