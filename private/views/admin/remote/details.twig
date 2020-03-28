@@ -1,0 +1,49 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Дистанційне навчання: {{ task.section.title }}. {{ task.title }}{% endblock %}
+
+{% block content %}
+  <p><a href="{{ path_for('admin.remote', {'id': task.section.id}) }}">{{ task.section.title }}</a></p>
+  {% if task|length %}
+    <p class="lead">Дістанційне навчання: {{ task.section.title }}. Завдання: {{ task.title }}</p>
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ task.id }}</td>
+      </tr>
+      <tr> 
+        <th>Відділ</th>
+        <td>{{ task.section.title }}</td>
+      </tr>  
+      <tr> 
+        <th>Предмет</th>
+        <td>{{ task.subject.title }}</td>
+      </tr>  
+      <tr> 
+        <th>Викладач</th>
+        <td>{{ task.teacher.full_name }}</td>
+      </tr>  
+      <tr>  
+        <th>Назва (тема)</th>
+        <td>{{ task.title }}</td>
+      </tr>  
+      <tr>  
+        <th>Опис</th>
+        <td>{{ task.content|raw }}</td>
+      </tr>
+      <tr>  
+        <th>Актуальність</th>
+        <td><i class="fas {{ task.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      </tr>  
+      <tr>  
+        <th>Користувач</th>
+        <td>{{ task.user.username }}</td>
+      </tr>  
+      <tr>  
+        <th>Створено / Редаговано</th>
+        <td>{{ task.created_at }} / {{ task.updated_at }}</td>
+      </tr>
+    </table>  
+    {# <a class="btn btn-dark btn-sm" href="{{ path_for('admin.post.update', {'id': post.id}) }}"><i class="fas fa-edit"></i> Редагувати</a> #}
+  {% endif %}
+{% endblock %}

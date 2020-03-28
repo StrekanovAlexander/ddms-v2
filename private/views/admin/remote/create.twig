@@ -1,0 +1,85 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Дістанційне навчання: {{ section.title }}. Створення завдання{% endblock %}
+
+{% block content %}
+  <p><a href="{{ path_for('admin.remote', {'id': section.id}) }}">{{ section.title }}</a></p>
+  <p class="lead">Дістанційне навчання: {{ section.title }}. Створення завдання</p>
+  <form action="{{ path_for('admin.remote.create') }}" method="POST">
+    <table class="table">
+      <tr>
+        <td>
+          <div class="form-group">
+            <label for="section_id" class="font-weight-bold">Відділ</label>
+            <select class="form-control" name="section_id" id="section_id">
+              <option value="{{ section.id }}">{{ section.title }}</option>
+            </select>
+          </div>
+        </td>
+        <td>   
+          <div class="form-group">
+            <label for="subject_id" class="font-weight-bold">Предмет</label>
+            <select class="form-control" name="subject_id" id="subject_id">
+            {% for subject in subjects %}
+              <option value="{{ subject.id }}">{{ subject.title }}</option>
+            {% endfor %}
+            </select>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>      
+          <div class="form-group">
+            <label for="teacher_id" class="font-weight-bold">Викладач</label>
+            <select class="form-control" name="teacher_id" id="teacher_id">
+            {% for teacher in teachers %}
+              <option value="{{ teacher.id }}">{{ teacher.full_name }}</option>
+            {% endfor %}
+            </select>
+          </div>
+        </td>
+        <td>
+          <div class="form-group">
+            <label for="grades" class="font-weight-bold">Клас</label>
+            <input class="form-control" name="grades" id="grades" value="{{ old.grades }}">
+          </div>
+        <td>
+      </tr>
+      <tr>
+        <td colspan="2">      
+          <div class="form-group">
+            <label for="title" class="font-weight-bold">Назва (тема)</label>
+            <input class="form-control{{ errors.title ? ' is-invalid' : '' }}" name="title" id="title" value="{{ old.title }}">
+          </div>
+        <td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="form-group">
+            <label for="content" class="font-weight-bold">Опис</label>
+            <textarea class="form-control" id="content" name="content">{{ old.content }}</textarea>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="form-group">
+            <div class="form-check">
+              <label for="is_actual" class="form-check-label font-weight-bold">
+              <input type="checkbox" class="form-check-input" name="is_actual" id="is_actual">Актуальність
+            </label>
+          </div>
+        </div>
+      </tr>
+      <tr>  
+        <td colspan="2">
+          <div class="form-group mt-5">
+            <button class="btn btn-dark btn-sm" type="submit"><i class="fas fa-pencil-alt"></i> Створити</button>
+        </div>
+      </tr>  
+    </table>  
+    <input type="hidden" name="sectionId" id="sectionId" value="{{ section.id }}">      
+    {{ csrf.fields|raw }}
+  </form> 
+  {% include 'templates/partials/_tinymce.twig' %}
+{% endblock %}
