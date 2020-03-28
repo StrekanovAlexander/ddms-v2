@@ -15,6 +15,7 @@
       <th>Відділ</th>
       <th>Інформація</th>
       <th>Ранг</th>
+      <th>Дистанційно</th>
       <th>Актуальність</th>
       <th></th>
     </tr>  
@@ -25,6 +26,7 @@
       <td>{{ teacher.section_title }}: {{ teacher.department_title }}</td>
       <td>{{ teacher.content }}</td>
       <td>{{ teacher.rank }}</td>
+      <td><i class="fas {{ teacher.is_remote ? 'fa-check' : 'fa-times' }} "></i></td>
       <td><i class="fas {{ teacher.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
       <td><a href="{{ path_for('admin.teacher.details', {'id': teacher.id}) }}"><i class="fas fa-search text-dark"></i></a></td>
     </tr>  

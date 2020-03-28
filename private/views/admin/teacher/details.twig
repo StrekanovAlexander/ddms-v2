@@ -51,7 +51,11 @@
               }) }}" class="btn btn-sm btn-dark"> <i class="fas fa-trash-alt"></i> Видалити</a>
           {% endif %}
         </td>
-      </tr>  
+      </tr>
+       <tr>  
+        <th>Дистанційно</th>
+        <td><i class="fas {{ teacher.is_remote ? 'fa-check' : 'fa-times' }} "></i></td>
+      </tr>    
       <tr>  
         <th>Актуальність</th>
         <td><i class="fas {{ teacher.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>

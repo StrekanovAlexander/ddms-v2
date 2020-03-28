@@ -12,11 +12,10 @@ class Teacher extends Model {
     'full_name',
     'content',
     'rank',
+    'is_remote',
     'is_actual',
     'user_id',
   ];
-
-
 
   public function department() {
     return $this->belongsTo('App\Models\Department', 'department_id'); 

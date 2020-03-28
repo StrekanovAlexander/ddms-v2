@@ -76,6 +76,7 @@ class TeacherController extends Controller {
       'full_name' => $request->getParam('full_name'),
       'content' => $request->getParam('content'),
       'rank' => $request->getParam('rank'),
+      'is_remote' => $request->getParam('is_remote')  ? true : false,
       'is_actual' => $request->getParam('is_actual')  ? true : false,
       'user_id' => $this->auth->user()->id,
     ]);
@@ -177,6 +178,7 @@ class TeacherController extends Controller {
       'full_name' => $request->getParam('full_name'),
       'content' => $request->getParam('content'),
       'rank' => $request->getParam('rank'),
+      'is_remote' => $request->getParam('is_remote')  ? true : false,
       'is_actual' => $request->getParam('is_actual')  ? true : false,
       'user_id' => $this->auth->user()->id,
     ]);
