@@ -8,10 +8,6 @@ use \App\Models\Task;
 use \App\Models\Teacher;
 use \Respect\Validation\Validator;
 
-/*
-use \App\Common\Files;
-*/
-
 class RemoteController extends Controller {
 
   public function index($request, $response, $args) {
@@ -33,7 +29,7 @@ class RemoteController extends Controller {
     $tasks = Task::tasks($section->id)->toArray();
     return $this->view->render($response, 'admin/remote/index.twig', [
       'section' => $section,
-      'tasks' => Pages::pagination($tasks, $request->getParam('page', 1), 5),
+      'tasks' => Pages::pagination($tasks, $request->getParam('page', 1), 10),
       'breadcrumbs' => Pages::breadcrumbs([
          ['Дістанційне навчання: ' . $section->title],
       ], true),
@@ -81,14 +77,13 @@ class RemoteController extends Controller {
     $this->flash->addMessage('message', 'Завдання було створено');
 
     return $response->withRedirect($this->router->pathFor('admin.remote.details', [
-      'id' => $request->getParam('sectionId'),
-      'taskId' => $taskId,
+      'id' => $taskId,
     ]));
 
   }
 
   public function details($request, $response, $args) {
-    $task = Task::find($args['taskId']);
+    $task = Task::find($args['id']);
     return $this->view->render($response, 'admin/remote/details.twig', [
       'task' => $task,
       'breadcrumbs' => Pages::breadcrumbs([
@@ -96,6 +91,55 @@ class RemoteController extends Controller {
       ], true),
     ]);
   }
+
+  public function getUpdate($request, $response, $args) {
+    $task = Task::find($args['id']);
+    return $this->view->render($response, 'admin/remote/update.twig', [
+      'task' => $task,
+      'subjects' =>  Subject::orderBy('title')->where('section_id', $task->section_id)->get(),
+      'teachers' =>  Teacher::remote($task->section_id),
+      'breadcrumbs' => Pages::breadcrumbs([
+        ['Дистанційне навчання: ' . $task->section->title],
+        [$task->title, 'admin.remote.details', $task->id],
+        ['Редагування'],
+      ], true),
+    ]);
+  }
+
+  public function postUpdate($request, $response) {
+
+    $validation = $this->validator->validate($request, [
+      'title' => Validator::notVoid(),
+    ]);
+
+    if ($validation->failed()) {
+      $this->flash->addMessage('message', 'Помилка редагування завдання');
+      return $response->withRedirect($this->router->pathFor('admin.remote.update', [
+        'id' => $request->getParam('id'),
+      ]));
+    }
+
+    $task = Task::find($request->getParam('id'));
+    $task->update([
+      'section_id' => $request->getParam('section_id'),
+      'subject_id' => $request->getParam('subject_id'),
+      'teacher_id' => $request->getParam('teacher_id'),
+      'grades' => $request->getParam('grades'),
+      'title' => $request->getParam('title'),
+      'content' => $request->getParam('content'),
+      'is_actual' => $request->getParam('is_actual')  ? true : false,
+      'user_id' => $this->auth->user()->id,
+    ]);
+
+    $this->flash->addMessage('message', 'Завдання було відредаговано');
+
+    return $response->withRedirect($this->router->pathFor('admin.remote.details', [
+      'id' => $task->id,
+    ]));
+
+
+
+  }  
 
   
 }

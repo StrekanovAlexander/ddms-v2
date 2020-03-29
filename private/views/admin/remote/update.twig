@@ -1,0 +1,87 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Редагування завдання: {{ post.id }}{% endblock %}
+
+{% block content %}
+  {% if task|length %}
+    <p class="lead">Редагування події: {{ task.title }}</p>
+    <form action="{{ path_for('admin.remote.update') }}" method="POST">
+      <table class="table">
+      <tr>
+        <td>
+          <div class="form-group">
+            <label for="section_id" class="font-weight-bold">Відділ</label>
+            <select class="form-control" name="section_id" id="section_id">
+              <option value="{{ task.section.id }}">{{ task.section.title }}</option>
+            </select>
+          </div>
+        </td>
+        <td>   
+          <div class="form-group">
+            <label for="subject_id" class="font-weight-bold">Предмет</label>
+            <select class="form-control" name="subject_id" id="subject_id">
+            {% for subject in subjects %}
+              <option value="{{ subject.id }}" {{ subject.id == task.subject_id ? 'selected' : '' }}>{{ subject.title }}</option>
+            {% endfor %}
+            </select>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>      
+          <div class="form-group">
+            <label for="teacher_id" class="font-weight-bold">Викладач</label>
+            <select class="form-control" name="teacher_id" id="teacher_id">
+            {% for teacher in teachers %}
+              <option value="{{ teacher.id }}"  {{ teacher.id == task.teacher_id ? 'selected' : '' }}>{{ teacher.full_name }}</option>
+            {% endfor %}
+            </select>
+          </div>
+        </td>
+        <td>
+          <div class="form-group">
+            <label for="grades" class="font-weight-bold">Клас</label>
+            <input class="form-control" name="grades" id="grades" value="{{ task.grades }}">
+          </div>
+        <td>
+      </tr>
+      <tr>
+        <td colspan="2">      
+          <div class="form-group">
+            <label for="title" class="font-weight-bold">Назва (тема)</label>
+            <input class="form-control{{ errors.title ? ' is-invalid' : '' }}" name="title" id="title" value="{{ task.title }}">
+          </div>
+        <td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="form-group">
+            <label for="content" class="font-weight-bold">Опис</label>
+            <textarea class="form-control" id="content" name="content">{{ task.content }}</textarea>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="form-group">
+            <div class="form-check">
+              <label for="is_actual" class="form-check-label font-weight-bold">
+              <input type="checkbox" class="form-check-input" name="is_actual" id="is_actual"  {{ task.is_actual ? ' checked="checked"' : ''}}>Актуальність
+            </label>
+          </div>
+        </div>
+      </tr>
+      <tr>  
+        <td colspan="2">
+          <div class="form-group mt-5">
+            <button class="btn btn-dark btn-sm" type="submit"><i class="fas fa-pencil-alt"></i> Зберігти</button>
+        </div>
+      </tr>  
+    </table>
+    <input type="hidden" name="id" id="id" value="{{ task.id }}">  
+    {{ csrf.fields|raw }}
+    </form> 
+    {% include 'templates/partials/_tinymce.twig' %}
+  {% endif %} 
+{% endblock %}

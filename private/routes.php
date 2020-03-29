@@ -86,7 +86,11 @@ $app->group('', function() {
   // Remote
   $this->get('/admin/remote/create[/{id}]', 'RemoteController:getCreate')->setName('admin.remote.create');
   $this->post('/admin/remote/create', 'RemoteController:postCreate');
-  $this->get('/admin/remote/details/{id}/{taskId}', 'RemoteController:details')->setName('admin.remote.details');
+  $this->get('/admin/remote/details/{id}', 'RemoteController:details')->setName('admin.remote.details');
+  
+  $this->get('/admin/remote/update[/{id}]', 'RemoteController:getUpdate')->setName('admin.remote.update');
+  $this->post('/admin/remote/update', 'RemoteController:postUpdate');
+  
   $this->get('/admin/remote[/{id}]', 'RemoteController:adminIndex')->setName('admin.remote');
 
   $this->get('/admin/subjects', 'SubjectController:index')->setName('admin.subjects');

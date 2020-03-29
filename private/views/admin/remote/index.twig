@@ -3,7 +3,6 @@
 {% block title %}Дістанційне навчання: {{ section.title }}{% endblock %}
 
 {% block content %}
-  <p class="lead text-danger">Данные не вносить (идет разработка)</p>
   <div class="my-3">
     <a href="{{ path_for('admin.remote.create', {'id': section.id}) }}" class="btn btn-dark btn-sm"><i class="fas fa-plus"></i> Створити завдання</a>
   </div>
@@ -31,20 +30,20 @@
       <td>{{ task.grades }}</td>
       <td>{{ task.title }}</td>
       <td><i class="fas {{ task.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
-      <td><a href="{{ path_for('admin.remote.details', {'id': section.id, 'taskId': task.id}) }}"><i class="fas fa-search text-dark"></i></a></td>
+      <td><a href="{{ path_for('admin.remote.details', {'id': task.id}) }}"><i class="fas fa-search text-dark"></i></a></td>
     </tr>  
     {% endfor %}
   </table>
-{#
+
   <nav class="my-5">
     <ul class="pagination justify-content-center">
-      {% for page in 1..posts.lastPage %}
-      <li class="page-item{{ page == posts.currentPage ? ' active' : '' }}">
-        <a class="page-link btn btn-sm" href="{{ path_for('admin.posts', {}, {'page': page}) }}">{{ page }}</a>
+      {% for page in 1..tasks.lastPage %}
+      <li class="page-item{{ page == tasks.currentPage ? ' active' : '' }}">
+        <a class="page-link btn btn-sm" href="{{ path_for('admin.remote', {'id': section.id}, {'page': page}) }}">{{ page }}</a>
       </li>
       {% endfor %}
     </ul>
   </nav>
-  #}
+ 
   {% endif %}
 {% endblock %}

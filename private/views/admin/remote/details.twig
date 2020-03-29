@@ -44,6 +44,6 @@
         <td>{{ task.created_at }} / {{ task.updated_at }}</td>
       </tr>
     </table>  
-    {# <a class="btn btn-dark btn-sm" href="{{ path_for('admin.post.update', {'id': post.id}) }}"><i class="fas fa-edit"></i> Редагувати</a> #}
+    <a class="btn btn-dark btn-sm" href="{{ path_for('admin.remote.update', {'id': task.id}) }}"><i class="fas fa-edit"></i> Редагувати</a>
   {% endif %}
 {% endblock %}
