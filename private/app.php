@@ -108,6 +108,10 @@ $container['StudentController'] = function($container) {
   return new \App\Controllers\StudentController($container);
 };
 
+$container['SubjectController'] = function($container) {
+  return new \App\Controllers\SubjectController($container);
+};
+
 $container['TeacherController'] = function($container) {
   return new \App\Controllers\TeacherController($container);
 };

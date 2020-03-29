@@ -88,6 +88,16 @@ $app->group('', function() {
   $this->post('/admin/remote/create', 'RemoteController:postCreate');
   $this->get('/admin/remote/details/{id}/{taskId}', 'RemoteController:details')->setName('admin.remote.details');
   $this->get('/admin/remote[/{id}]', 'RemoteController:adminIndex')->setName('admin.remote');
+
+  $this->get('/admin/subjects', 'SubjectController:index')->setName('admin.subjects');
+  $this->get('/admin/subject/create', 'SubjectController:getCreate')->setName('admin.subject.create');
+  $this->post('/admin/subject/create', 'SubjectController:postCreate');
+
+  $this->get('/admin/subject/details[/{id}]', 'SubjectController:details')->setName('admin.subject.details');
+
+  $this->get('/admin/subject/update[/{id}]', 'SubjectController:getUpdate')->setName('admin.subject.update');
+  $this->post('/admin/subject/update', 'SubjectController:postUpdate');
+
   // Remote end
 
 })->add(new \App\Middleware\AuthMiddleware($container));
