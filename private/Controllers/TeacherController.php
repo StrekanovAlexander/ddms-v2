@@ -76,6 +76,7 @@ class TeacherController extends Controller {
       'full_name' => $request->getParam('full_name'),
       'content' => $request->getParam('content'),
       'rank' => $request->getParam('rank'),
+      'phones' => $request->getParam('phones'),
       'is_remote' => $request->getParam('is_remote')  ? true : false,
       'is_actual' => $request->getParam('is_actual')  ? true : false,
       'user_id' => $this->auth->user()->id,
@@ -86,7 +87,6 @@ class TeacherController extends Controller {
     return $response->withRedirect($this->router->pathFor('admin.teacher.details', [
       'id' => $teacher->id,
     ]));
-
 
   }
 
@@ -178,6 +178,7 @@ class TeacherController extends Controller {
       'full_name' => $request->getParam('full_name'),
       'content' => $request->getParam('content'),
       'rank' => $request->getParam('rank'),
+      'phones' => $request->getParam('phones'),
       'is_remote' => $request->getParam('is_remote')  ? true : false,
       'is_actual' => $request->getParam('is_actual')  ? true : false,
       'user_id' => $this->auth->user()->id,

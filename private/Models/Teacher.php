@@ -12,6 +12,7 @@ class Teacher extends Model {
     'full_name',
     'content',
     'rank',
+    'phones',
     'is_remote',
     'is_actual',
     'user_id',
