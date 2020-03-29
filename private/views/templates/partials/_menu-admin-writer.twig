@@ -1,0 +1,16 @@
+    <div class="col-md-3 col-sm-12">
+      <p>Загальний розділ</p>
+      <ul>
+        <li><a href="{{ path_for('admin.posts') }}">Події</a></li>
+        <li><a href="{{ path_for('admin.fund') }}">Золотий фонд</a></li>
+        <li><a href="{{ path_for('admin.students') }}">Випускники</a></li>
+      </ul>  
+    </div>  
+    <div class="col-md-3 col-sm-12">
+      <p>Дістанційне навчання</p>
+      <ul>
+        <li><a href="{{ path_for('admin.remote', {'id': 1}) }}">Музичний відділ</a></li>
+        <li><a href="{{ path_for('admin.remote', {'id': 2}) }}">Художній відділ</a></li>
+        <li><a href="{{ path_for('admin.subjects') }}">Предмети</a></li>
+      </ul>
+    </div>  

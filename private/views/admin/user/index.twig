@@ -12,6 +12,7 @@
       <td>ID</th>
       <th>Користувач</th>
       <th>Адміністратор</th>
+      <th>Викладач</th>
       <th>Актуальність</th>
       <th></th>
     </tr>  
@@ -20,6 +21,7 @@
       <td>{{ user.id }}</td>
       <td>{{ user.username }}</td>
       <td><i class="fas {{ user.is_admin ? 'fa-check' : 'fa-times' }} "></i></td>
+      <td><i class="fas {{ user.is_teacher ? 'fa-check' : 'fa-times' }} "></i></td>
       <td><i class="fas {{ user.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
       <td><a href="{{ path_for('admin.user.update', {'id': user.id}) }}"><i class="fas fa-edit text-dark"></i></a></td>
     </tr>  

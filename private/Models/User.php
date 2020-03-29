@@ -11,12 +11,15 @@ class User extends Model {
     'username',
     'password',
     'is_actual',
+    'is_teacher',
   ];
 
   public static function add($array) {
     User::create([
       'username' => $array['username'],
       'password' => password_hash($array['password'], PASSWORD_DEFAULT),
+      'is_teacher' => $array['is_teacher'] ? true : false,
+      'is_actual' => $array['is_actual'] ? true : false,
     ]);
   }
 

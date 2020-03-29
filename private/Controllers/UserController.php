@@ -119,6 +119,7 @@ class UserController extends Controller {
 
     $user->update([
       'is_actual' => $request->getParam('is_actual') ? true : false,
+      'is_teacher' => $request->getParam('is_teacher') ? true : false,
     ]);
 
     $this->flash->addMessage('message', 'Дані користувача було змінено');
