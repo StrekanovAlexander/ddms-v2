@@ -1,0 +1,30 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Предмети{% endblock %}
+
+{% block content %}
+  <p class="lead">Предмети</p>
+  <div class="my-3">
+    <a href="{{ path_for('admin.subject.create') }}" class="btn btn-dark btn-sm"><i class="fas fa-plus"></i> Створити</a>
+  </div>
+  {% if subjects|length %}
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Назва</th>
+      <th>Відділ</th>
+      <th>Актуальність</th>
+      <th></th>
+    </tr>  
+    {% for subject in subjects %}
+     <tr>
+      <td>{{ subject.id }}</td>
+      <td>{{ subject.title }}</td>
+      <td>{{ subject.section.title }}</td>
+      <td><i class="fas {{ subject.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      <td><a href="{{ path_for('admin.subject.details', {'id': subject.id}) }}"><i class="fas fa-search text-dark"></i></a></td>
+    </tr>  
+    {% endfor %}
+  </table>
+  {% endif %}
+{% endblock %}

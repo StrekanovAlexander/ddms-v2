@@ -1,0 +1,34 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Створення предмету{% endblock %}
+
+{% block content %}
+  <p class="lead">Створення предмету</p>
+  {# <form action="{{ path_for('admin.award.create') }}" method="POST"> #}
+  <form action="#" method="POST">
+    <div class="form-group">
+      <label for="title" class="font-weight-bold">Назва</label>
+      <input class="form-control{{ errors.title ? ' is-invalid' : '' }}" name="title" id="title" value=" {{ old.title }}">
+    </div>
+    <div class="form-group">
+      <label for="section_id" class="font-weight-bold">Відділ</label>
+      <select class="form-control" name="section_id" id="section_id">
+      {% for section in sections %}
+        <option value="{{ section.id }}">{{ section.title }}</option>
+      {% endfor %}
+      </select>
+    </div>  
+   <div class="form-group">
+      <div class="form-check">
+        <label for="is_actual" class="form-check-label font-weight-bold">
+          <input type="checkbox" class="form-check-input" name="is_actual" id="is_actual" >Актуальність
+        </label>
+      </div>
+    </div>
+    <div class="form-group mt-5">
+      <button class="btn btn-dark btn-sm" type="submit"><i class="fas fa-pencil-alt"></i> Зберігти</button>
+    </div>
+    {{ csrf.fields|raw }}
+  </form> 
+
+{% endblock %}

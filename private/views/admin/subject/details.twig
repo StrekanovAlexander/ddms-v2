@@ -1,0 +1,32 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Предмет{% endblock %}
+
+{% block content %}
+  {% if subject|length %}
+    <p class="lead">Предмет: {{ subject.title }}</p>
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <td>{{ subject.id }}</td>
+      </tr>
+      <tr>  
+        <th>Назва</th>
+        <td>{{ subject.title }}</td>
+      </tr>  
+      <tr> 
+        <th>Відділ</th>
+        <td>{{ subject.section.title }}</td>
+      </tr>  
+      <tr>  
+        <th>Актуальність</th>
+        <td><i class="fas {{ subject.is_actual ? 'fa-check' : 'fa-times' }} "></i></td>
+      </tr>  
+      <tr>  
+        <th>Створено / Редаговано</th>
+        <td>{{ subject.created_at }} / {{ subject.updated_at }}</td>
+      </tr>
+    </table>  
+    <a class="btn btn-dark btn-sm" href="{{ path_for('admin.subject.update', {'id': subject.id}) }}"><i class="fas fa-edit"></i> Редагувати</a>
+  {% endif %}
+{% endblock %}
