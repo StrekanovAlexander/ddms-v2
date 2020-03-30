@@ -15,7 +15,7 @@
         <a class="nav-link" href="{{ path_for('posts') }}" title="Події">Події</a>
       </li>
       <li class="nav-item{{ activePage == 'remote' ? ' active' : '' }} dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Дістанційне навчання</a>
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Дистанційне навчання</a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="{{ path_for('remote.index', {'id': 1}) }}">Музичний відділ</a>
           <a class="dropdown-item" href="{{ path_for('remote.index', {'id': 2}) }}">Художній відділ</a>
@@ -37,7 +37,7 @@
     <ul class="navbar-nav">
       {% if auth.isAuth %}
         <li class="nav-item">
-          <a class="nav-link" href="{{ path_for('admin.dashboard') }}">Панель керування</a>
+          <a class="nav-link" href="{{ path_for('admin.dashboard') }}"><i class="fas fa-cog"></i></a>
         </li>
       {% else %} 
         <li class="nav-item">

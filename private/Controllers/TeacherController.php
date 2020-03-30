@@ -15,7 +15,7 @@ class TeacherController extends Controller {
       'teachers' => Pages::pagination($teachers, $request->getParam('page', 1), 9),
       'activePage' => 'teachers',
       'breadcrumbs' => Pages::breadcrumbs([
-        ['Викладачи'],
+        ['Викладачі'],
       ]),
     ]);
   }
@@ -26,7 +26,7 @@ class TeacherController extends Controller {
       'teacher' => $teacher,
       'activePage' => 'teachers',
       'breadcrumbs' => Pages::breadcrumbs([
-        ['Викладачи', 'teachers'],
+        ['Викладачі', 'teachers'],
         [$teacher->full_name],
       ]),
     ]);
@@ -37,7 +37,7 @@ class TeacherController extends Controller {
     return $this->view->render($response, 'admin/teacher/index.twig', [
       'teachers' => Pages::pagination($teachers, $request->getParam('page', 1), 5),
       'breadcrumbs' => Pages::breadcrumbs([
-        ['Викладачи'],
+        ['Викладачі'],
       ], true),
     ]);
   }
@@ -49,7 +49,7 @@ class TeacherController extends Controller {
       'teacher' => $teacher,
       'departments' => $departments,
       'breadcrumbs' => Pages::breadcrumbs([
-        ['Викладачи', 'admin.teachers'],
+        ['Викладачі', 'admin.teachers'],
         ['Редагування: ' . $reacher->full_name ]
       ])
     ]);
@@ -95,7 +95,7 @@ class TeacherController extends Controller {
     return $this->view->render($response, 'admin/teacher/details.twig', [
       'teacher' => $teacher,
       'breadcrumbs' => Pages::breadcrumbs([
-        ['Викладачи', 'admin.teachers'],
+        ['Викладачі', 'admin.teachers'],
         [$teacher->full_name],
       ], true),
     ]);
@@ -154,7 +154,7 @@ class TeacherController extends Controller {
     return $this->view->render($response, 'admin/teacher/create.twig', [
        'departments' => $departments,
       'breadcrumbs' => Pages::breadcrumbs([
-        ['Викладачи', 'admin.teachers'],
+        ['Викладачі', 'admin.teachers'],
         ['Створення']
       ])
     ]);
