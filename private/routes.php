@@ -28,7 +28,12 @@ $app->get('/contest[/{id}]', 'PostController:contest')->setName('contest');
 
 $app->get('/fund', 'FundController:fund')->setName('fund');
 
+$app->get('/remote/tasks[/{id}]', 'RemoteController:tasks')->setName('remote.tasks');
+$app->get('/remote/task[/{id}]', 'RemoteController:task')->setName('remote.task');
+
 $app->get('/remote[/{id}]', 'RemoteController:index')->setName('remote.index');
+
+
 
 $app->group('', function() {
   $this->get('/admin/user/login', 'UserController:getLogin')->setName('admin.user.login');

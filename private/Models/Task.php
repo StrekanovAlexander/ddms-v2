@@ -48,4 +48,20 @@ class Task extends Model {
       ]);
    }
 
+   public static function teacherTasks($id) {
+    return self::query()
+      ->join('sections', 'tasks.section_id', '=', 'sections.id')
+      ->join('subjects', 'tasks.subject_id', '=', 'subjects.id')
+      ->join('teachers', 'tasks.teacher_id', '=', 'teachers.id')
+      ->orderBy('id', 'DESC')
+      ->where('tasks.is_actual', true)
+      ->where('tasks.teacher_id', $id)
+      ->get([
+        'tasks.*',
+        'sections.title as section_title',
+        'subjects.title as subject_title',
+        'teachers.full_name as teacher_name',
+      ]);
+   }
+
 }

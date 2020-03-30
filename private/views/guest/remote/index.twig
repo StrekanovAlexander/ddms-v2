@@ -1,0 +1,45 @@
+{% extends 'templates/layout.twig' %}
+
+{% block description %}
+Дистанційне навчання у Дніпрорудненській дитячий музичній школі
+{% endblock %}
+
+{% block title %}Дистанційне навчання. {{ section.title }}{% endblock %}
+
+{% block content %}
+    <h1>Дистанційне навчання: {{ section.title }}</h1>
+    {% if section.title %}
+         {% set counter = 1 %}
+        {% if teachers|length %}
+            <h2 class="my-4">Обрати викладача</h2>
+            <div class="row">
+                {% for teacher in teachers %}
+                <div class="col-md-4">
+                    <div class="card card_no-border">
+                    {% if teacher.image_preview|length %}
+                        <a href="{{ path_for('remote.tasks', {'id': teacher.id}) }}">
+                        <img src="{{ base_url() }}/images/teachers/{{ teacher.image_preview }}" class="card-img-top" alt="{{ teacher.full_name }}">
+                        </a>
+                    {% endif %}  
+                        <div class="card-body text-center">
+                            <a href="{{ path_for('remote.tasks', {'id': teacher.id}) }}" class="text-firebrick">
+                                {{ teacher.full_name }}
+                            </a>
+                            <br><small>{{ teacher.content }}</small>    
+                        </div>
+                    </div>  
+                </div> 
+                {% if counter is divisible by(3) %}
+                    </div><br><div class="row">
+                {% endif %}
+                {% set counter = counter + 1 %} 
+                {% endfor %}
+            </div>
+        {% endif %}    
+    {% else %}
+        <ul>
+            <li><a class="text-firebrick lead" href="{{ path_for('remote.index', {'id': 1}) }}">Музичний відділ</a></li>
+            <li><a class="text-firebrick lead" href="{{ path_for('remote.index', {'id': 2}) }}">Художній відділ</a></li> 
+        </ul>
+    {% endif %}    
+ {% endblock %}

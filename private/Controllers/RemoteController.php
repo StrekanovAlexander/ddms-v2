@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use \App\Common\Pages;
+use \App\Models\Department;
 use \App\Models\Section;
 use \App\Models\Subject;
 use \App\Models\Task;
@@ -11,16 +12,45 @@ use \Respect\Validation\Validator;
 class RemoteController extends Controller {
 
   public function index($request, $response, $args) {
-    
     $section = Section::find($args['id']);  
-    $sectionTitle = $section->title;
     return $this->view->render($response, 'guest/remote/index.twig', [
-        'sectionTitle' => $sectionTitle,
-    //  'teachers' => Pages::pagination($teachers, $request->getParam('page', 1), 9),
+        'section' => $section,
+        'teachers' => Teacher::remote($section->id),
         'activePage' => 'remote',
         'breadcrumbs' => Pages::breadcrumbs([
-            ['Дистанційне навчання'],
+            ['Дистанційне навчання', 'remote.index'],
+            [$section->title],
         ]),
+    ]);
+  }
+
+  public function tasks($request, $response, $args) {
+    $teacher = Teacher::find($args['id']);  
+    $section = Department::where('id', $teacher->department_id)->first()->section;
+    $tasks = Task::teacherTasks($teacher->id);
+    return $this->view->render($response, 'guest/remote/tasks.twig', [
+      'teacher' => $teacher,
+      'tasks' => Pages::pagination($tasks->toArray(), $request->getParam('page', 1), 15),
+      'activePage' => 'remote',
+        'breadcrumbs' => Pages::breadcrumbs([
+          ['Дистанційне навчання', 'remote.index'],
+          [$section->title, 'remote.index', $section->id],
+          [$teacher->full_name],
+      ]),
+    ]);
+  }
+
+  public function task($request, $response, $args) {
+    $task = Task::find($args['id']);  
+    return $this->view->render($response, 'guest/remote/details.twig', [
+      'task' => $task,
+      'activePage' => 'remote',
+      'breadcrumbs' => Pages::breadcrumbs([
+        ['Дистанційне навчання'],
+        [$task->section->title, 'remote.index', $task->section->id],
+        [$task->teacher->full_name, 'remote.tasks', $task->teacher->id],
+        ['Завдання: ' . $task->id],
+      ]),
     ]);
   }
 
@@ -137,9 +167,6 @@ class RemoteController extends Controller {
       'id' => $task->id,
     ]));
 
-
-
   }  
-
   
 }

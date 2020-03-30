@@ -1,0 +1,40 @@
+{% extends 'templates/layout.twig' %}
+
+{% block description %}
+Дистанційне навчання у Дніпрорудненській дитячий музичній школі
+{% endblock %}
+
+{% block title %}Дистанційне навчання. {{ section.title }}{% endblock %}
+
+{% block content %}
+    <h1>Список завдань</h1>
+    <h3>Викладач: {{ teacher.full_name }}</h3>
+    <p>{{ teacher.content }}</p>
+    {% if tasks|length %}
+        <div class="row mt-5">
+        {% for task in tasks  %}
+            <div class="col-md-4 col-sm-12">
+                <div class="card card_no-border">
+                    <span class="text-gray">{{ task.created_at|date("d.m.Y") }}</span>
+                    <span class="text-gray">Предмет: {{ task.subject_title }}</span>
+                    <span class="text-gray">Класи: {{ task.grades }}</span>
+                    <div> 
+                    Тема: <a href="{{ path_for('remote.task', {id: task.id}) }}" class="text-firebrick">{{ task.title }}</a>
+                    </div>
+                </div>
+            </div>        
+        {% endfor %}
+        </div>
+        <nav class="my-5">
+            <ul class="pagination justify-content-center">
+                {% for page in 1..tasks.lastPage %}
+                    <li class="page-item{{ page == tasks.currentPage ? ' active' : '' }}">
+                    <a class="page-link btn btn-sm" href="{{ path_for('remote.tasks', {'id': teacher.id}, {'page': page}) }}">{{ page }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav> 
+    {% else %}
+        <p>Завдань немає</p>
+    {% endif %}
+ {% endblock %}

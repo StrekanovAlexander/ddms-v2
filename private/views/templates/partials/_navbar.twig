@@ -14,6 +14,13 @@
       <li class="nav-item{{ activePage == 'posts' ? ' active' : '' }}">
         <a class="nav-link" href="{{ path_for('posts') }}" title="Події">Події</a>
       </li>
+      <li class="nav-item{{ activePage == 'remote' ? ' active' : '' }} dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Дістанційне навчання</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{ path_for('remote.index', {'id': 1}) }}">Музичний відділ</a>
+          <a class="dropdown-item" href="{{ path_for('remote.index', {'id': 2}) }}">Художній відділ</a>
+        </div>
+      </li>
       <li class="nav-item{{ activePage == 'awards' ? ' active' : '' }}">
         <a class="nav-link" href="{{ path_for('awards') }}" title="Відзнаки">Відзнаки</a>
       </li>

@@ -1,0 +1,17 @@
+{% extends 'templates/layout.twig' %}
+
+{% block description %}Дистанціне завдання: {{ task.title }}{% endblock %}
+
+{% block title %}{{ task.title }}{% endblock %}
+
+{% block content %}
+    {% if task|length %}
+        <p class="lead">
+            {{ task.created_at|date("d.m.Y") }} / {{ task.subject.title }} / Класи: {{ task.grades }}
+        </p>
+        <h1>{{ task.title }}</h1>
+        {{ task.content|raw }}
+        <hr>
+        <p>Контактні дані: {{ task.teacher.phones }}</p>
+  {% endif %}
+{% endblock %}
