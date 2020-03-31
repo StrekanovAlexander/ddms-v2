@@ -45,5 +45,8 @@
       </tr>
     </table>  
     <a class="btn btn-dark btn-sm" href="{{ path_for('admin.remote.update', {'id': task.id}) }}"><i class="fas fa-edit"></i> Редагувати</a>
+
+    <a class="btn btn-dark btn-sm" href="{{ path_for('admin.remote.files', {'id': task.id}) }}"><i class="fas fa-file-image"></i> Файли</a>
+    
   {% endif %}
 {% endblock %}

@@ -95,6 +95,10 @@ $app->group('', function() {
   
   $this->get('/admin/remote/update[/{id}]', 'RemoteController:getUpdate')->setName('admin.remote.update');
   $this->post('/admin/remote/update', 'RemoteController:postUpdate');
+
+  $this->get('/admin/remote/files[/{id}]', 'RemoteController:files')->setName('admin.remote.files');
+  $this->post('/admin/remote/upload', 'RemoteController:postUpload')->setName('admin.remote.upload');
+  $this->get('/admin/remote/file/remove[/{id}/{file}]', 'RemoteController:removeFile')->setName('admin.remote.file.remove');
   
   $this->get('/admin/remote[/{id}]', 'RemoteController:adminIndex')->setName('admin.remote');
 
@@ -103,7 +107,6 @@ $app->group('', function() {
   $this->post('/admin/subject/create', 'SubjectController:postCreate');
 
   $this->get('/admin/subject/details[/{id}]', 'SubjectController:details')->setName('admin.subject.details');
-
   $this->get('/admin/subject/update[/{id}]', 'SubjectController:getUpdate')->setName('admin.subject.update');
   $this->post('/admin/subject/update', 'SubjectController:postUpdate');
 

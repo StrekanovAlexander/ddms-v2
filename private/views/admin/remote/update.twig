@@ -82,6 +82,15 @@
     <input type="hidden" name="id" id="id" value="{{ task.id }}">  
     {{ csrf.fields|raw }}
     </form> 
+
+    {% if images|length %}
+      <p class="lead">Файлы: </p>
+      <p>
+      {% for image in images %}
+        <img src="{{ base_url() }}/images/tasks/{{ task.folder }}/{{ image }}" alt="" style="width: 10%; margin: 0 1rem">
+      {% endfor %}  
+      </p>
+    {% endif %}  
     {% include 'templates/partials/_tinymce.twig' %}
   {% endif %} 
 {% endblock %}

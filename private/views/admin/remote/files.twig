@@ -1,0 +1,31 @@
+{% extends 'templates/layout-admin.twig' %}
+
+{% block title %}Файли{% endblock %}
+
+{% block content %}
+  {% if task|length %}
+    <h5>Файли завдання: {{ task.title }} ({{ task.created_at|date('d.m.Y') }})</h5>
+    <p class="lead">
+      Предмет {{ task.subject.title }}<br>
+      Викладач {{ task.teacher.full_name }}<br>
+      Клас {{ task.grades }}
+    </p>
+    {% for image in images %}
+      <p>
+        <img src="{{ base_url() }}/images/tasks/{{ task.folder }}/{{ image }}" alt="" style="width: 15%">
+        <a href="{{ path_for('admin.remote.file.remove', {'id': task.id, 'file': image}) }}" 
+          class="btn btn-sm btn-dark"> <i class="fas fa-trash-alt"></i> Видалити</a>    
+      </p>
+    {% endfor %}  
+    <form action="{{ path_for('admin.remote.upload') }}" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">Завантажити світлину</label>
+        <input class="form-control-file" id="files"  name="files[]" type="file" multiple="multiple">
+      </div>
+      <button class="btn btn-dark btn-sm" type="submit"><i class='fas fa-upload'></i> Пуск</button>
+      <input type="hidden" name="id" id="id" value="{{ task.id }}">
+      {{ csrf.fields|raw }}
+    </form> 
+    
+  {% endif %}
+{% endblock %}
