@@ -11,7 +11,8 @@
         </p>
         <h1>{{ task.title }}</h1>
         {{ task.content|raw }}
-        <hr>
-        <p>Контактні дані: {{ task.teacher.phones }}</p>
+        {% if task.teacher.phones %}
+            <hr><p>Контактні дані: {{ task.teacher.phones }}</p>
+        {% endif %}  
   {% endif %}
 {% endblock %}
