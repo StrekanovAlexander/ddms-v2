@@ -13,7 +13,7 @@
     {% if tasks|length %}
         <div class="row mt-5">
         {% for task in tasks  %}
-            <div class="col-md-4 col-sm-12">
+            <div class="col-md-4 col-sm-12 mb-5">
                 <div class="card card_no-border">
                     <span class="text-gray">{{ task.created_at|date("d.m.Y") }}</span>
                     <span class="text-gray">Предмет: {{ task.subject_title }}</span>
