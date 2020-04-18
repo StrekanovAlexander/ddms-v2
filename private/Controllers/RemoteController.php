@@ -31,7 +31,7 @@ class RemoteController extends Controller {
     $tasks = Task::teacherTasks($teacher->id);
     return $this->view->render($response, 'guest/remote/tasks.twig', [
       'teacher' => $teacher,
-      'tasks' => Pages::pagination($tasks->toArray(), $request->getParam('page', 1), 15),
+      'tasks' => Pages::pagination($tasks->toArray(), $request->getParam('page', 1), 12),
       'activePage' => 'remote',
         'breadcrumbs' => Pages::breadcrumbs([
           ['Дистанційне навчання', 'remote.index'],
