@@ -1,1 +1,1 @@
-http://ddms.zzz.com.ua
+#Site of music school
