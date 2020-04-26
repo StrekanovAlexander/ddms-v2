@@ -1,1 +1,1 @@
-# ddms-v2
+# http://ddms.zzz.com.ua
