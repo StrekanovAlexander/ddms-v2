@@ -1,1 +1,1 @@
-# http://ddms.zzz.com.ua
+http://ddms.zzz.com.ua
